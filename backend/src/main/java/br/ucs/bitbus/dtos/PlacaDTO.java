@@ -7,12 +7,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class PlacaDTO extends ItemDTO {
 
+    @NotNull(message = "A classificação não pode ser nula")
     private CLASSIFICACAO classificacao;
 
     public PlacaDTO(Placa entity) {

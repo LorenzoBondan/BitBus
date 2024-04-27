@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,8 @@ import java.util.List;
 public class TipoItemDTO {
 
     private Long id;
+    @NotNull(message = "A descrição não pode ser nula")
+    @Size(min = 3, max = 30, message = "A descrição deve ter entre 3 a 30 caracteres")
     private String descricao;
 
     private List<Long> discosRemoviveisIds = new ArrayList<>();

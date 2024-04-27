@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +19,14 @@ import java.util.List;
 public class DoacaoDTO {
 
     private Long id;
+    @PositiveOrZero(message = "O valor não pode ser negativo")
     private Double valor;
+    @NotNull(message = "A descrição não pode ser nula")
+    @Size(min = 3, max = 50, message = "A descrição deve ter entre 3 e 50 caracteres")
     private String descricao;
+    @NotNull(message = "O doador não pode ser nulo")
     private PessoaDTO doador;
+
     private List<Long> itensIds = new ArrayList<>();
 
     public DoacaoDTO(Doacao entity) {

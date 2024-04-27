@@ -6,13 +6,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class PerifericoDTO extends ItemDTO {
 
+    @Size(min = 8, message = "A url deve ter ao menos 8 caracteres")
     private String imgUrl;
+    @NotNull(message = "O tipo de item não pode ser nulo")
     private TipoItemDTO tipoItem;
 
     public PerifericoDTO(Periferico entity) {

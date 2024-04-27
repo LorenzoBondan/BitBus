@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +19,14 @@ import java.util.List;
 public class PessoaDTO {
 
     private Long id;
+    @NotNull(message = "O nome não pode ser nulo")
+    @Size(min = 3, max = 50, message = "O nome deve ter entre 3 a 50 caracteres")
     private String nome;
     @Email
     private String email;
     private String curriculo;
 
+    @NotNull(message = "Os papéis não podem ser nulos")
     private List<PapelDTO> papeis = new ArrayList<>();
     private List<Long> doacoesIds = new ArrayList<>();
     private List<Long> oficinasIds = new ArrayList<>();
