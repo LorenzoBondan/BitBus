@@ -19,6 +19,9 @@ public class SoftwareDTO extends ItemDTO {
         this.setLargura(entity.getLargura());
         this.setEspessura(entity.getEspessura());
         this.setInformacoes(entity.getInformacoes());
+        if(entity.getDoacao() != null) {
+            this.setDoacao(new DoacaoDTO(entity.getDoacao()));
+        }
 
         entity.getLinks().forEach(link -> this.getLinks().add(new LinkDTO(link)));
     }

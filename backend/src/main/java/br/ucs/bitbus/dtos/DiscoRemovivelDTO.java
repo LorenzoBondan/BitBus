@@ -31,6 +31,9 @@ public class DiscoRemovivelDTO extends ItemDTO {
         this.setInformacoes(entity.getInformacoes());
         this.setImgUrl(entity.getImgUrl());
         this.setTipoItem(new TipoItemDTO(entity.getTipoItem()));
+        if(entity.getDoacao() != null) {
+            this.setDoacao(new DoacaoDTO(entity.getDoacao()));
+        }
 
         entity.getLinks().forEach(link -> this.getLinks().add(new LinkDTO(link)));
     }

@@ -4,6 +4,7 @@ import br.ucs.bitbus.dtos.LinkDTO;
 import br.ucs.bitbus.dtos.PlacaDTO;
 import br.ucs.bitbus.entities.Link;
 import br.ucs.bitbus.entities.Placa;
+import br.ucs.bitbus.repositories.DoacaoRepository;
 import br.ucs.bitbus.repositories.LinkRepository;
 import br.ucs.bitbus.repositories.PlacaRepository;
 import br.ucs.bitbus.services.exceptions.DatabaseException;
@@ -23,6 +24,8 @@ public class PlacaService {
     private PlacaRepository repository;
     @Autowired
     private LinkRepository linkRepository;
+    @Autowired
+    private DoacaoRepository doacaoRepository;
 
     @Transactional(readOnly = true)
     public Page<PlacaDTO> findAllByName(String nome, Pageable pageable) {
@@ -71,6 +74,10 @@ public class PlacaService {
         entity.setEspessura(dto.getEspessura());
         entity.setInformacoes(dto.getInformacoes());
         entity.setClassificacao(dto.getClassificacao());
+
+        if(dto.getDoacao() != null){
+            entity.setDoacao(doacaoRepository.findById(dto.getDoacao().getId()).orElseThrow(() -> new ResourceNotFoundException("Doação não encontrada")));
+        }
         
         entity.getLinks().clear();
         for(LinkDTO dtoLink : dto.getLinks()) {

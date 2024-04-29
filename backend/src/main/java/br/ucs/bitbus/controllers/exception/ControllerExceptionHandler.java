@@ -45,17 +45,17 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(status).body(err);
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler(MethodArgumentNotValidException.class) // anotações de validação das entidades
     public ResponseEntity<CustomError> methodArgumentNotValidation(MethodArgumentNotValidException e, HttpServletRequest request) {
         HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
-        ValidationError err = new ValidationError(LocalDateTime.now(), status.value(), "Invalid data", request.getRequestURI());
+        ValidationError err = new ValidationError(LocalDateTime.now(), status.value(), "Dados inválidos", request.getRequestURI());
         for (FieldError f : e.getBindingResult().getFieldErrors()) {
             err.addError(f.getField(), f.getDefaultMessage());
         }
         return ResponseEntity.status(status).body(err);
     }
 
-    @ExceptionHandler(ConstraintViolationException.class) // anotações de validação das entidades
+    @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<CustomError> constraintViolation(ConstraintViolationException e, HttpServletRequest request) {
         HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
         List<String> constraintMessages = e.getConstraintViolations()

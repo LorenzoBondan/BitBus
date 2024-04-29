@@ -5,6 +5,7 @@ import br.ucs.bitbus.dtos.LinkDTO;
 import br.ucs.bitbus.entities.DiscoRemovivel;
 import br.ucs.bitbus.entities.Link;
 import br.ucs.bitbus.repositories.DiscoRemovivelRepository;
+import br.ucs.bitbus.repositories.DoacaoRepository;
 import br.ucs.bitbus.repositories.LinkRepository;
 import br.ucs.bitbus.repositories.TipoItemRepository;
 import br.ucs.bitbus.services.exceptions.DatabaseException;
@@ -26,6 +27,8 @@ public class DiscoRemovivelService {
     private LinkRepository linkRepository;
     @Autowired
     private TipoItemRepository tipoItemRepository;
+    @Autowired
+    private DoacaoRepository doacaoRepository;
 
     @Transactional(readOnly = true)
     public Page<DiscoRemovivelDTO> findAllByName(String nome, Pageable pageable) {
@@ -74,11 +77,15 @@ public class DiscoRemovivelService {
         entity.setEspessura(dto.getEspessura());
         entity.setInformacoes(dto.getInformacoes());
         entity.setImgUrl(dto.getImgUrl());
-        entity.setTipoItem(tipoItemRepository.findById(dto.getTipoItem().getId()).orElse(null));
-        
+        entity.setTipoItem(tipoItemRepository.findById(dto.getTipoItem().getId()).orElseThrow(() -> new ResourceNotFoundException("TipoItem não encontrado")));
+
+        if(dto.getDoacao() != null){
+            entity.setDoacao(doacaoRepository.findById(dto.getDoacao().getId()).orElseThrow(() -> new ResourceNotFoundException("Doação não encontrada")));
+        }
+
         entity.getLinks().clear();
         for(LinkDTO dtoLink : dto.getLinks()) {
-            Link link = linkRepository.findById(dtoLink.getId()).orElse(null);
+            Link link = linkRepository.findById(dtoLink.getId()).orElseThrow(() -> new ResourceNotFoundException("Link não encontrado: " + dtoLink.getId()));
             entity.getLinks().add(link);
         }
     }

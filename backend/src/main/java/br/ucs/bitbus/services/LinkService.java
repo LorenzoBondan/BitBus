@@ -62,6 +62,6 @@ public class LinkService {
 
     private void copyDtoToEntity(LinkDTO dto, Link entity) {
         entity.setUrl(dto.getUrl());
-        entity.setItem(itemRepository.findById(dto.getItemId()).orElse(null));
+        entity.setItem(itemRepository.findById(dto.getItemId()).orElseThrow(() -> new ResourceNotFoundException("Item não encontrado")));
     }
 }

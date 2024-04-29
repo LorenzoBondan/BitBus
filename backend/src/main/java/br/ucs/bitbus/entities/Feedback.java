@@ -14,6 +14,7 @@ import javax.persistence.*;
 public class Feedback {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String comentario;
     @Column(columnDefinition = "TEXT")

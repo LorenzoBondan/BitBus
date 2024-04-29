@@ -51,8 +51,9 @@ public class ItemDTO {
         this.largura = entity.getLargura();
         this.espessura = entity.getEspessura();
         this.informacoes = entity.getInformacoes();
-        this.doacao = new DoacaoDTO(entity.getDoacao());
-
+        if(entity.getDoacao() != null) {
+            this.doacao = new DoacaoDTO(entity.getDoacao());
+        }
         entity.getLinks().forEach(link -> this.links.add(new LinkDTO(link)));
     }
 }

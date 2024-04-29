@@ -4,6 +4,7 @@ import br.ucs.bitbus.dtos.PerifericoDTO;
 import br.ucs.bitbus.dtos.LinkDTO;
 import br.ucs.bitbus.entities.Periferico;
 import br.ucs.bitbus.entities.Link;
+import br.ucs.bitbus.repositories.DoacaoRepository;
 import br.ucs.bitbus.repositories.PerifericoRepository;
 import br.ucs.bitbus.repositories.LinkRepository;
 import br.ucs.bitbus.repositories.TipoItemRepository;
@@ -26,6 +27,8 @@ public class PerifericoService {
     private LinkRepository linkRepository;
     @Autowired
     private TipoItemRepository tipoItemRepository;
+    @Autowired
+    private DoacaoRepository doacaoRepository;
 
     @Transactional(readOnly = true)
     public Page<PerifericoDTO> findAllByName(String nome, Pageable pageable) {
@@ -75,7 +78,11 @@ public class PerifericoService {
         entity.setInformacoes(dto.getInformacoes());
         entity.setImgUrl(dto.getImgUrl());
         entity.setTipoItem(tipoItemRepository.findById(dto.getTipoItem().getId()).orElse(null));
-        
+
+        if(dto.getDoacao() != null){
+            entity.setDoacao(doacaoRepository.findById(dto.getDoacao().getId()).orElseThrow(() -> new ResourceNotFoundException("Doação não encontrada")));
+        }
+
         entity.getLinks().clear();
         for(LinkDTO dtoLink : dto.getLinks()) {
             Link link = linkRepository.findById(dtoLink.getId()).orElse(null);

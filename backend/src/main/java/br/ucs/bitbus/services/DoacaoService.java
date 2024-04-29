@@ -74,8 +74,9 @@ public class DoacaoService {
 
         entity.getItens().clear();
         for(Long itemId : dto.getItensIds()){
-            Item item = itemRepository.findById(itemId).orElse(null);
+            Item item = itemRepository.findById(itemId).orElseThrow(() -> new ResourceNotFoundException("Item não encontrado: " + itemId));
             entity.getItens().add(item);
+            item.setDoacao(entity);
         }
     }
 }

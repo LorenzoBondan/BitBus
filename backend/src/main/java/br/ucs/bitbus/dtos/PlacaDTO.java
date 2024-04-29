@@ -28,6 +28,9 @@ public class PlacaDTO extends ItemDTO {
         this.setEspessura(entity.getEspessura());
         this.setInformacoes(entity.getInformacoes());
         this.classificacao = entity.getClassificacao();
+        if(entity.getDoacao() != null) {
+            this.setDoacao(new DoacaoDTO(entity.getDoacao()));
+        }
 
         entity.getLinks().forEach(link -> this.getLinks().add(new LinkDTO(link)));
     }

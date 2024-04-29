@@ -4,6 +4,7 @@ import br.ucs.bitbus.dtos.MemoriaDTO;
 import br.ucs.bitbus.dtos.LinkDTO;
 import br.ucs.bitbus.entities.Memoria;
 import br.ucs.bitbus.entities.Link;
+import br.ucs.bitbus.repositories.DoacaoRepository;
 import br.ucs.bitbus.repositories.MemoriaRepository;
 import br.ucs.bitbus.repositories.LinkRepository;
 import br.ucs.bitbus.services.exceptions.DatabaseException;
@@ -23,6 +24,8 @@ public class MemoriaService {
     private MemoriaRepository repository;
     @Autowired
     private LinkRepository linkRepository;
+    @Autowired
+    private DoacaoRepository doacaoRepository;
 
     @Transactional(readOnly = true)
     public Page<MemoriaDTO> findAllByName(String nome, Pageable pageable) {
@@ -70,7 +73,11 @@ public class MemoriaService {
         entity.setLargura(dto.getLargura());
         entity.setEspessura(dto.getEspessura());
         entity.setInformacoes(dto.getInformacoes());
-        
+
+        if(dto.getDoacao() != null){
+            entity.setDoacao(doacaoRepository.findById(dto.getDoacao().getId()).orElseThrow(() -> new ResourceNotFoundException("Doação não encontrada")));
+        }
+
         entity.getLinks().clear();
         for(LinkDTO dtoLink : dto.getLinks()) {
             Link link = linkRepository.findById(dtoLink.getId()).orElse(null);
