@@ -1,4 +1,5 @@
-import AppRoutes from './AppRoutes'
+import ToastViewport from '../components/ui/Toast'
+import AppRoutes from '../routes/AppRoutes'
 import Header from './Header'
 import Sidebar from './Sidebar'
 
@@ -18,6 +19,7 @@ const AppContainer = () => {
           <AppRoutes />
         </div>
       </div>
+      <ToastViewport />
     </div>
   )
 }

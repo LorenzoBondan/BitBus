@@ -4,9 +4,11 @@ import {
   MapPinIcon,
   UserGroupIcon,
 } from '@heroicons/react/24/outline'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const Sidebar = () => {
+  const location = useLocation()
+
   const sidebarOptions = [
     {
       name: 'Acervo',
@@ -31,22 +33,30 @@ const Sidebar = () => {
   ]
 
   const cn = {
-    container: 'bg-slate-900 w-40 h-full py-2',
-    option: 'flex items-center gap-2 p-2',
-    icon: 'h-7 w-7',
+    container: 'bg-slate-900 w-56 h-full py-2',
+    option: 'flex items-center gap-2 py-2 px-4 hover:bg-gray-400/10',
+    optionActive: 'bg-white/10',
+    icon: 'h-7 w-7 text-green-500',
     optionName: 'font-semibold',
   }
 
   return (
     <div className={cn.container}>
-      {sidebarOptions.map((opt, i) => (
-        // <Link key={i} to={opt.path}>
-        <div key={i} className={cn.option}>
-          <opt.Icon className={cn.icon} />
-          <h4 className={cn.optionName}>{opt.name}</h4>
-        </div>
-        // </Link>
-      ))}
+      {sidebarOptions.map((opt, i) => {
+        const isOptionActive = location.pathname.indexOf(opt.path) === 1
+
+        return (
+          <Link key={i} to={opt.path}>
+            <div
+              key={i}
+              className={`${cn.option} ${isOptionActive && cn.optionActive}`}
+            >
+              <opt.Icon className={cn.icon} />
+              <h4 className={cn.optionName}>{opt.name}</h4>
+            </div>
+          </Link>
+        )
+      })}
     </div>
   )
 }

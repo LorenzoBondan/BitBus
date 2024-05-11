@@ -1,7 +1,12 @@
+import { BrowserRouter } from 'react-router-dom'
 import AppContainer from './layout/AppContainer'
 
 function App() {
-  return <AppContainer />
+  return (
+    <BrowserRouter>
+      <AppContainer />
+    </BrowserRouter>
+  )
 }
 
 export default App
