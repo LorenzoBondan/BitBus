@@ -1,13 +1,8 @@
-import React from 'react'
 import PT from 'prop-types'
 import { Controller } from 'react-hook-form'
 import Select from 'react-tailwindcss-select'
 import FormInputLabel from './FormInputLabel'
 import { isEmpty, isNil } from 'ramda'
-
-//*****************************************************************************
-// Interface
-//*****************************************************************************
 
 const optionShape = {
   label: PT.string, // Text to show in the menu entry
@@ -21,15 +16,7 @@ const propTypes = {
   className: PT.string, // applied to root container
 }
 
-const defaultProps = {
-  className: '',
-}
-
-//*****************************************************************************
-// Components
-//*****************************************************************************
-
-const SelectMenuInput = ({ name, label, options, className }) => {
+const SelectMenuInput = ({ name, label, options, className = '' }) => {
   if (isNil(options) || isEmpty(options)) return null
 
   const cn = {
@@ -45,8 +32,8 @@ const SelectMenuInput = ({ name, label, options, className }) => {
         render={({ field: { onChange, value } }) => (
           <Select
             options={options}
-            value={options.find(option => option.value === value)}
-            onChange={option => onChange(option.value)}
+            value={options.find((option) => option.value === value)}
+            onChange={(option) => onChange(option.value)}
             classNames={{
               menuButton: () =>
                 'flex items-center h-8 pl-2 w-full rounded text-base bg-gray-900',
@@ -64,6 +51,5 @@ const SelectMenuInput = ({ name, label, options, className }) => {
 }
 
 SelectMenuInput.propTypes = propTypes
-SelectMenuInput.defaultProps = defaultProps
 
 export default SelectMenuInput

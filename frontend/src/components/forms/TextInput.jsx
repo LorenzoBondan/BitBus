@@ -1,26 +1,12 @@
-import React, { forwardRef } from 'react'
-import FormInput, {
-  formInputPropTypes,
-  formInputDefaultProps,
-  pickFormProps,
-} from './FormInput'
-
-//*****************************************************************************
-// Interface
-//*****************************************************************************
+import { forwardRef } from 'react'
+import FormInput, { formInputPropTypes, pickFormProps } from './FormInput'
 
 const propTypes = formInputPropTypes
-const defaultProps = formInputDefaultProps
-
-//*****************************************************************************
-// Components
-//*****************************************************************************
 
 const TextInput = forwardRef((props, ref) => {
   return <FormInput ref={ref} {...{ type: 'text', ...pickFormProps(props) }} />
 })
 
 TextInput.propTypes = propTypes
-TextInput.defaultProps = defaultProps
 
 export default TextInput

@@ -1,26 +1,12 @@
-import React from 'react'
 import PT from 'prop-types'
-
-//*****************************************************************************
-// Interface
-//*****************************************************************************
 
 const propTypes = {
   className: PT.string, // applied to root container
   muted: PT.bool,
   children: PT.any,
 }
-const defaultProps = {
-  visible: true,
-  muted: false,
-  className: '',
-}
 
-//*****************************************************************************
-// Components
-//*****************************************************************************
-const Panel = ({ className, children, muted }) => {
-
+const Panel = ({ className = '', children, muted = false }) => {
   const cn = {
     root: `${
       muted ? 'opacity-80' : ''
@@ -30,5 +16,4 @@ const Panel = ({ className, children, muted }) => {
   return <div className={cn.root}>{children}</div>
 }
 Panel.propTypes = propTypes
-Panel.defaultProps = defaultProps
 export default Panel

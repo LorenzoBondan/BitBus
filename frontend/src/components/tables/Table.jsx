@@ -1,34 +1,16 @@
-import React from 'react'
 import PT from 'prop-types'
-import TableTitle from '../forms/FormTitle' // TODO: Generic or copy?
+import TableTitle from '../forms/FormTitle'
 import { useTable } from 'react-table'
 
-//*****************************************************************************
-// Interface
-//*****************************************************************************
-
 const propTypes = {
-  className: PT.string, // applied to root container
-  title: PT.string, // optional, only displayed if provided
+  className: PT.string,
+  title: PT.string,
   columns: PT.arrayOf(PT.object),
   data: PT.arrayOf(PT.object),
 }
 
-const defaultProps = {
-  className: '',
-  columns: [],
-  data: [],
-}
-
-//*****************************************************************************
-// Components
-//*****************************************************************************
-
-const Table = props => {
-
-  const {
-    className, title, columns, data
-  } = props
+const Table = (props) => {
+  const { className = '', title, columns = [], data = [] } = props
 
   const cn = {
     root: `relative overflow-x-auto text-white ${className}`,
@@ -41,23 +23,22 @@ const Table = props => {
     tbodyTd: 'px-6 py-4',
   }
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable({ columns, data })
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({ columns, data })
 
   return (
     <div className={cn.root}>
-      { title && <TableTitle text={title} /> }
+      {title && <TableTitle text={title} />}
       <table {...getTableProps()} className={cn.table}>
         <thead className={cn.thead}>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps() }  className={cn.thead}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()} className={cn.theadTh}>
+          {headerGroups.map((headerGroup, i) => (
+            <tr
+              key={i}
+              {...headerGroup.getHeaderGroupProps()}
+              className={cn.thead}
+            >
+              {headerGroup.headers.map((column, i) => (
+                <th key={i} {...column.getHeaderProps()} className={cn.theadTh}>
                   {column.render('Header')}
                 </th>
               ))}
@@ -65,17 +46,19 @@ const Table = props => {
           ))}
         </thead>
         <tbody {...getTableBodyProps()} className={cn.tbody}>
-          {rows.map(row => {
+          {rows.map((row, i) => {
             prepareRow(row)
             return (
-              <tr {...row.getRowProps()} className={cn.tbodyTr}>
-                {row.cells.map(cell => {
+              <tr key={i} {...row.getRowProps()} className={cn.tbodyTr}>
+                {row.cells.map((cell, i) => {
                   return (
-                    <td {...cell.getCellProps()} className={cn.tbodyTd}>
+                    <td key={i} {...cell.getCellProps()} className={cn.tbodyTd}>
                       {cell.render('Cell')}
-                    </td>)
+                    </td>
+                  )
                 })}
-              </tr>)
+              </tr>
+            )
           })}
         </tbody>
       </table>
@@ -84,5 +67,4 @@ const Table = props => {
 }
 
 Table.propTypes = propTypes
-Table.defaultProps = defaultProps
 export default Table

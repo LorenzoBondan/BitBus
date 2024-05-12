@@ -1,24 +1,15 @@
-import React from 'react'
-import FormInput, { formInputPropTypes, formInputDefaultProps, pickFormProps } from './FormInput'
-
-//*****************************************************************************
-// Interface
-//*****************************************************************************
+import FormInput, { formInputPropTypes, pickFormProps } from './FormInput'
 
 const propTypes = formInputPropTypes
-const defaultProps = formInputDefaultProps
-
-//*****************************************************************************
-// Components
-//*****************************************************************************
 
 const valueAsNumber = true
-const NumberInput = props => {
+const NumberInput = (props) => {
   return (
-    <FormInput {...{ valueAsNumber, type: 'number', ...pickFormProps(props) }} />
+    <FormInput
+      {...{ valueAsNumber, type: 'number', ...pickFormProps(props) }}
+    />
   )
 }
 
 NumberInput.propTypes = propTypes
-NumberInput.defaultProps = defaultProps
 export default NumberInput

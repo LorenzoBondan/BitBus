@@ -1,10 +1,5 @@
-import React from 'react'
 import PT from 'prop-types'
 import { classNames } from '../../utils/styleUtils'
-
-//*****************************************************************************
-// Interface
-//*****************************************************************************
 
 const propTypes = {
   name: PT.string,
@@ -12,24 +7,13 @@ const propTypes = {
   className: PT.string, // applied to root container
 }
 
-const defaultProps = {
-  name: '',
-  onClick: null,
-  className: '',
-}
-
-//*****************************************************************************
-// Components
-//*****************************************************************************
-
-const TableName = ({ name, onClick, className }) => {
-
+const TableName = ({ name = '', onClick = null, className = '' }) => {
   const cn = {
     root: classNames(
       'text-lg font-semibold cursor-default',
       onClick ? 'underline hover:cursor-pointer hover:text-primary' : '',
       className
-    )
+    ),
   }
   return (
     <div className={cn.root} {...{ onClick }}>
@@ -39,6 +23,5 @@ const TableName = ({ name, onClick, className }) => {
 }
 
 TableName.propTypes = propTypes
-TableName.defaultProps = defaultProps
 
 export default TableName

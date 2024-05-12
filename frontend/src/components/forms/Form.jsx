@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react'
+import { createContext } from 'react'
 import PT from 'prop-types'
 import {
   useFormContext,
@@ -51,40 +51,23 @@ const propTypes = {
   isLoading: PT.bool,
 }
 
-const defaultProps = {
-  debug: false,
-  withPanel: true,
-  onSubmit: () => console.log('Form onSubmit() not provided'),
-  onError: (e) => console.log('Form submission error', e),
-  panelClassName: '',
-  className: '',
-  navToOnCancel: '/',
-  disableFormButtons: false,
-  isLoading: false,
-}
-
 export const FormContext = createContext('unintilized form context')
-export const useBdiFormContext = () => useContext(FormContext)
-
-//*****************************************************************************
-// Components
-//*****************************************************************************
 
 const Form = (props) => {
   const {
     id,
-    withPanel,
+    withPanel = true,
     title,
-    onSubmit,
-    onError,
+    onSubmit = () => console.log('Form onSubmit() not provided'),
+    onError = (e) => console.log('Form submission error', e),
     onDirtyChange,
-    className,
-    panelClassName,
+    className = '',
+    panelClassName = '',
     children,
-    debug,
-    navToOnCancel,
-    disableFormButtons,
-    isLoading,
+    debug = false,
+    navToOnCancel = '/',
+    disableFormButtons = false,
+    isLoading = false,
   } = props
 
   const cn = {
@@ -145,6 +128,7 @@ export const nullFormContext = {
 }
 
 const withFormContext = (FormToWrap) => (props) => {
+  // eslint-disable-next-line react/prop-types
   const { defaultValues } = props
   const useFormOptions = defaultValues ? { defaultValues } : {}
   const useFormMethods = useForm(useFormOptions)
@@ -156,7 +140,6 @@ const withFormContext = (FormToWrap) => (props) => {
 }
 
 Form.propTypes = propTypes
-Form.defaultProps = defaultProps
 export default withFormContext(Form)
 
 //*****************************************************************************

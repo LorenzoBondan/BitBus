@@ -1,41 +1,20 @@
-import React from "react";
-import PT from "prop-types";
-import FormInput, {
-  formInputPropTypes,
-  formInputDefaultProps,
-  pickFormProps,
-} from "./FormInput";
-
-//*****************************************************************************
-// Interface
-//*****************************************************************************
+import PT from 'prop-types'
+import FormInput, { formInputPropTypes, pickFormProps } from './FormInput'
 
 const propTypes = {
   ...formInputPropTypes,
   rows: PT.number,
-};
-
-const defaultProps = {
-  ...formInputDefaultProps,
-  rows: 3,
-  placeholder: "Enter text here",
-};
-
-//*****************************************************************************
-// Components
-//*****************************************************************************
+}
 
 const TextAreaInput = (props) => {
-  const { rows } = props
+  const { rows = 3 } = props
   const textAreaInputProps = {
-    type: "textarea",
+    type: 'textarea',
     textAreaProps: { rows },
     ...pickFormProps(props),
-  };
-  return <FormInput {...textAreaInputProps} />;
-};
+  }
+  return <FormInput {...textAreaInputProps} />
+}
 
-TextAreaInput.propTypes = propTypes;
-TextAreaInput.defaultProps = defaultProps;
-export default TextAreaInput;
-
+TextAreaInput.propTypes = propTypes
+export default TextAreaInput

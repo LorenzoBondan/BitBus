@@ -1,9 +1,4 @@
-import React from 'react'
 import PT from 'prop-types'
-
-//*****************************************************************************
-// Interface
-//*****************************************************************************
 
 const propTypes = {
   labelText: PT.string, // If labelText, will still render errorText
@@ -13,16 +8,7 @@ const propTypes = {
   requiredClass: PT.string, // class for required fields
 }
 
-const defaultProps = {
-  className: '',
-  requiredClass: '',
-}
-
-//*****************************************************************************
-// Components
-//*****************************************************************************
-
-const FormLabel = ({ labelText, className, required }) => {
+const FormLabel = ({ labelText, className = '', required }) => {
   const cn = {
     root: `mb-0.5 text-sm text-zinc-500 flex-row gap-3 ${className}`,
     required: 'ml-1 text-rose-300',
@@ -39,5 +25,4 @@ const FormLabel = ({ labelText, className, required }) => {
 }
 
 FormLabel.propTypes = propTypes
-FormLabel.defaultProps = defaultProps
 export default FormLabel

@@ -6,7 +6,7 @@ import { pick, path } from 'ramda'
 
 import FormInputLabel from './FormInputLabel'
 import { nullFormContext } from './Form'
-import { isNotNil } from 'ramda-adjunct'
+import { isNotNil, noop } from 'ramda-adjunct'
 
 //*****************************************************************************
 // Interface
@@ -37,24 +37,6 @@ export const formInputPropTypes = {
   textAreaProps: textAreaPropsShape,
 }
 
-// Can be imported and used by parent component
-export const formInputDefaultProps = {
-  className: '',
-  label: '',
-  placeholder: '',
-  valueAsNumber: false,
-  required: false,
-  readOnly: false,
-  disabled: false,
-  hidden: false,
-  touched: false,
-  dirty: false,
-  validate: {},
-  onFocus: () => {},
-  textAreaProps: {},
-}
-
-// can be used to pick form specifc props from a props object
 const formInputProps = [
   'type',
   'name',
@@ -88,19 +70,24 @@ const propTypes = {
   className: PT.string,
 }
 
-const defaultProps = {
-  ...formInputDefaultProps,
-  className: '',
-}
-
-//*****************************************************************************
-// Components
-//*****************************************************************************
-
 const FormInput = forwardRef((props, ref) => {
-  const { type, name, id, value, label, defaultValue, onFocus } = props
-  const { valueAsNumber, disabled, hidden, placeholder, required } = props
-  const { textAreaProps, className = '', validate } = props
+  const {
+    type,
+    name,
+    id,
+    value,
+    label = '',
+    defaultValue,
+    onFocus = noop,
+  } = props
+  const {
+    valueAsNumber = false,
+    disabled = false,
+    hidden = false,
+    placeholder = '',
+    required = false,
+  } = props
+  const { textAreaProps = {}, className = '', validate = {} } = props
 
   const { register, setValue, formState } = useFormContext() || nullFormContext
   const { errors } = formState || {}

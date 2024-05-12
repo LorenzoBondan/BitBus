@@ -1,35 +1,20 @@
-import React from "react";
-import FormInput, {
-  formInputPropTypes,
-  formInputDefaultProps,
-  pickFormProps,
-} from "./FormInput";
+import FormInput, { formInputPropTypes, pickFormProps } from './FormInput'
 
-//*****************************************************************************
-// Interface
-//*****************************************************************************
-
-const propTypes = formInputPropTypes;
-const defaultProps = formInputDefaultProps;
-
-//*****************************************************************************
-// Components
-//*****************************************************************************
+const propTypes = formInputPropTypes
 
 const TimeInput = (props) => {
   return (
     <FormInput
       {...{
-        type: "time",
+        type: 'time',
         defaultValue: props.defaultValue,
         ...pickFormProps(props),
-        className: "text-red",
+        className: 'text-red',
       }}
     />
-  );
-};
+  )
+}
 
-TimeInput.propTypes = propTypes;
-TimeInput.defaultProps = defaultProps;
+TimeInput.propTypes = propTypes
 
-export default TimeInput;
+export default TimeInput

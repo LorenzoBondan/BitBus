@@ -1,35 +1,20 @@
-import React from "react";
-import FormInput, {
-  formInputPropTypes,
-  formInputDefaultProps,
-  pickFormProps,
-} from "./FormInput";
+import FormInput, { formInputPropTypes, pickFormProps } from './FormInput'
 
-//*****************************************************************************
-// Interface
-//*****************************************************************************
-
-const propTypes = formInputPropTypes;
-const defaultProps = formInputDefaultProps;
-
-//*****************************************************************************
-// Components
-//*****************************************************************************
+const propTypes = formInputPropTypes
 
 const RadioButton = (props) => {
   return (
     <FormInput
       {...{
-        type: "radio",
+        type: 'radio',
         id: props.id,
         onChange: props.changed,
         ...pickFormProps(props),
       }}
     />
-  );
-};
+  )
+}
 
-RadioButton.propTypes = propTypes;
-RadioButton.defaultProps = defaultProps;
+RadioButton.propTypes = propTypes
 
-export default RadioButton;
+export default RadioButton

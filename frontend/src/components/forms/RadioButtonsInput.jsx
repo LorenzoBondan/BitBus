@@ -1,66 +1,55 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React from "react";
-import PT from "prop-types";
-import { useFormContext } from "react-hook-form";
-import { nullFormContext } from "./Form";
-
-//*****************************************************************************
-// Interface
-//*****************************************************************************
+import PT from 'prop-types'
+import { useFormContext } from 'react-hook-form'
+import { nullFormContext } from './Form'
 
 const radioButtonShape = {
   label: PT.string.isRequired, // text to who next to radio button
   value: PT.string.isRequired, // unique string value to associate w the Radio button
-};
+}
 
 const propTypes = {
   name: PT.string.isRequired, // Name associated w radio buttons in the list
-  direction: PT.oneOf(["vertical", "horizontal"]),
+  label: PT.string,
+  hidden: PT.bool,
+  direction: PT.oneOf(['vertical', 'horizontal']),
   defaultChecked: PT.string, // Initial button to check (one of the radioButtons[x].value)
   radioButtons: PT.arrayOf(PT.shape(radioButtonShape)),
   readOnly: PT.bool,
   required: PT.bool,
   disabled: PT.bool,
   className: PT.string, // applied to root element
-};
+}
 
-const defaultProps = {
-  direction: "horizontal",
-  defaultChecked: "",
-  required: false,
-  disabled: false,
-  readOnly: false,
-  className: "",
-};
-
-//*****************************************************************************
-// Components
-//*****************************************************************************
-
-const toId = (name, radioButtonValue) => `${name}.${radioButtonValue}`;
+const toId = (name, radioButtonValue) => `${name}.${radioButtonValue}`
 
 const RadioButtonsInput = (props) => {
-  const { name, label, radioButtons, disabled, hidden } = props;
-  const { direction, defaultChecked, required, className } = props;
+  const { name, label, radioButtons, disabled = false, hidden = false } = props
+  const {
+    direction = 'horizontal',
+    defaultChecked = '',
+    required,
+    className = '',
+  } = props
 
-  if (hidden) return null;
+  if (hidden) return null
 
-  const { register } = useFormContext() || nullFormContext;
+  const { register } = useFormContext() || nullFormContext
   const registerRequired = {
     value: required,
     message: `${label} is required`,
-  };
+  }
 
-  const flexDir = direction === "horizontal" ? "flex-row" : "flex-column";
+  const flexDir = direction === 'horizontal' ? 'flex-row' : 'flex-column'
   const getRadioStyle = (row) =>
-    direction === "horizontal" && row !== 0 ? "flex-3" : "";
+    direction === 'horizontal' && row !== 0 ? 'flex-3' : ''
 
   const cn = {
     root: className,
     buttonContainer: `flex ${flexDir}`,
-    label: "fakeOverlap",
+    label: 'fakeOverlap',
     radioButton: getRadioStyle,
-  };
+  }
 
   return (
     <div className={cn.root}>
@@ -89,16 +78,15 @@ const RadioButtonsInput = (props) => {
                     {label}
                   </label>
                 </div>
-              );
+              )
             })}
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-RadioButtonsInput.propTypes = propTypes;
-RadioButtonsInput.defaultProps = defaultProps;
+RadioButtonsInput.propTypes = propTypes
 
-export default RadioButtonsInput;
+export default RadioButtonsInput

@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import PT from 'prop-types'
 
 import { useFormContext } from 'react-hook-form'
@@ -7,10 +7,6 @@ import { path } from 'ramda'
 import FormInputLabel from './FormInputLabel'
 import { nullFormContext } from './Form'
 import { isNotNil } from 'ramda-adjunct'
-
-//*****************************************************************************
-// Interface
-//*****************************************************************************
 
 const propTypes = {
   name: PT.string.isRequired,
@@ -21,23 +17,10 @@ const propTypes = {
   className: PT.string,
 }
 
-const defaultProps = {
-  label: '',
-  placeholder: '',
-  valueAsNumber: false,
-  required: false,
-  hidden: false,
-  className: '',
-}
-
-//*****************************************************************************
-// Components
-//*****************************************************************************
-
-const ImmutableInput = props => {
-  const { name, value, label } = props
-  const { hidden, required } = props
-  const { className } = props
+const ImmutableInput = (props) => {
+  const { name, value, label = '' } = props
+  const { hidden = '', required = false } = props
+  const { className = '' } = props
 
   const { setValue, formState } = useFormContext() || nullFormContext
   const { errors } = formState || {}
@@ -61,10 +44,8 @@ const ImmutableInput = props => {
   const TextComponent = (
     <div className={cn.root}>
       <FormInputLabel {...{ labelText, required }} />
-      <div className=''>
-        <div className={cn.input}>
-          {value}
-        </div>
+      <div className="">
+        <div className={cn.input}>{value}</div>
         {errorText && <div className={cn.error}>{errorText}</div>}
       </div>
     </div>
@@ -74,6 +55,5 @@ const ImmutableInput = props => {
 }
 
 ImmutableInput.propTypes = propTypes
-ImmutableInput.defaultProps = defaultProps
 
 export default ImmutableInput
