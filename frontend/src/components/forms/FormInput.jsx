@@ -109,8 +109,9 @@ const FormInput = forwardRef((props, ref) => {
 
   const cn = {
     root: `transition-opacity duration-1000 mb-3 ${className}`,
-    input:
-      'focus:ring-0 focus:border-gray-600 border border-gray-600 text-gray-300 mb-1 p-2 h-8 w-full rounded text-base bg-gray-900',
+    input: `focus:ring-0 focus:border-gray-600 border border-gray-600 text-gray-300 mb-1 p-2 w-full rounded text-base bg-gray-900 ${
+      type !== 'textarea' && 'h-8'
+    }`,
     error: 'text-red-300 font-semibold text-xs whitespace-pre-wrap',
   }
 

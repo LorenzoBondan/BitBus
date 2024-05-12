@@ -11,7 +11,7 @@ const TableName = ({ name = '', onClick = null, className = '' }) => {
   const cn = {
     root: classNames(
       'text-lg font-semibold cursor-default',
-      onClick ? 'underline hover:cursor-pointer hover:text-primary' : '',
+      onClick ? 'underline hover:cursor-pointer hover:text-green-500' : '',
       className
     ),
   }

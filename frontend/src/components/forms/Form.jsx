@@ -71,7 +71,7 @@ const Form = (props) => {
   } = props
 
   const cn = {
-    buttonsContainer: 'flex flex-row gap-4 mt-6',
+    buttonsContainer: 'flex flex-row justify-end gap-4 mt-6',
   }
 
   const { handleSubmit, control } = UseReactHookFormContext()
@@ -85,13 +85,14 @@ const Form = (props) => {
           {children}
           {!disableFormButtons && (
             <div className={cn.buttonsContainer}>
-              <SubmitButton className={cn.button} disabled={isLoading} />
               <NavButton
                 className="flex-initial"
-                text="Cancel"
+                text="Cancelar"
+                solid={false}
                 linkto={navToOnCancel}
                 disabled={isLoading}
               />
+              <SubmitButton className={cn.button} disabled={isLoading} />
             </div>
           )}
         </form>

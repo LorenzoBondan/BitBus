@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import PT from 'prop-types'
 import EditIcon from '../icons/EditIcon'
 import DeleteIcon from '../icons/DeleteIcon'

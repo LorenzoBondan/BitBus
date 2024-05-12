@@ -2,15 +2,6 @@ import PT from 'prop-types'
 import { noop } from 'ramda-adjunct'
 import Button from './Button'
 
-//*****************************************************************************
-// Interface
-//*****************************************************************************
-
-/*
-  Causes a submit event for associated form
-  An optional action can be specified by supplying onClick()
-*/
-
 const propTypes = {
   text: PT.string, // defaults to 'Submit'
   onClick: PT.func, // optional, only if you need an action in addition to submit
@@ -22,7 +13,7 @@ const propTypes = {
 
 const SubmitButton = ({
   disabled = false,
-  text = 'Submit',
+  text = 'Enviar',
   onClick = noop,
   tranparent = false,
   formName,

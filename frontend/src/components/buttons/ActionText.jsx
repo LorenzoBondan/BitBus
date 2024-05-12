@@ -23,7 +23,7 @@ const ActionText = ({
     <div className={cn.root} {...{ onClick }}>
       {Icon && <Icon />}
       <span
-        className={`text-primary text-sm underline cursor-pointer ${className}`}
+        className={`text-green-500 text-sm underline cursor-pointer ${className}`}
       >
         {text}
       </span>

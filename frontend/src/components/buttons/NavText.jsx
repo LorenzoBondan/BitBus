@@ -12,7 +12,7 @@ const propTypes = {
 const NavText = ({ text = 'No Text', to = '', onClick = noop, className }) => {
   return (
     <Link {...{ onClick, to, className }}>
-      <span className={'hover:text-primary underline'}>{text}</span>
+      <span className={'hover:text-green-500 underline'}>{text}</span>
     </Link>
   )
 }

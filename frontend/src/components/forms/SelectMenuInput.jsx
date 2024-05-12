@@ -40,7 +40,7 @@ const SelectMenuInput = ({ name, label, options, className = '' }) => {
               menu: 'absolute z-10 w-full bg-gray-600 rounded py-1 mt-1.5 text-base',
               listItem: ({ isSelected }) =>
                 isSelected
-                  ? 'block transition duration-200 px-2 py-1.5 cursor-pointer select-none truncate rounded text-gray-200 bg-primary-dark'
+                  ? 'block transition duration-200 px-2 py-1.5 cursor-pointer select-none truncate rounded text-gray-200 bg-green-600'
                   : 'block transition duration-200 px-2 py-1.5 cursor-pointer select-none truncate rounded text-gray-400 hover:bg-gray-700',
             }}
           />

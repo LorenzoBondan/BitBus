@@ -81,19 +81,13 @@ export const makeRestClient = (serverConfig) => {
 const _requestPreprocessor =
   (opts = {}) =>
   (req = {}) => {
-    const { verbose, getAccessToken } = opts
-    const accessToken = getAccessToken()
+    const { verbose } = opts
     const { method, baseURL, url, data } = req
     if (verbose) {
       console.debug(`\n${method} (new) ${baseURL}${url}`)
       if (data) console.debug('body', data)
     }
-    return accessToken
-      ? {
-          ...req,
-          headers: { ...req.headers, Authorization: `Bearer ${accessToken}` },
-        }
-      : req
+    return req
   }
 
 const _responsePostProcessor =

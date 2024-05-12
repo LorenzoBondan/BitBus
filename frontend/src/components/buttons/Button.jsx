@@ -33,15 +33,15 @@ const Button = (props) => {
   const { type = 'button', form } = parentButtonProps
 
   const baseCn =
-    'border border-primary font-medium text-sm text-zinc-200 py-2 px-6 rounded-full'
+    'border border-green-500 font-medium text-sm text-zinc-200 py-2 px-6 rounded-full'
 
   const fillCn = (solid) => {
     if (solid) {
       if (disabled) return 'bg-zinc-700'
-      return 'bg-primary hover:bg-primary-light'
+      return 'bg-green-500 hover:bg-green-400 hover:border-green-400'
     }
     if (disabled) return 'bg-zinc-700'
-    return 'bg-zinc-700 hover:bg-gray-800'
+    return 'hover:bg-white/10'
   }
 
   const cn = {
