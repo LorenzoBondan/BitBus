@@ -7,7 +7,10 @@ import {
 import { propOr } from 'ramda'
 
 export const useGetDiscosRemoviveis = (options = {}) => {
-  const { defaultResponse = [], resultsPropName = 'discosRemoviveis' } = options
+  const {
+    defaultResponse = { content: [] },
+    resultsPropName = 'discosRemoviveis',
+  } = options
   const restPath = '/discosRemoviveis'
   const queryCacheKey = 'discosRemoviveis'
   return useRestQuery(queryCacheKey, restPath, {

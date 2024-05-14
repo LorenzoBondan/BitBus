@@ -7,7 +7,8 @@ import {
 import { propOr } from 'ramda'
 
 export const useGetMemorias = (options = {}) => {
-  const { defaultResponse = [], resultsPropName = 'memorias' } = options
+  const { defaultResponse = { content: [] }, resultsPropName = 'memorias' } =
+    options
   const restPath = '/memorias'
   const queryCacheKey = 'memorias'
   return useRestQuery(queryCacheKey, restPath, {

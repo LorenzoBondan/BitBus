@@ -7,7 +7,8 @@ import {
 import { propOr } from 'ramda'
 
 export const useGetPlacas = (options = {}) => {
-  const { defaultResponse = [], resultsPropName = 'placas' } = options
+  const { defaultResponse = { content: [] }, resultsPropName = 'placas' } =
+    options
   const restPath = '/placas'
   const queryCacheKey = 'placas'
   return useRestQuery(queryCacheKey, restPath, {

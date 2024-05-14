@@ -13,7 +13,7 @@ const TabButton = ({
   className,
   text,
 }) => {
-  const commonStyle = 'w-38'
+  const commonStyle = 'w-38 whitespace-nowrap'
   const activeStyle = `${commonStyle} text-white bg-white/20 pt-2 pb-2 pr-7 pl-7 rounded-md`
   const inactiveStyle = `${commonStyle} text-white/30 bg-white/10 hover:bg-white/20 pt-2 pb-2 pr-7 pl-7 rounded-md`
 

@@ -1,11 +1,12 @@
 import Tabs from '../components/ui/Tabs'
 import { useState } from 'react'
-import Memoria from '../views/acervo/Memoria'
 import Processador from '../views/acervo/Processador'
 import DiscoRemovivel from '../views/acervo/DiscoRemovivel'
 import Periferico from '../views/acervo/Periferico'
 import Software from '../views/acervo/Software'
 import Placa from '../views/acervo/Placa'
+import PageTitle from '../components/ui/PageTitle'
+import Memorias from '../views/acervo/memoria/Memorias'
 
 const Acervo = () => {
   const [tabSelected, setTabSelected] = useState('memoria')
@@ -22,7 +23,7 @@ const Acervo = () => {
   const renderCategory = () => {
     switch (tabSelected) {
       case 'memoria':
-        return <Memoria />
+        return <Memorias />
       case 'processador':
         return <Processador />
       case 'discoRemovivel':
@@ -37,11 +38,13 @@ const Acervo = () => {
   }
 
   const cn = {
-    tabs: 'flex gap-1 w-full justify-center',
+    container: '',
+    tabs: 'flex gap-1 w-full',
   }
 
   return (
-    <div>
+    <div className={cn.container}>
+      <PageTitle>Acervo</PageTitle>
       <Tabs
         tabs={tabs}
         className={cn.tabs}

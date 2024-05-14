@@ -7,7 +7,8 @@ import {
 import { propOr } from 'ramda'
 
 export const useGetSoftwares = (options = {}) => {
-  const { defaultResponse = [], resultsPropName = 'softwares' } = options
+  const { defaultResponse = { content: [] }, resultsPropName = 'softwares' } =
+    options
   const restPath = '/softwares'
   const queryCacheKey = 'softwares'
   return useRestQuery(queryCacheKey, restPath, {

@@ -7,7 +7,7 @@ const AppContainer = () => {
   const cn = {
     container: 'min-h-screen w-screen bg-slate-950 ',
     content: 'flex flex-row w-full h-[calc(100vh-3.5rem)] ',
-    resource: 'w-[calc(100%-160px)] p-4 overflow-y-auto',
+    resource: 'w-[calc(100%-160px)] p-8 overflow-y-auto',
   }
 
   return (

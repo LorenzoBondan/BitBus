@@ -7,7 +7,8 @@ import {
 import { propOr } from 'ramda'
 
 export const useGetPerifericos = (options = {}) => {
-  const { defaultResponse = [], resultsPropName = 'perifericos' } = options
+  const { defaultResponse = { content: [] }, resultsPropName = 'perifericos' } =
+    options
   const restPath = '/perifericos'
   const queryCacheKey = 'perifericos'
   return useRestQuery(queryCacheKey, restPath, {

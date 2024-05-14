@@ -1,8 +1,9 @@
-import NavButton from '../../components/buttons/NavButton'
+import { PlusIcon } from '@heroicons/react/24/outline'
+import NavButton from '../../../components/buttons/NavButton'
 
 const Memoria = () => {
   const cn = {
-    header: 'flex justify-between',
+    header: 'flex justify-between mt-5',
   }
 
   return (

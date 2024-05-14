@@ -7,7 +7,10 @@ import {
 import { propOr } from 'ramda'
 
 export const useGetProcessadores = (options = {}) => {
-  const { defaultResponse = [], resultsPropName = 'processadores' } = options
+  const {
+    defaultResponse = { content: [] },
+    resultsPropName = 'processadores',
+  } = options
   const restPath = '/processadores'
   const queryCacheKey = 'processadores'
   return useRestQuery(queryCacheKey, restPath, {

@@ -37,14 +37,15 @@ const ItemAcervoForm = (props) => {
         <NumberInput required name="ano" label="Ano" />
         <NumberInput required name="quantidade" label="Quantidade" />
         <div className={cn.medidas}>
-          <NumberInput required name="altura" label="Altura" />
-          <NumberInput required name="largura" label="Largura" />
-          <NumberInput required name="espessura" label="Espessura" />
+          <NumberInput name="altura" label="Altura" />
+          <NumberInput name="largura" label="Largura" />
+          <NumberInput name="espessura" label="Espessura" />
         </div>
         <TextAreaInput
           name="informacoes"
           label="Informações adicionais"
           rows={3}
+          required
         />
         {/* Faltando os Links */}
       </Form>

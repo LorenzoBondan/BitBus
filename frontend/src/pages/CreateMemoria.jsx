@@ -2,7 +2,9 @@ import MemoriaForm from '../forms/MemoriaForm'
 import { useCreateMemoria } from '../rest/memoriaRestHooks'
 
 const CreateMemoria = () => {
-  const { createMemoria } = useCreateMemoria()
+  const { createMemoria } = useCreateMemoria({
+    onSuccess: { routeTo: '/acervo' },
+  })
 
   const onSubmit = async (data) => {
     await createMemoria(data)
