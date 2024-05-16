@@ -3,25 +3,42 @@ import TableTitle from '../forms/FormTitle'
 import { useTable } from 'react-table'
 import { omit } from 'ramda'
 
+const classNamesShape = PT.shape({
+  table: PT.string,
+  thead: PT.string,
+  theadTr: PT.string,
+  theadTh: PT.string,
+  tbody: PT.string,
+  tbodyTr: PT.string,
+  tbodyTd: PT.string,
+})
+
 const propTypes = {
   className: PT.string,
+  classNames: classNamesShape,
   title: PT.string,
   columns: PT.arrayOf(PT.object),
   data: PT.arrayOf(PT.object),
 }
 
 const Table = (props) => {
-  const { className = '', title, columns = [], data = [] } = props
+  const {
+    className = '',
+    title,
+    columns = [],
+    data = [],
+    classNames = {},
+  } = props
 
   const cn = {
     root: `relative overflow-x-auto text-white ${className}`,
-    table: 'w-full text-sm text-center text-white',
-    thead: 'text-s border-b border-zinc-500 pb-8',
-    theadTr: 'px-6 py-3',
-    theadTh: 'w-24',
-    tbody: '',
-    tbodyTr: 'border-b border-zinc-500',
-    tbodyTd: 'px-6 py-4',
+    table: `w-full text-sm text-center text-white ${classNames.table}`,
+    thead: `text-s border-b border-zinc-500 pb-8 ${classNames.thead}`,
+    theadTr: `px-6 py-3  ${classNames.theadTr}`,
+    theadTh: `w-24 ${classNames.theadTh}`,
+    tbody: `${classNames.tbody}`,
+    tbodyTr: `border-b border-zinc-500 ${classNames.tbodyTr}`,
+    tbodyTd: `px-6 py-4 ${classNames.tbodyTd}`,
   }
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =

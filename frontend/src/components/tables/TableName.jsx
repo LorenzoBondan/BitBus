@@ -16,11 +16,11 @@ const TableName = ({
 }) => {
   const cn = {
     name: classNames(
-      'text-lg font-semibold cursor-default text-start leading-6',
+      'text-xl font-semibold cursor-default text-start leading-7',
       onClick ? 'underline hover:cursor-pointer hover:text-green-500' : '',
       className
     ),
-    subtext: 'leading-3 text-xs text-gray-200 whitespace-pre',
+    subtext: 'leading-3 text-xs text-zinc-500 whitespace-pre text-start',
   }
   return (
     <>

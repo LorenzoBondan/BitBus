@@ -21,7 +21,6 @@ const MemoriasTable = () => {
         Header: 'Quantidade',
         accessor: 'quantidade',
       }),
-      append({ Header: 'Informações', accessor: 'info' }),
       append({ Header: 'Ações', accessor: 'manage' })
     )([])
   )
@@ -32,7 +31,6 @@ const MemoriasTable = () => {
       assoc('item', <MemoriaTableName {...{ mem }} />),
       assoc('dimensions', <Dimensions {...{ mem }} />),
       assoc('quantidade', mem?.quantidade),
-      assoc('info', <Informacoes {...{ mem }} />),
       assoc('manage', <MemoriaManage {...{ mem }} />)
     )({})
   )
@@ -53,18 +51,6 @@ const MemoriaTableName = ({ mem }) => {
 }
 
 MemoriaTableName.propTypes = {
-  mem: PT.object.isRequired,
-}
-
-const Informacoes = ({ mem }) => {
-  const cn = {
-    root: 'truncate max-w-36',
-  }
-
-  return <div className={cn.root}>{mem.informacoes}</div>
-}
-
-Informacoes.propTypes = {
   mem: PT.object.isRequired,
 }
 
@@ -105,9 +91,9 @@ const MemoriaManage = ({ mem }) => {
 
   const onDelete = () => deleteMemoria(mem?.id)
 
-  const onView = () => navigate(`/application-developers/${mem?.id}`)
+  const onView = () => navigate(`/acervo/memoria/${mem?.id}`)
 
-  const onEdit = () => navigate(`/application-developers/${mem?.id}/update`)
+  const onEdit = () => navigate(`/acervo/memoria/${mem?.id}/alterar`)
 
   return <ManageControls {...{ name: nome, onDelete, onEdit, onView }} />
 }
