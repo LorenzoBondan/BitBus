@@ -1,6 +1,7 @@
 import PT from 'prop-types'
 import TableTitle from '../forms/FormTitle'
 import { useTable } from 'react-table'
+import { omit } from 'ramda'
 
 const propTypes = {
   className: PT.string,
@@ -19,7 +20,7 @@ const Table = (props) => {
     theadTr: 'px-6 py-3',
     theadTh: 'w-24',
     tbody: '',
-    tbodyTr: 'border-b border-zinc-500 opacity-70',
+    tbodyTr: 'border-b border-zinc-500',
     tbodyTd: 'px-6 py-4',
   }
 
@@ -34,11 +35,15 @@ const Table = (props) => {
           {headerGroups.map((headerGroup, i) => (
             <tr
               key={i}
-              {...headerGroup.getHeaderGroupProps()}
+              {...omit(['key'], headerGroup.getHeaderGroupProps())}
               className={cn.thead}
             >
               {headerGroup.headers.map((column, i) => (
-                <th key={i} {...column.getHeaderProps()} className={cn.theadTh}>
+                <th
+                  key={i}
+                  {...omit(['key'], column.getHeaderProps())}
+                  className={cn.theadTh}
+                >
                   {column.render('Header')}
                 </th>
               ))}
@@ -49,10 +54,18 @@ const Table = (props) => {
           {rows.map((row, i) => {
             prepareRow(row)
             return (
-              <tr key={i} {...row.getRowProps()} className={cn.tbodyTr}>
+              <tr
+                key={i}
+                {...omit(['key'], row.getRowProps())}
+                className={cn.tbodyTr}
+              >
                 {row.cells.map((cell, i) => {
                   return (
-                    <td key={i} {...cell.getCellProps()} className={cn.tbodyTd}>
+                    <td
+                      key={i}
+                      {...omit(['key'], cell.getCellProps())}
+                      className={cn.tbodyTd}
+                    >
                       {cell.render('Cell')}
                     </td>
                   )

@@ -1,6 +1,6 @@
-import { PlusIcon } from '@heroicons/react/24/outline'
 import NavButton from '../../../components/buttons/NavButton'
 import { useGetMemorias } from '../../../rest/memoriaRestHooks'
+import MemoriasTable from '../../../tables/MemoriasTable'
 
 const Memorias = () => {
   const { data } = useGetMemorias()
@@ -15,6 +15,7 @@ const Memorias = () => {
       <div className={cn.header}>
         <div />
         <NavButton linkto={'/acervo/memoria/novo'} text={'Nova memória'} />
+        <MemoriasTable />
       </div>
     </div>
   )

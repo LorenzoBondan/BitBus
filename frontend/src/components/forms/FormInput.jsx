@@ -16,6 +16,10 @@ const textAreaPropsShape = PT.shape({
   rows: PT.number,
 })
 
+const numberPropsShape = PT.shape({
+  step: PT.number,
+})
+
 // Can be imported and used by parent component
 export const formInputPropTypes = {
   name: PT.string.isRequired,
@@ -35,6 +39,9 @@ export const formInputPropTypes = {
 
   // only if type = text area
   textAreaProps: textAreaPropsShape,
+
+  // only if type = number
+  numberProps: numberPropsShape,
 }
 
 const formInputProps = [
@@ -87,7 +94,12 @@ const FormInput = forwardRef((props, ref) => {
     placeholder = '',
     required = false,
   } = props
-  const { textAreaProps = {}, className = '', validate = {} } = props
+  const {
+    textAreaProps = {},
+    numberProps = {},
+    className = '',
+    validate = {},
+  } = props
 
   const { register, setValue, formState } = useFormContext() || nullFormContext
   const { errors } = formState || {}
@@ -127,6 +139,7 @@ const FormInput = forwardRef((props, ref) => {
   }
 
   if (type === 'textarea') inputProps.rows = textAreaProps?.rows || 3
+  if (type === 'number') inputProps.step = numberProps?.step || 1
 
   const InputComponent = (
     <div className={cn.root}>

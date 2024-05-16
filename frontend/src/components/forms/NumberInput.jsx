@@ -1,14 +1,20 @@
+import PT from 'prop-types'
 import FormInput, { formInputPropTypes, pickFormProps } from './FormInput'
 
-const propTypes = formInputPropTypes
+const propTypes = {
+  ...formInputPropTypes,
+  step: PT.number,
+}
 
-const valueAsNumber = true
 const NumberInput = (props) => {
-  return (
-    <FormInput
-      {...{ valueAsNumber, type: 'number', ...pickFormProps(props) }}
-    />
-  )
+  const { step = 1 } = props
+  const numberInputProps = {
+    type: 'number',
+    valueAsNumber: true,
+    numberProps: { step },
+    ...pickFormProps(props),
+  }
+  return <FormInput {...numberInputProps} />
 }
 
 NumberInput.propTypes = propTypes

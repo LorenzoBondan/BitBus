@@ -1,10 +1,10 @@
 import Tabs from '../components/ui/Tabs'
 import { useState } from 'react'
-import Processador from '../views/acervo/Processador'
-import DiscoRemovivel from '../views/acervo/DiscoRemovivel'
-import Periferico from '../views/acervo/Periferico'
-import Software from '../views/acervo/Software'
-import Placa from '../views/acervo/Placa'
+import Processadores from '../views/acervo/processador/Processadores'
+import DiscosRemoviveis from '../views/acervo/discoRemovivel/DiscosRemoviveis'
+import Perifericos from '../views/acervo/periferico/Perifericos'
+import Softwares from '../views/acervo/software/Softwares'
+import Placas from '../views/acervo/placa/Placas'
 import PageTitle from '../components/ui/PageTitle'
 import Memorias from '../views/acervo/memoria/Memorias'
 
@@ -25,15 +25,15 @@ const Acervo = () => {
       case 'memoria':
         return <Memorias />
       case 'processador':
-        return <Processador />
+        return <Processadores />
       case 'discoRemovivel':
-        return <DiscoRemovivel />
+        return <DiscosRemoviveis />
       case 'periferico':
-        return <Periferico />
+        return <Perifericos />
       case 'software':
-        return <Software />
+        return <Softwares />
       case 'placa':
-        return <Placa />
+        return <Placas />
     }
   }
 

@@ -23,8 +23,8 @@ const ManageControls = ({ onDelete, onEdit, onView, name, className = '' }) => {
   return (
     <div className={cn.root}>
       <Confirm
-        modalTitle="Confirm Delete"
-        modalSubtitle={`Are you sure you want to delete ${name}?`}
+        modalTitle="Confirmar Remoção"
+        modalSubtitle={`Você tem certeza que deseja deletar ${name}?`}
         modalIsOpen={confirmModalOpen}
         onDeny={() => setConfirmModalOpen(false)}
         onAccept={() => {
