@@ -1,21 +1,33 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import PT from 'prop-types'
 
 import { pipe, append, assoc } from 'ramda'
 import { useNavigate } from 'react-router-dom'
 
+import { useState } from 'react'
 import { useGetMemorias, useDeleteMemoria } from '../rest/memoriaRestHooks'
 
 import { Table, TableName, ManageControls } from '../components/tables'
 import ValueDisplay from '../components/ui/ValueDisplay'
+import Pagination from '../components/ui/Pagination'
 
 const MemoriasTable = () => {
-  const { data, isLoading } = useGetMemorias()
+  const [page, setPage] = useState(0)
+  console.log(page)
+  const { data, isLoading, refetch } = useGetMemorias({
+    queryParams: { page, size: 5, sort: 'nome,ASC' },
+  })
 
+  useEffect(() => {
+    refetch({})
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page])
+
+  console.log(data)
   // dynamic columns
   const memoriaTableColumns = useMemo(() =>
     pipe(
-      append({ Header: 'Nome', accessor: 'item' }),
+      append({ Header: '', accessor: 'item' }),
       append({ Header: 'Dimensões', accessor: 'dimensions' }),
       append({
         Header: 'Quantidade',
@@ -37,7 +49,14 @@ const MemoriasTable = () => {
 
   if (isLoading) return <div>Loading...</div>
 
-  return <Table columns={memoriaTableColumns} data={memoriaTableData} />
+  return (
+    <>
+      <Table columns={memoriaTableColumns} data={memoriaTableData} />
+      {data.totalPages && (
+        <Pagination page={page} setPage={setPage} lastPage={data.totalPages} />
+      )}
+    </>
+  )
 }
 
 export default MemoriasTable

@@ -1,19 +1,42 @@
-import { PlusIcon } from '@heroicons/react/24/outline'
-import NavButton from '../../../components/buttons/NavButton'
+import PT from 'prop-types'
+import Panel from '../../../components/ui/Panel'
+import PanelTitle from '../../../components/ui/PanelTitle'
+import ValueDisplay from '../../../components/ui/ValueDisplay'
+import LinkList from '../../LinkList'
+import VertValueDisplay from '../../../components/ui/VertValueDisplay'
 
-const Memoria = () => {
+const propTypes = {
+  memoria: PT.object,
+  className: PT.string, // applied to root container
+}
+
+const Memoria = ({ memoria, className }) => {
   const cn = {
-    header: 'flex justify-between mt-5',
+    root: `${className}`,
+    info: 'text-justify',
   }
 
   return (
-    <div>
-      <div className={cn.header}>
-        <div />
-        <NavButton linkto={'/acervo/memoria/novo'} text={'Nova memória'} />
-      </div>
+    <div className={cn.root}>
+      <PanelTitle text="Detalhes" />
+      <Panel>
+        <ValueDisplay label="Nome" value={memoria?.nome || ''} />
+        <ValueDisplay label="Ano" value={memoria?.ano || ''} />
+        <ValueDisplay label="Quantidade" value={memoria?.quantidade || ''} />
+        <ValueDisplay label="Altura" value={memoria?.altura || ''} />
+        <ValueDisplay label="Largura" value={memoria?.largura || ''} />
+        <ValueDisplay label="Espessura" value={memoria?.espessura || ''} />
+        <VertValueDisplay
+          label="Informações"
+          value={memoria?.informacoes || ''}
+          className={cn.info}
+        />
+        <LinkList links={memoria?.links} />
+      </Panel>
     </div>
   )
 }
+
+Memoria.propTypes = propTypes
 
 export default Memoria

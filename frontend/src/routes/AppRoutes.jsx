@@ -4,6 +4,8 @@ import Visitas from '../pages/Visitas'
 import Oficinas from '../pages/Oficinas'
 import Doacoes from '../pages/Doacoes'
 import CreateMemoria from '../pages/CreateMemoria'
+import UpdateMemoria from '../pages/UpdateMemoria'
+import ViewMemoria from '../pages/ViewMemoria'
 
 const AppRoutes = () => {
   return (
@@ -13,6 +15,8 @@ const AppRoutes = () => {
         <Route index element={<Acervo />} />
         <Route path="memoria">
           <Route path="novo" element={<CreateMemoria />} />
+          <Route path=":id" element={<ViewMemoria />} />
+          <Route path=":id/alterar" element={<UpdateMemoria />} />
         </Route>
         <Route path="disco_removivel">
           <Route path="novo" element={<CreateMemoria />} />

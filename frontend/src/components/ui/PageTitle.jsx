@@ -1,16 +1,24 @@
 import PT from 'prop-types'
 
 const propTypes = {
-  children: PT.string,
+  title: PT.string.isRequired,
+  upperText: PT.string, // text above title
+  className: PT.string, // applied to root container
 }
 
-const PageTitle = ({ children }) => {
+const PageTitle = ({ title, upperText, className }) => {
   const cn = {
-    title: 'text-3xl font-semibold text-gray-300 mb-4',
+    root: `${className}`,
+    title: 'mb-4 text-2xl text-gray-400 pb-2 pr-1-bold',
+    upperText: 'text-gray-700 text-sm',
   }
 
-  return <h1 className={cn.title}>{children}</h1>
+  return (
+    <div className={cn.root}>
+      <div className={cn.upperText}>{upperText}</div>
+      <div className={cn.title}>{title}</div>
+    </div>
+  )
 }
-
 PageTitle.propTypes = propTypes
 export default PageTitle
