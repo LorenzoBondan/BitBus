@@ -37,7 +37,7 @@ const RadioButtonsInput = (props) => {
   const { register } = useFormContext() || nullFormContext
   const registerRequired = {
     value: required,
-    message: `${label} is required`,
+    message: `${label} é obrigatório`,
   }
 
   const flexDir = direction === 'horizontal' ? 'flex-row' : 'flex-column'

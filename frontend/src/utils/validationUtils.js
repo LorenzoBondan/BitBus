@@ -5,7 +5,7 @@ export const isEmailValid = (email) => {
 export const validateInputEmail = (email) => {
   if (isEmailValid(email)) return true
 
-  return 'Email is invalid'
+  return 'Email é inválido'
 }
 
 export const isPasswordValid = (pw) => {
@@ -18,11 +18,27 @@ export const validateInputPassword = (pw) => {
   if (isPasswordValid(pw)) return true
 
   return (
-    'Password must have at least:\n' +
-    '- 1 lower letter\n' +
-    '- 1 upper letter\n' +
-    '- 1 of the following special characters: @#$%^&+=!\n' +
-    '- 12 characters\n' +
-    '- no whitespaces'
+    'Senha deve ter pelo menos:\n' +
+    '- 1 letra minúscula\n' +
+    '- 1 letra maiúscula\n' +
+    '- 1 dos seguintes caracteres especiais: @#$%^&+=!\n' +
+    '- 12 caracteres\n' +
+    '- Sem espaços em branco'
   )
+}
+
+export const validateMinLength = (text, min) => {
+  if (text.length >= min) {
+    return true
+  }
+
+  return `Campo deve ter pelo menos ${min} caracteres`
+}
+
+export const validateMaxLength = (text, max) => {
+  if (text.length <= max) {
+    return true
+  }
+
+  return `Campo deve ter no máximo ${max} caracteres`
 }

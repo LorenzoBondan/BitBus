@@ -116,7 +116,7 @@ const FormInput = forwardRef((props, ref) => {
 
   const registerRequired = {
     value: required,
-    message: `${label || placeholder} is required`,
+    message: `${label || placeholder} é obrigatório`,
   }
 
   const cn = {

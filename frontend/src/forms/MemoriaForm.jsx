@@ -6,6 +6,7 @@ import Form, {
 } from '../components/forms/Form'
 import LinksForm from './LinksForm'
 import { omit } from 'ramda'
+import { validateMaxLength, validateMinLength } from '../utils/validationUtils'
 
 const propTypes = {
   onSubmit: PT.func, // called on form submission (passed form data)
@@ -50,7 +51,15 @@ const ItemAcervoForm = (props) => {
           defaultValues,
         }}
       >
-        <TextInput required name="nome" label="Nome" />
+        <TextInput
+          required
+          name="nome"
+          label="Nome"
+          validate={{
+            min: (text) => validateMinLength(text, 3),
+            max: (text) => validateMaxLength(text, 50),
+          }}
+        />
         <NumberInput required name="ano" label="Ano" />
         <NumberInput required name="quantidade" label="Quantidade" />
         <div className={cn.medidas}>
@@ -61,6 +70,10 @@ const ItemAcervoForm = (props) => {
         <TextAreaInput
           name="informacoes"
           label="Informações adicionais"
+          validate={{
+            min: (text) => validateMinLength(text, 3),
+            max: (text) => validateMaxLength(text, 255),
+          }}
           rows={3}
           required
         />

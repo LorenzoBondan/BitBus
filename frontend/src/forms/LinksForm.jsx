@@ -28,6 +28,9 @@ const LinksForm = ({ className }) => {
       'flex flex-col items-start justify-center text-sm text-zinc-400 break-all w-3/4 max-w-72 ',
     linkTag: 'hover:text-zinc-200',
     actionContainer: 'flex items-center',
+    form: 'flex items-center gap-2',
+    input: 'grow',
+    button: 'mt-1',
     icon: 'cursor-pointer',
   }
 
@@ -49,8 +52,16 @@ const LinksForm = ({ className }) => {
   return (
     <div className={cn.root}>
       <div className={cn.title}>Links</div>
-      <TextInput {...register('temp_link.url')} label="Link" />
-      <Button text="Adicionar Link" onClick={onSubmit} />
+      <div className={cn.form}>
+        <div className={cn.input}>
+          <TextInput {...register('temp_link.url')} label="Link" />
+        </div>
+        <Button
+          className={cn.button}
+          text="Adicionar Link"
+          onClick={onSubmit}
+        />
+      </div>
 
       {showList && (
         <div className={cn.list}>
