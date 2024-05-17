@@ -15,7 +15,7 @@ const ViewMemoria = ({ className }) => {
 
   const { memoria, isLoading } = useGetMemoriaById(id)
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <div>Carregando...</div>
 
   const cn = {
     root: ` ${className}`,

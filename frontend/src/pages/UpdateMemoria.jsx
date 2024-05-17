@@ -15,7 +15,7 @@ const UpdateMemoria = () => {
     await updateMemoria(data)
   }
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <div>Carregando...</div>
 
   return (
     <MemoriaForm

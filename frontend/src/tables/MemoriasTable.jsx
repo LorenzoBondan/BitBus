@@ -13,7 +13,7 @@ import Pagination from '../components/ui/Pagination'
 
 const MemoriasTable = () => {
   const [page, setPage] = useState(0)
-  console.log(page)
+
   const { data, isLoading, refetch } = useGetMemorias({
     queryParams: { page, size: 5, sort: 'nome,ASC' },
   })
@@ -23,7 +23,6 @@ const MemoriasTable = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page])
 
-  console.log(data)
   // dynamic columns
   const memoriaTableColumns = useMemo(() =>
     pipe(
@@ -47,7 +46,13 @@ const MemoriasTable = () => {
     )({})
   )
 
-  if (isLoading) return <div>Loading...</div>
+  const cn = {
+    noData: 'text-center',
+  }
+
+  if (isLoading) return <div>Carregando...</div>
+  if (!isLoading && memoriaTableData.length === 0)
+    return <div className={cn.noData}>Não foram encontradas memórias.</div>
 
   return (
     <>

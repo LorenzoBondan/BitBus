@@ -1,7 +1,7 @@
 import PT from 'prop-types'
 
 const propTypes = {
-  links: PT.arrayOf(PT.string),
+  links: PT.arrayOf(PT.object),
 }
 
 const LinkList = ({ links = [] }) => {
