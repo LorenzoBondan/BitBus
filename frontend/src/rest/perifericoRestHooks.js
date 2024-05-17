@@ -2,7 +2,7 @@ import { useRestQuery } from './core/restQueryHooks'
 import {
   useRestDelete,
   useRestCreate,
-  useRestPatch,
+  useRestUpdate,
 } from './core/restMutateHooks'
 import { propOr } from 'ramda'
 
@@ -98,7 +98,7 @@ export const useUpdatePeriferico = (idPeriferico, options = {}) => {
   }
 
   const updateOptions = { mutationFnName, onSuccess, onError }
-  const res = useRestPatch(restPath, updateOptions)
+  const res = useRestUpdate(restPath, updateOptions)
   return {
     ...res,
     [mutationFnName]: (data, params) => res.mutate({ data, params }),

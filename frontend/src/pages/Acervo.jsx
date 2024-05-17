@@ -1,5 +1,4 @@
 import Tabs from '../components/ui/Tabs'
-import { useState } from 'react'
 import Processadores from '../views/acervo/processador/Processadores'
 import DiscosRemoviveis from '../views/acervo/discoRemovivel/DiscosRemoviveis'
 import Perifericos from '../views/acervo/periferico/Perifericos'
@@ -7,9 +6,10 @@ import Softwares from '../views/acervo/software/Softwares'
 import Placas from '../views/acervo/placa/Placas'
 import PageTitle from '../components/ui/PageTitle'
 import Memorias from '../views/acervo/memoria/Memorias'
+import { useItemAcervoTab } from '../state/appState'
 
 const Acervo = () => {
-  const [tabSelected, setTabSelected] = useState('memoria')
+  const {itemAcervoTab, setItemAcervoTab} = useItemAcervoTab()
 
   const tabs = [
     { id: 'memoria', text: 'Memória' },
@@ -21,7 +21,7 @@ const Acervo = () => {
   ]
 
   const renderCategory = () => {
-    switch (tabSelected) {
+    switch (itemAcervoTab) {
       case 'memoria':
         return <Memorias />
       case 'processador':
@@ -48,8 +48,8 @@ const Acervo = () => {
       <Tabs
         tabs={tabs}
         className={cn.tabs}
-        activeTabId={tabSelected}
-        onTabSelect={(tab) => setTabSelected(tab.id)}
+        activeTabId={itemAcervoTab}
+        onTabSelect={(tab) => setItemAcervoTab(tab.id)}
       />
 
       {renderCategory()}

@@ -5,26 +5,26 @@ import { pipe, append, assoc } from 'ramda'
 import { useNavigate } from 'react-router-dom'
 
 import { useState } from 'react'
-import { useGetMemorias, useDeleteMemoria } from '../rest/memoriaRestHooks'
+import { useGetProcessadores, useDeleteProcessador } from '../rest/processadorRestHooks'
 
 import { Table, TableName, ManageControls } from '../components/tables'
 import ValueDisplay from '../components/ui/ValueDisplay'
 import Pagination from '../components/ui/Pagination'
 
-const MemoriasTable = () => {
+const ProcessadoresTable = () => {
   const [page, setPage] = useState(0)
 
-  const { data, isLoading, refetch } = useGetMemorias({
+  const { data, isLoading, refetch } = useGetProcessadores({
     queryParams: { page, size: 5, sort: 'nome,ASC' },
   })
 
   useEffect(() => {
-    refetch({})
+    refetch()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page])
 
   // dynamic columns
-  const memoriaTableColumns = useMemo(() =>
+  const processadorTableColumns = useMemo(() =>
     pipe(
       append({ Header: '', accessor: 'item' }),
       append({ Header: 'Dimensões', accessor: 'dimensions' }),
@@ -37,12 +37,12 @@ const MemoriasTable = () => {
   )
 
   // dynamic table content
-  const memoriaTableData = data.content.map((mem) =>
+  const processadorTableData = data.content.map((pro) =>
     pipe(
-      assoc('item', <MemoriaTableName {...{ mem }} />),
-      assoc('dimensions', <Dimensions {...{ mem }} />),
-      assoc('quantidade', mem?.quantidade),
-      assoc('manage', <MemoriaManage {...{ mem }} />)
+      assoc('item', <ProcessadorTableName {...{ pro }} />),
+      assoc('dimensions', <Dimensions {...{ pro }} />),
+      assoc('quantidade', pro?.quantidade),
+      assoc('manage', <ProcessadorManage {...{ pro }} />)
     )({})
   )
 
@@ -51,12 +51,12 @@ const MemoriasTable = () => {
   }
 
   if (isLoading) return <div>Carregando...</div>
-  if (!isLoading && memoriaTableData.length === 0)
-    return <div className={cn.noData}>Não foram encontradas memórias.</div>
+  if (!isLoading && processadorTableData.length === 0)
+    return <div className={cn.noData}>Não foram encontrados processadores.</div>
 
   return (
     <>
-      <Table columns={memoriaTableColumns} data={memoriaTableData} />
+      <Table columns={processadorTableColumns} data={processadorTableData} />
       {data.totalPages && (
         <Pagination page={page} setPage={setPage} lastPage={data.totalPages} />
       )}
@@ -64,21 +64,21 @@ const MemoriasTable = () => {
   )
 }
 
-export default MemoriasTable
+export default ProcessadoresTable
 
 //*****************************************************************************
 // Helpers
 //*****************************************************************************
 
-const MemoriaTableName = ({ mem }) => {
-  return <TableName name={mem?.nome} subtext={`Ano: ${mem.ano}`} />
+const ProcessadorTableName = ({ pro }) => {
+  return <TableName name={pro?.nome} subtext={`Ano: ${pro.ano}`} />
 }
 
-MemoriaTableName.propTypes = {
-  mem: PT.object.isRequired,
+ProcessadorTableName.propTypes = {
+  pro: PT.object.isRequired,
 }
 
-const Dimensions = ({ mem }) => {
+const Dimensions = ({ pro }) => {
   const cn = {
     root: 'leading-3 whitespace-pre',
   }
@@ -87,17 +87,17 @@ const Dimensions = ({ mem }) => {
     <div>
       <ValueDisplay
         label="Altura"
-        value={mem?.altura || ''}
+        value={pro?.altura || ''}
         className={cn.root}
       />
       <ValueDisplay
         label="Largura"
-        value={mem?.largura || ''}
+        value={pro?.largura || ''}
         className={cn.root}
       />
       <ValueDisplay
         label="Espessura"
-        value={mem?.espessura || ''}
+        value={pro?.espessura || ''}
         className={cn.root}
       />
     </div>
@@ -105,23 +105,23 @@ const Dimensions = ({ mem }) => {
 }
 
 Dimensions.propTypes = {
-  mem: PT.object.isRequired,
+  pro: PT.object.isRequired,
 }
 
-const MemoriaManage = ({ mem }) => {
+const ProcessadorManage = ({ pro }) => {
   const navigate = useNavigate()
-  const { nome } = mem
-  const { deleteMemoria } = useDeleteMemoria()
+  const { nome } = pro
+  const { deleteProcessador } = useDeleteProcessador()
 
-  const onDelete = () => deleteMemoria(mem?.id)
+  const onDelete = () => deleteProcessador(pro?.id)
 
-  const onView = () => navigate(`/acervo/memoria/${mem?.id}`)
+  const onView = () => navigate(`/acervo/processador/${pro?.id}`)
 
-  const onEdit = () => navigate(`/acervo/memoria/${mem?.id}/alterar`)
+  const onEdit = () => navigate(`/acervo/processador/${pro?.id}/alterar`)
 
   return <ManageControls {...{ name: nome, onDelete, onEdit, onView }} />
 }
 
-MemoriaManage.propTypes = {
-  mem: PT.object.isRequired,
+ProcessadorManage.propTypes = {
+  pro: PT.object.isRequired,
 }

@@ -5,26 +5,26 @@ import { pipe, append, assoc } from 'ramda'
 import { useNavigate } from 'react-router-dom'
 
 import { useState } from 'react'
-import { useGetMemorias, useDeleteMemoria } from '../rest/memoriaRestHooks'
+import { useGetPlacas, useDeletePlaca } from '../rest/placaRestHooks'
 
 import { Table, TableName, ManageControls } from '../components/tables'
 import ValueDisplay from '../components/ui/ValueDisplay'
 import Pagination from '../components/ui/Pagination'
 
-const MemoriasTable = () => {
+const PlacasTable = () => {
   const [page, setPage] = useState(0)
 
-  const { data, isLoading, refetch } = useGetMemorias({
+  const { data, isLoading, refetch } = useGetPlacas({
     queryParams: { page, size: 5, sort: 'nome,ASC' },
   })
 
   useEffect(() => {
-    refetch({})
+    refetch()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page])
 
   // dynamic columns
-  const memoriaTableColumns = useMemo(() =>
+  const placaTableColumns = useMemo(() =>
     pipe(
       append({ Header: '', accessor: 'item' }),
       append({ Header: 'Dimensões', accessor: 'dimensions' }),
@@ -32,17 +32,22 @@ const MemoriasTable = () => {
         Header: 'Quantidade',
         accessor: 'quantidade',
       }),
+      append({
+        Header: 'Classificação',
+        accessor: 'classificacao',
+      }),
       append({ Header: 'Ações', accessor: 'manage' })
     )([]), []
   )
 
   // dynamic table content
-  const memoriaTableData = data.content.map((mem) =>
+  const placaTableData = data.content.map((pla) =>
     pipe(
-      assoc('item', <MemoriaTableName {...{ mem }} />),
-      assoc('dimensions', <Dimensions {...{ mem }} />),
-      assoc('quantidade', mem?.quantidade),
-      assoc('manage', <MemoriaManage {...{ mem }} />)
+      assoc('item', <PlacaTableName {...{ pla }} />),
+      assoc('dimensions', <Dimensions {...{ pla }} />),
+      assoc('quantidade', pla?.quantidade),
+      assoc('classificacao', pla?.classificacao),
+      assoc('manage', <PlacaManage {...{ pla }} />)
     )({})
   )
 
@@ -51,12 +56,12 @@ const MemoriasTable = () => {
   }
 
   if (isLoading) return <div>Carregando...</div>
-  if (!isLoading && memoriaTableData.length === 0)
-    return <div className={cn.noData}>Não foram encontradas memórias.</div>
+  if (!isLoading && placaTableData.length === 0)
+    return <div className={cn.noData}>Não foram encontradas placas.</div>
 
   return (
     <>
-      <Table columns={memoriaTableColumns} data={memoriaTableData} />
+      <Table columns={placaTableColumns} data={placaTableData} />
       {data.totalPages && (
         <Pagination page={page} setPage={setPage} lastPage={data.totalPages} />
       )}
@@ -64,21 +69,21 @@ const MemoriasTable = () => {
   )
 }
 
-export default MemoriasTable
+export default PlacasTable
 
 //*****************************************************************************
 // Helpers
 //*****************************************************************************
 
-const MemoriaTableName = ({ mem }) => {
-  return <TableName name={mem?.nome} subtext={`Ano: ${mem.ano}`} />
+const PlacaTableName = ({ pla }) => {
+  return <TableName name={pla?.nome} subtext={`Ano: ${pla.ano}`} />
 }
 
-MemoriaTableName.propTypes = {
-  mem: PT.object.isRequired,
+PlacaTableName.propTypes = {
+  pla: PT.object.isRequired,
 }
 
-const Dimensions = ({ mem }) => {
+const Dimensions = ({ pla }) => {
   const cn = {
     root: 'leading-3 whitespace-pre',
   }
@@ -87,17 +92,17 @@ const Dimensions = ({ mem }) => {
     <div>
       <ValueDisplay
         label="Altura"
-        value={mem?.altura || ''}
+        value={pla?.altura || ''}
         className={cn.root}
       />
       <ValueDisplay
         label="Largura"
-        value={mem?.largura || ''}
+        value={pla?.largura || ''}
         className={cn.root}
       />
       <ValueDisplay
         label="Espessura"
-        value={mem?.espessura || ''}
+        value={pla?.espessura || ''}
         className={cn.root}
       />
     </div>
@@ -105,23 +110,23 @@ const Dimensions = ({ mem }) => {
 }
 
 Dimensions.propTypes = {
-  mem: PT.object.isRequired,
+  pla: PT.object.isRequired,
 }
 
-const MemoriaManage = ({ mem }) => {
+const PlacaManage = ({ pla }) => {
   const navigate = useNavigate()
-  const { nome } = mem
-  const { deleteMemoria } = useDeleteMemoria()
+  const { nome } = pla
+  const { deletePlaca } = useDeletePlaca()
 
-  const onDelete = () => deleteMemoria(mem?.id)
+  const onDelete = () => deletePlaca(pla?.id)
 
-  const onView = () => navigate(`/acervo/memoria/${mem?.id}`)
+  const onView = () => navigate(`/acervo/placa/${pla?.id}`)
 
-  const onEdit = () => navigate(`/acervo/memoria/${mem?.id}/alterar`)
+  const onEdit = () => navigate(`/acervo/placa/${pla?.id}/alterar`)
 
   return <ManageControls {...{ name: nome, onDelete, onEdit, onView }} />
 }
 
-MemoriaManage.propTypes = {
-  mem: PT.object.isRequired,
+PlacaManage.propTypes = {
+  pla: PT.object.isRequired,
 }

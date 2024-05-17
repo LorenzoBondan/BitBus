@@ -12,17 +12,17 @@ const propTypes = {
   onSubmit: PT.func, // called on form submission (passed form data)
   onDirtyChange: PT.func, // called when ever form dirty state changes
   title: PT.string, // form title if desired
-  initialMemoriaData: PT.object,
+  initialProcessadorData: PT.object,
   navToOnCancel: PT.string, // route to navigate if form processing is cancelled
   className: PT.string, // applied to root container
 }
 
-const MemoriaoForm = (props) => {
+const ProcessadorForm = (props) => {
   const {
     title = '',
     navToOnCancel = '',
     onDirtyChange,
-    initialMemoriaData = {},
+    initialProcessadorData = {},
     onSubmit,
     className = '',
   } = props
@@ -32,7 +32,7 @@ const MemoriaoForm = (props) => {
     medidas: 'flex gap-2',
   }
 
-  const defaultValues = initialMemoriaData
+  const defaultValues = initialProcessadorData
 
   const handleOnSubmit = (data) => {
     const filteredData = omit(['temp_link'], data)
@@ -83,6 +83,6 @@ const MemoriaoForm = (props) => {
   )
 }
 
-MemoriaoForm.propTypes = propTypes
+ProcessadorForm.propTypes = propTypes
 
-export default MemoriaoForm
+export default ProcessadorForm

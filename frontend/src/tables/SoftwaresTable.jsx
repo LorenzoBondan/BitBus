@@ -5,26 +5,26 @@ import { pipe, append, assoc } from 'ramda'
 import { useNavigate } from 'react-router-dom'
 
 import { useState } from 'react'
-import { useGetMemorias, useDeleteMemoria } from '../rest/memoriaRestHooks'
+import { useGetSoftwares, useDeleteSoftware } from '../rest/softwareRestHooks'
 
 import { Table, TableName, ManageControls } from '../components/tables'
 import ValueDisplay from '../components/ui/ValueDisplay'
 import Pagination from '../components/ui/Pagination'
 
-const MemoriasTable = () => {
+const SoftwaresTable = () => {
   const [page, setPage] = useState(0)
 
-  const { data, isLoading, refetch } = useGetMemorias({
+  const { data, isLoading, refetch } = useGetSoftwares({
     queryParams: { page, size: 5, sort: 'nome,ASC' },
   })
 
   useEffect(() => {
-    refetch({})
+    refetch()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page])
 
   // dynamic columns
-  const memoriaTableColumns = useMemo(() =>
+  const softwareTableColumns = useMemo(() =>
     pipe(
       append({ Header: '', accessor: 'item' }),
       append({ Header: 'Dimensões', accessor: 'dimensions' }),
@@ -37,12 +37,12 @@ const MemoriasTable = () => {
   )
 
   // dynamic table content
-  const memoriaTableData = data.content.map((mem) =>
+  const softwareTableData = data.content.map((soft) =>
     pipe(
-      assoc('item', <MemoriaTableName {...{ mem }} />),
-      assoc('dimensions', <Dimensions {...{ mem }} />),
-      assoc('quantidade', mem?.quantidade),
-      assoc('manage', <MemoriaManage {...{ mem }} />)
+      assoc('item', <SoftwareTableName {...{ soft }} />),
+      assoc('dimensions', <Dimensions {...{ soft }} />),
+      assoc('quantidade', soft?.quantidade),
+      assoc('manage', <SoftwareManage {...{ soft }} />)
     )({})
   )
 
@@ -51,12 +51,12 @@ const MemoriasTable = () => {
   }
 
   if (isLoading) return <div>Carregando...</div>
-  if (!isLoading && memoriaTableData.length === 0)
-    return <div className={cn.noData}>Não foram encontradas memórias.</div>
+  if (!isLoading && softwareTableData.length === 0)
+    return <div className={cn.noData}>Não foram encontrados softwares.</div>
 
   return (
     <>
-      <Table columns={memoriaTableColumns} data={memoriaTableData} />
+      <Table columns={softwareTableColumns} data={softwareTableData} />
       {data.totalPages && (
         <Pagination page={page} setPage={setPage} lastPage={data.totalPages} />
       )}
@@ -64,21 +64,21 @@ const MemoriasTable = () => {
   )
 }
 
-export default MemoriasTable
+export default SoftwaresTable
 
 //*****************************************************************************
 // Helpers
 //*****************************************************************************
 
-const MemoriaTableName = ({ mem }) => {
-  return <TableName name={mem?.nome} subtext={`Ano: ${mem.ano}`} />
+const SoftwareTableName = ({ soft }) => {
+  return <TableName name={soft?.nome} subtext={`Ano: ${soft.ano}`} />
 }
 
-MemoriaTableName.propTypes = {
-  mem: PT.object.isRequired,
+SoftwareTableName.propTypes = {
+  soft: PT.object.isRequired,
 }
 
-const Dimensions = ({ mem }) => {
+const Dimensions = ({ soft }) => {
   const cn = {
     root: 'leading-3 whitespace-pre',
   }
@@ -87,17 +87,17 @@ const Dimensions = ({ mem }) => {
     <div>
       <ValueDisplay
         label="Altura"
-        value={mem?.altura || ''}
+        value={soft?.altura || ''}
         className={cn.root}
       />
       <ValueDisplay
         label="Largura"
-        value={mem?.largura || ''}
+        value={soft?.largura || ''}
         className={cn.root}
       />
       <ValueDisplay
         label="Espessura"
-        value={mem?.espessura || ''}
+        value={soft?.espessura || ''}
         className={cn.root}
       />
     </div>
@@ -105,23 +105,23 @@ const Dimensions = ({ mem }) => {
 }
 
 Dimensions.propTypes = {
-  mem: PT.object.isRequired,
+  soft: PT.object.isRequired,
 }
 
-const MemoriaManage = ({ mem }) => {
+const SoftwareManage = ({ soft }) => {
   const navigate = useNavigate()
-  const { nome } = mem
-  const { deleteMemoria } = useDeleteMemoria()
+  const { nome } = soft
+  const { deleteSoftware } = useDeleteSoftware()
 
-  const onDelete = () => deleteMemoria(mem?.id)
+  const onDelete = () => deleteSoftware(soft?.id)
 
-  const onView = () => navigate(`/acervo/memoria/${mem?.id}`)
+  const onView = () => navigate(`/acervo/software/${soft?.id}`)
 
-  const onEdit = () => navigate(`/acervo/memoria/${mem?.id}/alterar`)
+  const onEdit = () => navigate(`/acervo/software/${soft?.id}/alterar`)
 
   return <ManageControls {...{ name: nome, onDelete, onEdit, onView }} />
 }
 
-MemoriaManage.propTypes = {
-  mem: PT.object.isRequired,
+SoftwareManage.propTypes = {
+  soft: PT.object.isRequired,
 }

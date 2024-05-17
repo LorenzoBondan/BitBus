@@ -5,26 +5,26 @@ import { pipe, append, assoc } from 'ramda'
 import { useNavigate } from 'react-router-dom'
 
 import { useState } from 'react'
-import { useGetMemorias, useDeleteMemoria } from '../rest/memoriaRestHooks'
+import { useGetDiscosRemoviveis, useDeleteDiscoRemovivel } from '../rest/discoRemovivelRestHooks'
 
 import { Table, TableName, ManageControls } from '../components/tables'
 import ValueDisplay from '../components/ui/ValueDisplay'
 import Pagination from '../components/ui/Pagination'
 
-const MemoriasTable = () => {
+const DiscosRemovivesTable = () => {
   const [page, setPage] = useState(0)
 
-  const { data, isLoading, refetch } = useGetMemorias({
+  const { data, isLoading, refetch } = useGetDiscosRemoviveis({
     queryParams: { page, size: 5, sort: 'nome,ASC' },
   })
 
   useEffect(() => {
-    refetch({})
+    refetch()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page])
 
   // dynamic columns
-  const memoriaTableColumns = useMemo(() =>
+  const discoRemovivelTableColumns = useMemo(() =>
     pipe(
       append({ Header: '', accessor: 'item' }),
       append({ Header: 'Dimensões', accessor: 'dimensions' }),
@@ -32,17 +32,19 @@ const MemoriasTable = () => {
         Header: 'Quantidade',
         accessor: 'quantidade',
       }),
+      append({ Header: 'Tipo', accessor: 'tipo' }),
       append({ Header: 'Ações', accessor: 'manage' })
     )([]), []
   )
 
   // dynamic table content
-  const memoriaTableData = data.content.map((mem) =>
+  const discoRemovivelTableData = data.content.map((dis) =>
     pipe(
-      assoc('item', <MemoriaTableName {...{ mem }} />),
-      assoc('dimensions', <Dimensions {...{ mem }} />),
-      assoc('quantidade', mem?.quantidade),
-      assoc('manage', <MemoriaManage {...{ mem }} />)
+      assoc('item', <DiscoRemovivelTableName {...{ dis }} />),
+      assoc('dimensions', <Dimensions {...{ dis }} />),
+      assoc('quantidade', dis?.quantidade),
+      assoc('tipo', dis?.tipoItem.descricao),
+      assoc('manage', <DiscoRemovivelManage {...{ dis }} />)
     )({})
   )
 
@@ -51,12 +53,12 @@ const MemoriasTable = () => {
   }
 
   if (isLoading) return <div>Carregando...</div>
-  if (!isLoading && memoriaTableData.length === 0)
-    return <div className={cn.noData}>Não foram encontradas memórias.</div>
+  if (!isLoading && discoRemovivelTableData.length === 0)
+    return <div className={cn.noData}>Não foram encontrados discos removíves.</div>
 
   return (
     <>
-      <Table columns={memoriaTableColumns} data={memoriaTableData} />
+      <Table columns={discoRemovivelTableColumns} data={discoRemovivelTableData} />
       {data.totalPages && (
         <Pagination page={page} setPage={setPage} lastPage={data.totalPages} />
       )}
@@ -64,21 +66,21 @@ const MemoriasTable = () => {
   )
 }
 
-export default MemoriasTable
+export default DiscosRemovivesTable
 
 //*****************************************************************************
 // Helpers
 //*****************************************************************************
 
-const MemoriaTableName = ({ mem }) => {
-  return <TableName name={mem?.nome} subtext={`Ano: ${mem.ano}`} />
+const DiscoRemovivelTableName = ({ dis }) => {
+  return <TableName name={dis?.nome} subtext={`Ano: ${dis.ano}`} />
 }
 
-MemoriaTableName.propTypes = {
-  mem: PT.object.isRequired,
+DiscoRemovivelTableName.propTypes = {
+  dis: PT.object.isRequired,
 }
 
-const Dimensions = ({ mem }) => {
+const Dimensions = ({ dis }) => {
   const cn = {
     root: 'leading-3 whitespace-pre',
   }
@@ -87,17 +89,17 @@ const Dimensions = ({ mem }) => {
     <div>
       <ValueDisplay
         label="Altura"
-        value={mem?.altura || ''}
+        value={dis?.altura || ''}
         className={cn.root}
       />
       <ValueDisplay
         label="Largura"
-        value={mem?.largura || ''}
+        value={dis?.largura || ''}
         className={cn.root}
       />
       <ValueDisplay
         label="Espessura"
-        value={mem?.espessura || ''}
+        value={dis?.espessura || ''}
         className={cn.root}
       />
     </div>
@@ -105,23 +107,23 @@ const Dimensions = ({ mem }) => {
 }
 
 Dimensions.propTypes = {
-  mem: PT.object.isRequired,
+  dis: PT.object.isRequired,
 }
 
-const MemoriaManage = ({ mem }) => {
+const DiscoRemovivelManage = ({ dis }) => {
   const navigate = useNavigate()
-  const { nome } = mem
-  const { deleteMemoria } = useDeleteMemoria()
+  const { nome } = dis
+  const { deleteDiscoRemovivel } = useDeleteDiscoRemovivel()
 
-  const onDelete = () => deleteMemoria(mem?.id)
+  const onDelete = () => deleteDiscoRemovivel(dis?.id)
 
-  const onView = () => navigate(`/acervo/memoria/${mem?.id}`)
+  const onView = () => navigate(`/acervo/disco_removivel/${dis?.id}`)
 
-  const onEdit = () => navigate(`/acervo/memoria/${mem?.id}/alterar`)
+  const onEdit = () => navigate(`/acervo/disco_removivel/${dis?.id}/alterar`)
 
   return <ManageControls {...{ name: nome, onDelete, onEdit, onView }} />
 }
 
-MemoriaManage.propTypes = {
-  mem: PT.object.isRequired,
+DiscoRemovivelManage.propTypes = {
+  dis: PT.object.isRequired,
 }

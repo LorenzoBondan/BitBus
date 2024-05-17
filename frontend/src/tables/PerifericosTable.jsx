@@ -5,26 +5,26 @@ import { pipe, append, assoc } from 'ramda'
 import { useNavigate } from 'react-router-dom'
 
 import { useState } from 'react'
-import { useGetMemorias, useDeleteMemoria } from '../rest/memoriaRestHooks'
+import { useGetPerifericos, useDeletePeriferico } from '../rest/perifericoRestHooks'
 
 import { Table, TableName, ManageControls } from '../components/tables'
 import ValueDisplay from '../components/ui/ValueDisplay'
 import Pagination from '../components/ui/Pagination'
 
-const MemoriasTable = () => {
+const PerifericosTable = () => {
   const [page, setPage] = useState(0)
 
-  const { data, isLoading, refetch } = useGetMemorias({
+  const { data, isLoading, refetch } = useGetPerifericos({
     queryParams: { page, size: 5, sort: 'nome,ASC' },
   })
 
   useEffect(() => {
-    refetch({})
+    refetch()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page])
 
   // dynamic columns
-  const memoriaTableColumns = useMemo(() =>
+  const perifericoTableColumns = useMemo(() =>
     pipe(
       append({ Header: '', accessor: 'item' }),
       append({ Header: 'Dimensões', accessor: 'dimensions' }),
@@ -32,17 +32,19 @@ const MemoriasTable = () => {
         Header: 'Quantidade',
         accessor: 'quantidade',
       }),
+      append({ Header: 'Tipo', accessor: 'tipo' }),
       append({ Header: 'Ações', accessor: 'manage' })
     )([]), []
   )
 
   // dynamic table content
-  const memoriaTableData = data.content.map((mem) =>
+  const perifericoTableData = data.content.map((per) =>
     pipe(
-      assoc('item', <MemoriaTableName {...{ mem }} />),
-      assoc('dimensions', <Dimensions {...{ mem }} />),
-      assoc('quantidade', mem?.quantidade),
-      assoc('manage', <MemoriaManage {...{ mem }} />)
+      assoc('item', <PerifericoTableName {...{ per }} />),
+      assoc('dimensions', <Dimensions {...{ per }} />),
+      assoc('quantidade', per?.quantidade),
+      assoc('tipo', per?.tipoItem.descricao),
+      assoc('manage', <PerifericoManage {...{ per }} />)
     )({})
   )
 
@@ -51,12 +53,12 @@ const MemoriasTable = () => {
   }
 
   if (isLoading) return <div>Carregando...</div>
-  if (!isLoading && memoriaTableData.length === 0)
-    return <div className={cn.noData}>Não foram encontradas memórias.</div>
+  if (!isLoading && perifericoTableData.length === 0)
+    return <div className={cn.noData}>Não foram encontrados periféricos.</div>
 
   return (
     <>
-      <Table columns={memoriaTableColumns} data={memoriaTableData} />
+      <Table columns={perifericoTableColumns} data={perifericoTableData} />
       {data.totalPages && (
         <Pagination page={page} setPage={setPage} lastPage={data.totalPages} />
       )}
@@ -64,21 +66,21 @@ const MemoriasTable = () => {
   )
 }
 
-export default MemoriasTable
+export default PerifericosTable
 
 //*****************************************************************************
 // Helpers
 //*****************************************************************************
 
-const MemoriaTableName = ({ mem }) => {
-  return <TableName name={mem?.nome} subtext={`Ano: ${mem.ano}`} />
+const PerifericoTableName = ({ per }) => {
+  return <TableName name={per?.nome} subtext={`Ano: ${per.ano}`} />
 }
 
-MemoriaTableName.propTypes = {
-  mem: PT.object.isRequired,
+PerifericoTableName.propTypes = {
+  per: PT.object.isRequired,
 }
 
-const Dimensions = ({ mem }) => {
+const Dimensions = ({ per }) => {
   const cn = {
     root: 'leading-3 whitespace-pre',
   }
@@ -87,17 +89,17 @@ const Dimensions = ({ mem }) => {
     <div>
       <ValueDisplay
         label="Altura"
-        value={mem?.altura || ''}
+        value={per?.altura || ''}
         className={cn.root}
       />
       <ValueDisplay
         label="Largura"
-        value={mem?.largura || ''}
+        value={per?.largura || ''}
         className={cn.root}
       />
       <ValueDisplay
         label="Espessura"
-        value={mem?.espessura || ''}
+        value={per?.espessura || ''}
         className={cn.root}
       />
     </div>
@@ -105,23 +107,23 @@ const Dimensions = ({ mem }) => {
 }
 
 Dimensions.propTypes = {
-  mem: PT.object.isRequired,
+  per: PT.object.isRequired,
 }
 
-const MemoriaManage = ({ mem }) => {
+const PerifericoManage = ({ per }) => {
   const navigate = useNavigate()
-  const { nome } = mem
-  const { deleteMemoria } = useDeleteMemoria()
+  const { nome } = per
+  const { deletePeriferico } = useDeletePeriferico()
 
-  const onDelete = () => deleteMemoria(mem?.id)
+  const onDelete = () => deletePeriferico(per?.id)
 
-  const onView = () => navigate(`/acervo/memoria/${mem?.id}`)
+  const onView = () => navigate(`/acervo/periferico/${per?.id}`)
 
-  const onEdit = () => navigate(`/acervo/memoria/${mem?.id}/alterar`)
+  const onEdit = () => navigate(`/acervo/periferico/${per?.id}/alterar`)
 
   return <ManageControls {...{ name: nome, onDelete, onEdit, onView }} />
 }
 
-MemoriaManage.propTypes = {
-  mem: PT.object.isRequired,
+PerifericoManage.propTypes = {
+  per: PT.object.isRequired,
 }

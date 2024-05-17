@@ -6,6 +6,9 @@ import Doacoes from '../pages/Doacoes'
 import CreateMemoria from '../pages/CreateMemoria'
 import UpdateMemoria from '../pages/UpdateMemoria'
 import ViewMemoria from '../pages/ViewMemoria'
+import UpdateProcessador from '../pages/UpdateProcessador'
+import CreateProcessador from '../pages/CreateProcessador'
+import ViewProcessador from '../pages/ViewProcessador'
 
 const AppRoutes = () => {
   return (
@@ -19,19 +22,29 @@ const AppRoutes = () => {
           <Route path=":id/alterar" element={<UpdateMemoria />} />
         </Route>
         <Route path="disco_removivel">
-          <Route path="novo" element={<CreateMemoria />} />
+        <Route path="novo" element={<CreateMemoria />} />
+          <Route path=":id" element={<ViewMemoria />} />
+          <Route path=":id/alterar" element={<UpdateMemoria />} />
         </Route>
         <Route path="periferico">
-          <Route path="novo" element={<CreateMemoria />} />
+        <Route path="novo" element={<CreateMemoria />} />
+          <Route path=":id" element={<ViewMemoria />} />
+          <Route path=":id/alterar" element={<UpdateMemoria />} />
         </Route>
         <Route path="placa">
-          <Route path="novo" element={<CreateMemoria />} />
+        <Route path="novo" element={<CreateMemoria />} />
+          <Route path=":id" element={<ViewMemoria />} />
+          <Route path=":id/alterar" element={<UpdateMemoria />} />
         </Route>
         <Route path="processador">
-          <Route path="novo" element={<CreateMemoria />} />
+          <Route path="novo" element={<CreateProcessador />} />
+          <Route path=":id" element={<ViewProcessador />} />
+          <Route path=":id/alterar" element={<UpdateProcessador />} />
         </Route>
         <Route path="software">
-          <Route path="novo" element={<CreateMemoria />} />
+        <Route path="novo" element={<CreateMemoria />} />
+          <Route path=":id" element={<ViewMemoria />} />
+          <Route path=":id/alterar" element={<UpdateMemoria />} />
         </Route>
       </Route>
       <Route path="visitas">
