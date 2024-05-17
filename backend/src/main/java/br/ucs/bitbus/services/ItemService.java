@@ -80,8 +80,16 @@ public class ItemService {
 
         entity.getLinks().clear();
         for(LinkDTO dtoLink : dto.getLinks()) {
-            Link link = linkRepository.findById(dtoLink.getId()).orElse(null);
-            entity.getLinks().add(link);
+            if(linkRepository.existsByUrl(dtoLink.getUrl())){
+                Link link = linkRepository.findByUrl(dtoLink.getUrl());
+                entity.getLinks().add(link);
+            } else {
+                Link link = new Link();
+                link.setUrl(dtoLink.getUrl());
+                link.setItem(entity);
+                linkRepository.save(link);
+                entity.getLinks().add(link);
+            }
         }
     }
 }
