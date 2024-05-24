@@ -9,7 +9,7 @@ import Memorias from '../views/acervo/memoria/Memorias'
 import { useItemAcervoTab } from '../state/appState'
 
 const Acervo = () => {
-  const {itemAcervoTab, setItemAcervoTab} = useItemAcervoTab()
+  const { itemAcervoTab, setItemAcervoTab } = useItemAcervoTab()
 
   const tabs = [
     { id: 'memoria', text: 'Memória' },

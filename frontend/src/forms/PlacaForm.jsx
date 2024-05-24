@@ -3,26 +3,28 @@ import Form, {
   TextInput,
   NumberInput,
   TextAreaInput,
+  SelectMenuInput,
 } from '../components/forms/Form'
 import LinksForm from './LinksForm'
 import { omit } from 'ramda'
 import { validateMaxLength, validateMinLength } from '../utils/validationUtils'
+import { classificacaoPlacaSelectOptions } from '../utils/acervoUtils'
 
 const propTypes = {
   onSubmit: PT.func, // called on form submission (passed form data)
   onDirtyChange: PT.func, // called when ever form dirty state changes
   title: PT.string, // form title if desired
-  initialProcessadorData: PT.object,
+  initialPlacaData: PT.object,
   navToOnCancel: PT.string, // route to navigate if form processing is cancelled
   className: PT.string, // applied to root container
 }
 
-const ProcessadorForm = (props) => {
+const PlacaForm = (props) => {
   const {
     title = '',
     navToOnCancel = '',
     onDirtyChange,
-    initialProcessadorData = {},
+    initialPlacaData = {},
     onSubmit,
     className = '',
   } = props
@@ -32,7 +34,7 @@ const ProcessadorForm = (props) => {
     medidas: 'flex gap-2',
   }
 
-  const defaultValues = initialProcessadorData
+  const defaultValues = initialPlacaData
 
   const handleOnSubmit = (data) => {
     const filteredData = omit(['temp_link'], data)
@@ -67,6 +69,12 @@ const ProcessadorForm = (props) => {
           <NumberInput step={0.001} name="largura" label="Largura" />
           <NumberInput step={0.001} name="espessura" label="Espessura" />
         </div>
+        <SelectMenuInput
+          name="classificacao"
+          label="Classificação"
+          options={classificacaoPlacaSelectOptions}
+          required
+        />
         <TextAreaInput
           name="informacoes"
           label="Informações adicionais"
@@ -83,6 +91,6 @@ const ProcessadorForm = (props) => {
   )
 }
 
-ProcessadorForm.propTypes = propTypes
+PlacaForm.propTypes = propTypes
 
-export default ProcessadorForm
+export default PlacaForm

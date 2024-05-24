@@ -9,6 +9,18 @@ import ViewMemoria from '../pages/ViewMemoria'
 import UpdateProcessador from '../pages/UpdateProcessador'
 import CreateProcessador from '../pages/CreateProcessador'
 import ViewProcessador from '../pages/ViewProcessador'
+import CreateDiscoRemovivel from '../pages/CreateDiscoRemovivel'
+import ViewDiscoRemovivel from '../pages/ViewDiscoRemovivel'
+import UpdateDiscoRemovivel from '../pages/UpdateDiscoRemovivel'
+import UpdatePeriferico from '../pages/UpdatePeriferico'
+import ViewPeriferico from '../pages/ViewPeriferico'
+import CreatePeriferico from '../pages/CreatePeriferico'
+import CreatePlaca from '../pages/CreatePlaca'
+import ViewPlaca from '../pages/ViewPlaca'
+import UpdatePlaca from '../pages/UpdatePlaca'
+import CreateSoftware from '../pages/CreateSoftware'
+import ViewSoftware from '../pages/ViewSoftware'
+import UpdateSoftware from '../pages/UpdateSoftware'
 
 const AppRoutes = () => {
   return (
@@ -22,19 +34,19 @@ const AppRoutes = () => {
           <Route path=":id/alterar" element={<UpdateMemoria />} />
         </Route>
         <Route path="disco_removivel">
-        <Route path="novo" element={<CreateMemoria />} />
-          <Route path=":id" element={<ViewMemoria />} />
-          <Route path=":id/alterar" element={<UpdateMemoria />} />
+          <Route path="novo" element={<CreateDiscoRemovivel />} />
+          <Route path=":id" element={<ViewDiscoRemovivel />} />
+          <Route path=":id/alterar" element={<UpdateDiscoRemovivel />} />
         </Route>
         <Route path="periferico">
-        <Route path="novo" element={<CreateMemoria />} />
-          <Route path=":id" element={<ViewMemoria />} />
-          <Route path=":id/alterar" element={<UpdateMemoria />} />
+          <Route path="novo" element={<CreatePeriferico />} />
+          <Route path=":id" element={<ViewPeriferico />} />
+          <Route path=":id/alterar" element={<UpdatePeriferico />} />
         </Route>
         <Route path="placa">
-        <Route path="novo" element={<CreateMemoria />} />
-          <Route path=":id" element={<ViewMemoria />} />
-          <Route path=":id/alterar" element={<UpdateMemoria />} />
+          <Route path="novo" element={<CreatePlaca />} />
+          <Route path=":id" element={<ViewPlaca />} />
+          <Route path=":id/alterar" element={<UpdatePlaca />} />
         </Route>
         <Route path="processador">
           <Route path="novo" element={<CreateProcessador />} />
@@ -42,13 +54,22 @@ const AppRoutes = () => {
           <Route path=":id/alterar" element={<UpdateProcessador />} />
         </Route>
         <Route path="software">
-        <Route path="novo" element={<CreateMemoria />} />
-          <Route path=":id" element={<ViewMemoria />} />
-          <Route path=":id/alterar" element={<UpdateMemoria />} />
+          <Route path="novo" element={<CreateSoftware />} />
+          <Route path=":id" element={<ViewSoftware />} />
+          <Route path=":id/alterar" element={<UpdateSoftware />} />
         </Route>
       </Route>
       <Route path="visitas">
         <Route index element={<Visitas />} />
+        <Route path="nova" element={<></>} />
+        <Route path=":idVisita" element={<></>} />
+        <Route path=":idVisita/alterar" element={<></>} />
+        <Route path="feedbacks">
+          <Route index element={<></>} />
+          <Route path="nova" element={<></>} />
+          <Route path=":idFeedback" element={<></>} />
+          <Route path=":idFeedback/alterar" element={<></>} />
+        </Route>
       </Route>
       <Route path="oficinas">
         <Route index element={<Oficinas />} />

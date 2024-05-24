@@ -1,5 +1,5 @@
 import NavButton from '../../../components/buttons/NavButton'
-import DiscosRemovives from '../../../tables/DiscosRemoviveisTable'
+import DiscosRemoviveisTable from '../../../tables/DiscosRemoviveisTable'
 
 const DiscosRemoviveis = () => {
   const cn = {
@@ -9,9 +9,12 @@ const DiscosRemoviveis = () => {
   return (
     <div>
       <div className={cn.header}>
-        <NavButton linkto={'/acervo/disco_removivel/novo'} text={'Novo disco removível'} />
+        <NavButton
+          linkto={'/acervo/disco_removivel/novo'}
+          text={'Novo disco removível'}
+        />
       </div>
-      <DiscosRemovives />
+      <DiscosRemoviveisTable />
     </div>
   )
 }

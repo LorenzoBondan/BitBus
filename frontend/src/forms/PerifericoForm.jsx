@@ -12,17 +12,17 @@ const propTypes = {
   onSubmit: PT.func, // called on form submission (passed form data)
   onDirtyChange: PT.func, // called when ever form dirty state changes
   title: PT.string, // form title if desired
-  initialProcessadorData: PT.object,
+  initialPerifericoData: PT.object,
   navToOnCancel: PT.string, // route to navigate if form processing is cancelled
   className: PT.string, // applied to root container
 }
 
-const ProcessadorForm = (props) => {
+const PerifericoForm = (props) => {
   const {
     title = '',
     navToOnCancel = '',
     onDirtyChange,
-    initialProcessadorData = {},
+    initialPerifericoData = {},
     onSubmit,
     className = '',
   } = props
@@ -32,7 +32,7 @@ const ProcessadorForm = (props) => {
     medidas: 'flex gap-2',
   }
 
-  const defaultValues = initialProcessadorData
+  const defaultValues = initialPerifericoData
 
   const handleOnSubmit = (data) => {
     const filteredData = omit(['temp_link'], data)
@@ -67,6 +67,14 @@ const ProcessadorForm = (props) => {
           <NumberInput step={0.001} name="largura" label="Largura" />
           <NumberInput step={0.001} name="espessura" label="Espessura" />
         </div>
+        <TextInput
+          required
+          name="imgUrl"
+          label="Imagem (URL)"
+          validate={{
+            min: (text) => validateMinLength(text, 8),
+          }}
+        />
         <TextAreaInput
           name="informacoes"
           label="Informações adicionais"
@@ -83,6 +91,6 @@ const ProcessadorForm = (props) => {
   )
 }
 
-ProcessadorForm.propTypes = propTypes
+PerifericoForm.propTypes = propTypes
 
-export default ProcessadorForm
+export default PerifericoForm

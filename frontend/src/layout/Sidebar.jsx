@@ -3,6 +3,7 @@ import {
   CpuChipIcon,
   MapPinIcon,
   UserGroupIcon,
+  UsersIcon,
 } from '@heroicons/react/24/outline'
 import { Link, useLocation } from 'react-router-dom'
 
@@ -29,6 +30,11 @@ const Sidebar = () => {
       name: 'Doações',
       path: 'doacoes',
       Icon: BanknotesIcon,
+    },
+    {
+      name: 'Pessoas',
+      path: 'pessoas',
+      Icon: UsersIcon,
     },
   ]
 

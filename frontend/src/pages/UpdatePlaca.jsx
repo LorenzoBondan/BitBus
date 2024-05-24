@@ -1,30 +1,30 @@
 import { useParams } from 'react-router-dom'
-import { useGetProcessadorById, useUpdateProcessador } from '../rest/processadorRestHooks'
-import ProcessadorForm from '../forms/ProcessadorForm'
+import { useGetPlacaById, useUpdatePlaca } from '../rest/placaRestHooks'
+import PlacaForm from '../forms/PlacaForm'
 
-const UpdateProcessador = () => {
+const UpdatePlaca = () => {
   const { id } = useParams()
 
-  const { processador, isLoading } = useGetProcessadorById(id)
+  const { placa, isLoading } = useGetPlacaById(id)
 
-  const { updateProcessador } = useUpdateProcessador(id, {
-    onSuccess: { routeTo: `/acervo/processador/${id}` },
+  const { updatePlaca } = useUpdatePlaca(id, {
+    onSuccess: { routeTo: `/acervo/placa/${id}` },
   })
 
   const onSubmit = async (data) => {
-    await updateProcessador(data)
+    await updatePlaca(data)
   }
 
   if (isLoading) return <div>Carregando...</div>
 
   return (
-    <ProcessadorForm
-      navToOnCancel={`/acervo/processador/${id}`}
-      initialProcessadorData={processador}
-      title={'Alterar Processador'}
+    <PlacaForm
+      navToOnCancel={`/acervo/placa/${id}`}
+      initialPlacaData={placa}
+      title={'Alterar Placa'}
       onSubmit={onSubmit}
     />
   )
 }
 
-export default UpdateProcessador
+export default UpdatePlaca

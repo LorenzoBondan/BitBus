@@ -1,5 +1,8 @@
 import { useParams } from 'react-router-dom'
-import { useGetDiscoRemovivelById, useUpdateDiscoRemovivel } from '../rest/processadorRestHooks'
+import {
+  useGetDiscoRemovivelById,
+  useUpdateDiscoRemovivel,
+} from '../rest/discoRemovivelRestHooks'
 import DiscoRemovivelForm from '../forms/DiscoRemovivelForm'
 
 const UpdateDiscoRemovivel = () => {

@@ -10,30 +10,34 @@ import { useGetMemorias, useDeleteMemoria } from '../rest/memoriaRestHooks'
 import { Table, TableName, ManageControls } from '../components/tables'
 import ValueDisplay from '../components/ui/ValueDisplay'
 import Pagination from '../components/ui/Pagination'
+import AcervoFilter from '../components/ui/AcervoFilter'
 
 const MemoriasTable = () => {
   const [page, setPage] = useState(0)
+  const [nome, setNome] = useState('')
 
   const { data, isLoading, refetch } = useGetMemorias({
-    queryParams: { page, size: 5, sort: 'nome,ASC' },
+    queryParams: { page, size: 5, sort: 'nome,ASC', nome },
   })
 
   useEffect(() => {
     refetch({})
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page])
+  }, [page, nome])
 
   // dynamic columns
-  const memoriaTableColumns = useMemo(() =>
-    pipe(
-      append({ Header: '', accessor: 'item' }),
-      append({ Header: 'Dimensões', accessor: 'dimensions' }),
-      append({
-        Header: 'Quantidade',
-        accessor: 'quantidade',
-      }),
-      append({ Header: 'Ações', accessor: 'manage' })
-    )([]), []
+  const memoriaTableColumns = useMemo(
+    () =>
+      pipe(
+        append({ Header: '', accessor: 'item' }),
+        append({ Header: 'Dimensões', accessor: 'dimensions' }),
+        append({
+          Header: 'Quantidade',
+          accessor: 'quantidade',
+        }),
+        append({ Header: 'Ações', accessor: 'manage' })
+      )([]),
+    []
   )
 
   // dynamic table content
@@ -48,14 +52,21 @@ const MemoriasTable = () => {
 
   const cn = {
     noData: 'text-center',
+    filter: 'max-w-lg mb-8',
   }
 
-  if (isLoading) return <div>Carregando...</div>
+  if (isLoading) return 
   if (!isLoading && memoriaTableData.length === 0)
     return <div className={cn.noData}>Não foram encontradas memórias.</div>
 
   return (
     <>
+      <AcervoFilter onSubmitFilter={setNome} className={cn.filter} />
+      {isLoading ? (
+        <div>Carregando...</div>
+      ) : (
+        
+      )}
       <Table columns={memoriaTableColumns} data={memoriaTableData} />
       {data.totalPages && (
         <Pagination page={page} setPage={setPage} lastPage={data.totalPages} />

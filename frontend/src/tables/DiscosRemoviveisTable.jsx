@@ -5,7 +5,10 @@ import { pipe, append, assoc } from 'ramda'
 import { useNavigate } from 'react-router-dom'
 
 import { useState } from 'react'
-import { useGetDiscosRemoviveis, useDeleteDiscoRemovivel } from '../rest/discoRemovivelRestHooks'
+import {
+  useGetDiscosRemoviveis,
+  useDeleteDiscoRemovivel,
+} from '../rest/discoRemovivelRestHooks'
 
 import { Table, TableName, ManageControls } from '../components/tables'
 import ValueDisplay from '../components/ui/ValueDisplay'
@@ -24,17 +27,19 @@ const DiscosRemovivesTable = () => {
   }, [page])
 
   // dynamic columns
-  const discoRemovivelTableColumns = useMemo(() =>
-    pipe(
-      append({ Header: '', accessor: 'item' }),
-      append({ Header: 'Dimensões', accessor: 'dimensions' }),
-      append({
-        Header: 'Quantidade',
-        accessor: 'quantidade',
-      }),
-      append({ Header: 'Tipo', accessor: 'tipo' }),
-      append({ Header: 'Ações', accessor: 'manage' })
-    )([]), []
+  const discoRemovivelTableColumns = useMemo(
+    () =>
+      pipe(
+        append({ Header: '', accessor: 'item' }),
+        append({ Header: 'Dimensões', accessor: 'dimensions' }),
+        append({
+          Header: 'Quantidade',
+          accessor: 'quantidade',
+        }),
+        append({ Header: 'Tipo', accessor: 'tipo' }),
+        append({ Header: 'Ações', accessor: 'manage' })
+      )([]),
+    []
   )
 
   // dynamic table content
@@ -54,11 +59,16 @@ const DiscosRemovivesTable = () => {
 
   if (isLoading) return <div>Carregando...</div>
   if (!isLoading && discoRemovivelTableData.length === 0)
-    return <div className={cn.noData}>Não foram encontrados discos removíves.</div>
+    return (
+      <div className={cn.noData}>Não foram encontrados discos removíves.</div>
+    )
 
   return (
     <>
-      <Table columns={discoRemovivelTableColumns} data={discoRemovivelTableData} />
+      <Table
+        columns={discoRemovivelTableColumns}
+        data={discoRemovivelTableData}
+      />
       {data.totalPages && (
         <Pagination page={page} setPage={setPage} lastPage={data.totalPages} />
       )}

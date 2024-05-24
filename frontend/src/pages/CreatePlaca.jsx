@@ -1,5 +1,5 @@
 import PlacaForm from '../forms/PlacaForm'
-import { useCreatePlaca } from '../rest/processadorRestHooks'
+import { useCreatePlaca } from '../rest/placaRestHooks'
 
 const CreatePlaca = () => {
   const { createPlaca } = useCreatePlaca({

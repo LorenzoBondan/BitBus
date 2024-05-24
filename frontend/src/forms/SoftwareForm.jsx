@@ -12,17 +12,17 @@ const propTypes = {
   onSubmit: PT.func, // called on form submission (passed form data)
   onDirtyChange: PT.func, // called when ever form dirty state changes
   title: PT.string, // form title if desired
-  initialProcessadorData: PT.object,
+  initialSoftwareData: PT.object,
   navToOnCancel: PT.string, // route to navigate if form processing is cancelled
   className: PT.string, // applied to root container
 }
 
-const ProcessadorForm = (props) => {
+const SoftwareForm = (props) => {
   const {
     title = '',
     navToOnCancel = '',
     onDirtyChange,
-    initialProcessadorData = {},
+    initialSoftwareData = {},
     onSubmit,
     className = '',
   } = props
@@ -32,7 +32,7 @@ const ProcessadorForm = (props) => {
     medidas: 'flex gap-2',
   }
 
-  const defaultValues = initialProcessadorData
+  const defaultValues = initialSoftwareData
 
   const handleOnSubmit = (data) => {
     const filteredData = omit(['temp_link'], data)
@@ -83,6 +83,6 @@ const ProcessadorForm = (props) => {
   )
 }
 
-ProcessadorForm.propTypes = propTypes
+SoftwareForm.propTypes = propTypes
 
-export default ProcessadorForm
+export default SoftwareForm

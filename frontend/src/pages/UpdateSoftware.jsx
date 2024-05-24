@@ -1,30 +1,33 @@
 import { useParams } from 'react-router-dom'
-import { useGetProcessadorById, useUpdateProcessador } from '../rest/processadorRestHooks'
-import ProcessadorForm from '../forms/ProcessadorForm'
+import {
+  useGetSoftwareById,
+  useUpdateSoftware,
+} from '../rest/softwareRestHooks'
+import SoftwareForm from '../forms/SoftwareForm'
 
-const UpdateProcessador = () => {
+const UpdateSoftware = () => {
   const { id } = useParams()
 
-  const { processador, isLoading } = useGetProcessadorById(id)
+  const { software, isLoading } = useGetSoftwareById(id)
 
-  const { updateProcessador } = useUpdateProcessador(id, {
-    onSuccess: { routeTo: `/acervo/processador/${id}` },
+  const { updateSoftware } = useUpdateSoftware(id, {
+    onSuccess: { routeTo: `/acervo/software/${id}` },
   })
 
   const onSubmit = async (data) => {
-    await updateProcessador(data)
+    await updateSoftware(data)
   }
 
   if (isLoading) return <div>Carregando...</div>
 
   return (
-    <ProcessadorForm
-      navToOnCancel={`/acervo/processador/${id}`}
-      initialProcessadorData={processador}
-      title={'Alterar Processador'}
+    <SoftwareForm
+      navToOnCancel={`/acervo/software/${id}`}
+      initialSoftwareData={software}
+      title={'Alterar Software'}
       onSubmit={onSubmit}
     />
   )
 }
 
-export default UpdateProcessador
+export default UpdateSoftware
