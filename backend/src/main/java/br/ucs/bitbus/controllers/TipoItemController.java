@@ -10,13 +10,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @Tag(name = "Tipo Item")
 @RestController
@@ -32,8 +32,8 @@ public class TipoItemController {
             @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
     @GetMapping
-    public ResponseEntity<Page<TipoItemDTO>> findAll(Pageable pageable) {
-        return ResponseEntity.ok(service.findAllPaged(pageable));
+    public ResponseEntity<List<TipoItemDTO>> findAll() {
+        return ResponseEntity.ok(service.findAll());
     }
 
     @Operation(summary = "Pesquisar uma Tipo de Item por id", method = "GET", description = "Pesquisa um objeto por id")
