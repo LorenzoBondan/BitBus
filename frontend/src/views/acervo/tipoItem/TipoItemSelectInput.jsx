@@ -25,8 +25,8 @@ const TipoItemSelectInput = () => {
   })
 
   const defaultValue = {
-    ...defaultValues.tipoItem,
-    label: defaultValues.tipoItem.descricao,
+    ...defaultValues?.tipoItem,
+    label: defaultValues?.tipoItem?.descricao,
   }
 
   const cn = {
