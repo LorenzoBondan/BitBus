@@ -26,6 +26,10 @@ const Periferico = ({ periferico, className }) => {
         <ValueDisplay label="Altura" value={periferico?.altura || ''} />
         <ValueDisplay label="Largura" value={periferico?.largura || ''} />
         <ValueDisplay label="Espessura" value={periferico?.espessura || ''} />
+        <ValueDisplay
+          label="Tipo"
+          value={periferico?.tipoItem?.descricao || ''}
+        />
         <VertValueDisplay
           label="Informações"
           value={periferico?.informacoes || ''}

@@ -5,36 +5,45 @@ import { pipe, append, assoc } from 'ramda'
 import { useNavigate } from 'react-router-dom'
 
 import { useState } from 'react'
-import { useGetPerifericos, useDeletePeriferico } from '../rest/perifericoRestHooks'
+import {
+  useGetPerifericos,
+  useDeletePeriferico,
+} from '../rest/perifericoRestHooks'
 
 import { Table, TableName, ManageControls } from '../components/tables'
 import ValueDisplay from '../components/ui/ValueDisplay'
 import Pagination from '../components/ui/Pagination'
 
-const PerifericosTable = () => {
+const propTypes = {
+  filters: PT.object,
+}
+
+const PerifericosTable = ({ filters }) => {
   const [page, setPage] = useState(0)
 
   const { data, isLoading, refetch } = useGetPerifericos({
-    queryParams: { page, size: 5, sort: 'nome,ASC' },
+    queryParams: { page, size: 5, sort: 'nome,ASC', ...filters },
   })
 
   useEffect(() => {
     refetch()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page])
+  }, [page, filters])
 
   // dynamic columns
-  const perifericoTableColumns = useMemo(() =>
-    pipe(
-      append({ Header: '', accessor: 'item' }),
-      append({ Header: 'Dimensões', accessor: 'dimensions' }),
-      append({
-        Header: 'Quantidade',
-        accessor: 'quantidade',
-      }),
-      append({ Header: 'Tipo', accessor: 'tipo' }),
-      append({ Header: 'Ações', accessor: 'manage' })
-    )([]), []
+  const perifericoTableColumns = useMemo(
+    () =>
+      pipe(
+        append({ Header: '', accessor: 'item' }),
+        append({ Header: 'Dimensões', accessor: 'dimensions' }),
+        append({
+          Header: 'Quantidade',
+          accessor: 'quantidade',
+        }),
+        append({ Header: 'Tipo', accessor: 'tipo' }),
+        append({ Header: 'Ações', accessor: 'manage' })
+      )([]),
+    []
   )
 
   // dynamic table content
@@ -65,6 +74,8 @@ const PerifericosTable = () => {
     </>
   )
 }
+
+PerifericosTable.propTypes = propTypes
 
 export default PerifericosTable
 

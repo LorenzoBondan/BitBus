@@ -5,35 +5,44 @@ import { pipe, append, assoc } from 'ramda'
 import { useNavigate } from 'react-router-dom'
 
 import { useState } from 'react'
-import { useGetProcessadores, useDeleteProcessador } from '../rest/processadorRestHooks'
+import {
+  useGetProcessadores,
+  useDeleteProcessador,
+} from '../rest/processadorRestHooks'
 
 import { Table, TableName, ManageControls } from '../components/tables'
 import ValueDisplay from '../components/ui/ValueDisplay'
 import Pagination from '../components/ui/Pagination'
 
-const ProcessadoresTable = () => {
+const propTypes = {
+  filters: PT.object,
+}
+
+const ProcessadoresTable = ({ filters }) => {
   const [page, setPage] = useState(0)
 
   const { data, isLoading, refetch } = useGetProcessadores({
-    queryParams: { page, size: 5, sort: 'nome,ASC' },
+    queryParams: { page, size: 5, sort: 'nome,ASC', ...filters },
   })
 
   useEffect(() => {
     refetch()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page])
+  }, [page, filters])
 
   // dynamic columns
-  const processadorTableColumns = useMemo(() =>
-    pipe(
-      append({ Header: '', accessor: 'item' }),
-      append({ Header: 'Dimensões', accessor: 'dimensions' }),
-      append({
-        Header: 'Quantidade',
-        accessor: 'quantidade',
-      }),
-      append({ Header: 'Ações', accessor: 'manage' })
-    )([]), []
+  const processadorTableColumns = useMemo(
+    () =>
+      pipe(
+        append({ Header: '', accessor: 'item' }),
+        append({ Header: 'Dimensões', accessor: 'dimensions' }),
+        append({
+          Header: 'Quantidade',
+          accessor: 'quantidade',
+        }),
+        append({ Header: 'Ações', accessor: 'manage' })
+      )([]),
+    []
   )
 
   // dynamic table content
@@ -63,6 +72,8 @@ const ProcessadoresTable = () => {
     </>
   )
 }
+
+ProcessadoresTable.propTypes = propTypes
 
 export default ProcessadoresTable
 

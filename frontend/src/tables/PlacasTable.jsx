@@ -11,33 +11,39 @@ import { Table, TableName, ManageControls } from '../components/tables'
 import ValueDisplay from '../components/ui/ValueDisplay'
 import Pagination from '../components/ui/Pagination'
 
-const PlacasTable = () => {
+const propTypes = {
+  filters: PT.object,
+}
+
+const PlacasTable = ({ filters }) => {
   const [page, setPage] = useState(0)
 
   const { data, isLoading, refetch } = useGetPlacas({
-    queryParams: { page, size: 5, sort: 'nome,ASC' },
+    queryParams: { page, size: 5, sort: 'nome,ASC', ...filters },
   })
 
   useEffect(() => {
     refetch()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page])
+  }, [page, filters])
 
   // dynamic columns
-  const placaTableColumns = useMemo(() =>
-    pipe(
-      append({ Header: '', accessor: 'item' }),
-      append({ Header: 'Dimensões', accessor: 'dimensions' }),
-      append({
-        Header: 'Quantidade',
-        accessor: 'quantidade',
-      }),
-      append({
-        Header: 'Classificação',
-        accessor: 'classificacao',
-      }),
-      append({ Header: 'Ações', accessor: 'manage' })
-    )([]), []
+  const placaTableColumns = useMemo(
+    () =>
+      pipe(
+        append({ Header: '', accessor: 'item' }),
+        append({ Header: 'Dimensões', accessor: 'dimensions' }),
+        append({
+          Header: 'Quantidade',
+          accessor: 'quantidade',
+        }),
+        append({
+          Header: 'Classificação',
+          accessor: 'classificacao',
+        }),
+        append({ Header: 'Ações', accessor: 'manage' })
+      )([]),
+    []
   )
 
   // dynamic table content
@@ -68,6 +74,8 @@ const PlacasTable = () => {
     </>
   )
 }
+
+PlacasTable.propTypes = propTypes
 
 export default PlacasTable
 

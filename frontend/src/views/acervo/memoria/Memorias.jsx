@@ -1,21 +1,27 @@
+import { useState } from 'react'
 import NavButton from '../../../components/buttons/NavButton'
-import { useGetMemorias } from '../../../rest/memoriaRestHooks'
+import AcervoFilter from '../../../components/ui/AcervoFilter'
 import MemoriasTable from '../../../tables/MemoriasTable'
 
 const Memorias = () => {
-  const { data } = useGetMemorias()
+  const [nome, setNome] = useState('')
 
-  console.log(data)
   const cn = {
-    header: 'flex justify-end my-5',
+    header: 'flex justify-between my-5',
+    filter: 'max-w-lg mb-8 w-full',
+  }
+
+  const filters = {
+    nome,
   }
 
   return (
     <div>
       <div className={cn.header}>
+        <AcervoFilter onSubmitFilter={setNome} className={cn.filter} />
         <NavButton linkto={'/acervo/memoria/novo'} text={'Nova memória'} />
       </div>
-      <MemoriasTable />
+      <MemoriasTable filters={filters} />
     </div>
   )
 }

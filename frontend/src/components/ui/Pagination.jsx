@@ -23,7 +23,7 @@ const Pagination = ({ page: indexPage, setPage, lastPage }) => {
     if (page + i < lastPage) setArray.add(page + i)
   }
   setArray.forEach((v) => arr.push(v))
-  console.log(arr)
+
   const cn = {
     icon: 'h-7 w-7',
     iconDisabled: 'fill-slate-700',

@@ -7,6 +7,8 @@ import Form, {
 import LinksForm from './LinksForm'
 import { omit } from 'ramda'
 import { validateMaxLength, validateMinLength } from '../utils/validationUtils'
+import TipoItemSelectInput from '../views/acervo/tipoItem/TipoItemSelectInput'
+import CreateTipoItem from '../views/acervo/tipoItem/CreateTipoItem'
 
 const propTypes = {
   onSubmit: PT.func, // called on form submission (passed form data)
@@ -75,11 +77,7 @@ const DiscoRemovivelForm = (props) => {
             min: (text) => validateMinLength(text, 8),
           }}
         />
-        {/* <TextInput
-          required
-          name="tipoItem.descricao"
-          label="Tipo"
-        /> */}
+        <TipoItemSelectInput />
         <TextAreaInput
           name="informacoes"
           label="Informações adicionais"
@@ -92,6 +90,7 @@ const DiscoRemovivelForm = (props) => {
         />
         <LinksForm />
       </Form>
+      <CreateTipoItem />
     </div>
   )
 }

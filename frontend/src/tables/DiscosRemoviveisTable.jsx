@@ -14,17 +14,21 @@ import { Table, TableName, ManageControls } from '../components/tables'
 import ValueDisplay from '../components/ui/ValueDisplay'
 import Pagination from '../components/ui/Pagination'
 
-const DiscosRemovivesTable = () => {
+const propTypes = {
+  filters: PT.object,
+}
+
+const DiscosRemovivesTable = ({ filters }) => {
   const [page, setPage] = useState(0)
 
   const { data, isLoading, refetch } = useGetDiscosRemoviveis({
-    queryParams: { page, size: 5, sort: 'nome,ASC' },
+    queryParams: { page, size: 5, sort: 'nome,ASC', ...filters },
   })
 
   useEffect(() => {
     refetch()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page])
+  }, [page, filters])
 
   // dynamic columns
   const discoRemovivelTableColumns = useMemo(
@@ -75,6 +79,8 @@ const DiscosRemovivesTable = () => {
     </>
   )
 }
+
+DiscosRemovivesTable.propTypes = propTypes
 
 export default DiscosRemovivesTable
 

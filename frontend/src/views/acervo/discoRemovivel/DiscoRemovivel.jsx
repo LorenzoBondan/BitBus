@@ -22,10 +22,20 @@ const DiscoRemovivel = ({ discoRemovivel, className }) => {
       <Panel>
         <ValueDisplay label="Nome" value={discoRemovivel?.nome || ''} />
         <ValueDisplay label="Ano" value={discoRemovivel?.ano || ''} />
-        <ValueDisplay label="Quantidade" value={discoRemovivel?.quantidade || ''} />
+        <ValueDisplay
+          label="Quantidade"
+          value={discoRemovivel?.quantidade || ''}
+        />
         <ValueDisplay label="Altura" value={discoRemovivel?.altura || ''} />
         <ValueDisplay label="Largura" value={discoRemovivel?.largura || ''} />
-        <ValueDisplay label="Espessura" value={discoRemovivel?.espessura || ''} />
+        <ValueDisplay
+          label="Espessura"
+          value={discoRemovivel?.espessura || ''}
+        />
+        <ValueDisplay
+          label="Tipo"
+          value={discoRemovivel?.tipoItem?.descricao || ''}
+        />
         <VertValueDisplay
           label="Informações"
           value={discoRemovivel?.informacoes || ''}
