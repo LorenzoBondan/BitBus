@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import NavButton from '../../../components/buttons/NavButton'
-import AcervoFilter from '../../../components/ui/AcervoFilter'
+import Filter from '../../../components/ui/Filter'
 import SoftwaresTable from '../../../tables/SoftwaresTable'
 
 const Softwares = () => {
@@ -14,7 +14,7 @@ const Softwares = () => {
   return (
     <div>
       <div className={cn.header}>
-        <AcervoFilter onSubmitFilter={setNome} className={cn.filter} />
+        <Filter onSubmitFilter={setNome} className={cn.filter} />
         <NavButton linkto={'/acervo/software/novo'} text={'Novo software'} />
       </div>
       <SoftwaresTable filters={{ nome }} />

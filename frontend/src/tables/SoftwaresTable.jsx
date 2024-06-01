@@ -19,7 +19,7 @@ const SoftwaresTable = ({ filters }) => {
   const [page, setPage] = useState(0)
 
   const { data, isLoading, refetch } = useGetSoftwares({
-    queryParams: { page, size: 5, sort: 'nome,ASC', ...filters },
+    queryParams: { page, size: 15, sort: 'nome,ASC', ...filters },
   })
 
   useEffect(() => {

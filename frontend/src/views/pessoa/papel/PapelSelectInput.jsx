@@ -2,32 +2,34 @@
 
 import { useFormContext } from 'react-hook-form'
 import FilterableSelectInput from '../../../components/forms/FilterableSelectInput'
-import { useGetTiposItem } from '../../../rest/tipoItemRestHooks'
+import { useGetPapeis } from '../../../rest/papelRestHooks'
 import { useHandleOpenForm } from '../../../state/appState'
 import { nullFormContext } from '../../../components/forms/Form'
 
 const propTypes = {}
 
-const TipoItemSelectInput = () => {
-  const { setOpenTipoItemForm } = useHandleOpenForm()
+const PapelSelectInput = () => {
+  const { setOpenPapelForm } = useHandleOpenForm()
   const {
     formState: { defaultValues },
   } = useFormContext() || nullFormContext
 
-  const { data = {} } = useGetTiposItem()
+  const { data = {} } = useGetPapeis()
   const { content = [] } = data
 
   const options = content.map((item) => {
     return {
       label: item.descricao,
-      value: item.id,
+      value: item,
     }
   })
 
-  const defaultValue = {
-    ...defaultValues?.tipoItem,
-    label: defaultValues?.tipoItem?.descricao,
-  }
+  const defaultValue = (defaultValues?.papeis || []).map((p) => {
+    return {
+      ...p,
+      label: p.descricao,
+    }
+  })
 
   const cn = {
     footer: 'w-full flex justify-end relative top-[-12px] mb-3',
@@ -38,18 +40,19 @@ const TipoItemSelectInput = () => {
   return (
     <div>
       <FilterableSelectInput
-        name="tipoItem.id"
-        label={'Tipo'}
+        name="papeis"
+        label={'Função'}
         options={options}
         defaultValue={defaultValue}
+        isMulti
       />
       <div className={cn.footer}>
-        <div className={cn.subText} onClick={() => setOpenTipoItemForm(true)}>
-          {`Não encontrou o tipo que procura?\nClique aqui para adicioná-lo.`}
+        <div className={cn.subText} onClick={() => setOpenPapelForm(true)}>
+          {`Não encontrou a função que procura?\nClique aqui para adicioná-la.`}
         </div>
       </div>
     </div>
   )
 }
-TipoItemSelectInput.propTypes = propTypes
-export default TipoItemSelectInput
+PapelSelectInput.propTypes = propTypes
+export default PapelSelectInput

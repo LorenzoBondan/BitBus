@@ -8,9 +8,34 @@ export const useItemAcervoTab = () => {
   return { itemAcervoTab, setItemAcervoTab }
 }
 
-const OpenTipoItemFormAtom = atom(false)
-export const useOpenTipoItemForm = () => {
-  const [openTipoItemForm, setOpenTipoItemForm] = useAtom(OpenTipoItemFormAtom)
+const PessoaTabAtom = atomWithStorage('pessoaTab', '')
+export const usePessoaTab = () => {
+  const [pessoaTab, setPessoaTab] = useAtom(PessoaTabAtom)
 
-  return { openTipoItemForm, setOpenTipoItemForm }
+  return { pessoaTab, setPessoaTab }
+}
+
+const OpenTipoItemFormAtom = atom(false)
+const OpenPapelFormAtom = atom(false)
+export const useHandleOpenForm = () => {
+  const [openTipoItemForm, setOpenTipoItemForm] = useAtom(OpenTipoItemFormAtom)
+  const [openPapelForm, setOpenPapelForm] = useAtom(OpenPapelFormAtom)
+
+  const toogleForm = (form) => {
+    switch (form) {
+      case 'tipoItem':
+        setOpenTipoItemForm(!openTipoItemForm)
+        break
+      case 'papel':
+        setOpenPapelForm(!openPapelForm)
+    }
+  }
+
+  return {
+    openPapelForm,
+    openTipoItemForm,
+    toogleForm,
+    setOpenPapelForm,
+    setOpenTipoItemForm,
+  }
 }

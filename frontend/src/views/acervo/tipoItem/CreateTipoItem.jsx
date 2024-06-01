@@ -1,10 +1,10 @@
 import Modal from '../../../components/ui/Modal'
 import TipoItemForm from '../../../forms/TipoItemForm'
 import { useCreateTipoItem } from '../../../rest/tipoItemRestHooks'
-import { useOpenTipoItemForm } from '../../../state/appState'
+import { useHandleOpenForm } from '../../../state/appState'
 
 const CreateTipoItem = () => {
-  const { openTipoItemForm, setOpenTipoItemForm } = useOpenTipoItemForm()
+  const { openTipoItemForm, setOpenTipoItemForm } = useHandleOpenForm()
   const { createTipoItem } = useCreateTipoItem()
 
   const onSubmit = async (data) => {

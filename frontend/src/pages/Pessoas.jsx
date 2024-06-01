@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import NavButton from '../../../components/buttons/NavButton'
-import Filter from '../../../components/ui/Filter'
-import MemoriasTable from '../../../tables/MemoriasTable'
+import NavButton from '../components/buttons/NavButton'
+import Filter from '../components/ui/Filter'
+import PessoasTable from '../tables/PessoasTable'
 
-const Memorias = () => {
+const Pessoas = () => {
   const [nome, setNome] = useState('')
 
   const cn = {
@@ -19,11 +19,11 @@ const Memorias = () => {
     <div>
       <div className={cn.header}>
         <Filter onSubmitFilter={setNome} className={cn.filter} />
-        <NavButton linkto={'/acervo/memoria/novo'} text={'Nova memória'} />
+        <NavButton linkto={'/pessoas/nova'} text={'Nova Pessoa'} />
       </div>
-      <MemoriasTable filters={filters} />
+      <PessoasTable filters={filters} />
     </div>
   )
 }
 
-export default Memorias
+export default Pessoas

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import NavButton from '../../../components/buttons/NavButton'
 import PerifericosTable from '../../../tables/PerifericosTable'
-import AcervoFilter from '../../../components/ui/AcervoFilter'
+import Filter from '../../../components/ui/Filter'
 
 const Perifericos = () => {
   const [nome, setNome] = useState('')
@@ -14,7 +14,7 @@ const Perifericos = () => {
   return (
     <div>
       <div className={cn.header}>
-        <AcervoFilter onSubmitFilter={setNome} className={cn.filter} />
+        <Filter onSubmitFilter={setNome} className={cn.filter} />
         <NavButton
           linkto={'/acervo/periferico/novo'}
           text={'Novo periférico'}

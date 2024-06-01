@@ -7,7 +7,7 @@ const propTypes = {
   className: PT.string, // applied to root container
 }
 
-const AcervoFilter = ({ onSubmitFilter, className }) => {
+const Filter = ({ onSubmitFilter, className }) => {
   const onSubmit = (formData) => {
     onSubmitFilter(formData.nome)
   }
@@ -37,6 +37,6 @@ const AcervoFilter = ({ onSubmitFilter, className }) => {
   )
 }
 
-AcervoFilter.propTypes = propTypes
+Filter.propTypes = propTypes
 
-export default AcervoFilter
+export default Filter

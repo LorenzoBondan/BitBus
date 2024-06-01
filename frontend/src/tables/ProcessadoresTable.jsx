@@ -22,7 +22,7 @@ const ProcessadoresTable = ({ filters }) => {
   const [page, setPage] = useState(0)
 
   const { data, isLoading, refetch } = useGetProcessadores({
-    queryParams: { page, size: 5, sort: 'nome,ASC', ...filters },
+    queryParams: { page, size: 15, sort: 'nome,ASC', ...filters },
   })
 
   useEffect(() => {

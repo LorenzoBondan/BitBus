@@ -21,6 +21,10 @@ import UpdatePlaca from '../pages/UpdatePlaca'
 import CreateSoftware from '../pages/CreateSoftware'
 import ViewSoftware from '../pages/ViewSoftware'
 import UpdateSoftware from '../pages/UpdateSoftware'
+import Pessoas from '../pages/Pessoas'
+import CreatePessoa from '../pages/CreatePessoa'
+import UpdatePessoa from '../pages/UpdatePessoa'
+import ViewPessoa from '../pages/ViewPessoa'
 
 const AppRoutes = () => {
   return (
@@ -70,6 +74,12 @@ const AppRoutes = () => {
           <Route path=":idFeedback" element={<></>} />
           <Route path=":idFeedback/alterar" element={<></>} />
         </Route>
+      </Route>
+      <Route path="pessoas">
+        <Route index element={<Pessoas />} />
+        <Route path="nova" element={<CreatePessoa />} />
+        <Route path=":id" element={<ViewPessoa />} />
+        <Route path=":id/alterar" element={<UpdatePessoa />} />
       </Route>
       <Route path="oficinas">
         <Route index element={<Oficinas />} />

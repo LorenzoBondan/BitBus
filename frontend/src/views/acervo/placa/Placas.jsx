@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import NavButton from '../../../components/buttons/NavButton'
 import PlacasTable from '../../../tables/PlacasTable'
-import AcervoFilter from '../../../components/ui/AcervoFilter'
+import Filter from '../../../components/ui/Filter'
 
 const Placas = () => {
   const [nome, setNome] = useState('')
@@ -14,7 +14,7 @@ const Placas = () => {
   return (
     <div>
       <div className={cn.header}>
-        <AcervoFilter onSubmitFilter={setNome} className={cn.filter} />
+        <Filter onSubmitFilter={setNome} className={cn.filter} />
         <NavButton linkto={'/acervo/placa/novo'} text={'Nova placa'} />
       </div>
       <PlacasTable filters={{ nome }} />
