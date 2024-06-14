@@ -14,10 +14,9 @@ const TipoItemSelectInput = () => {
     formState: { defaultValues },
   } = useFormContext() || nullFormContext
 
-  const { data = {} } = useGetTiposItem()
-  const { content = [] } = data
+  const { data = [] } = useGetTiposItem()
 
-  const options = content.map((item) => {
+  const options = data.map((item) => {
     return {
       label: item.descricao,
       value: item.id,
@@ -32,7 +31,7 @@ const TipoItemSelectInput = () => {
   const cn = {
     footer: 'w-full flex justify-end relative top-[-12px] mb-3',
     subText:
-      'text-xs text-gray-400 cursor-pointer hover:text-gray-200 text-right whitespace-pre',
+      'text-xs text-gray-300 cursor-pointer hover:text-gray-100 text-right whitespace-pre',
   }
 
   return (

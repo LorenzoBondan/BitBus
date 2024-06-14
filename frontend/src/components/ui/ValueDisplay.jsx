@@ -9,8 +9,8 @@ const propTypes = {
 const ValueDisplay = ({ label, value, className }) => {
   const cn = {
     root: `text-sm mb-2 ${className}`,
-    label: 'text-zinc-500',
-    value: 'ml-3 break-all text-zinc-300',
+    label: 'text-zinc-400',
+    value: 'ml-3 break-all text-zinc-100',
   }
 
   return (

@@ -7,7 +7,7 @@ const propTypes = {
 
 const PanelTitle = ({ text = '', className = '' }) => {
   const cn = {
-    root: `text-gray-500 pb-2 pr-1 ${className}`,
+    root: `text-gray-300 pb-2 pr-1 ${className}`,
   }
   return <div className={cn.root}>{text}</div>
 }

@@ -20,7 +20,7 @@ const TableName = ({
       onClick ? 'underline hover:cursor-pointer hover:text-green-500' : '',
       className
     ),
-    subtext: 'leading-3 text-xs text-zinc-500 whitespace-pre text-start',
+    subtext: 'leading-3 text-xs text-zinc-300 whitespace-pre text-start',
   }
   return (
     <>

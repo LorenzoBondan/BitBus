@@ -9,8 +9,8 @@ const propTypes = {
 const PageTitle = ({ title, upperText, className }) => {
   const cn = {
     root: `${className}`,
-    title: 'mb-4 text-2xl text-gray-400 pb-2 pr-1-bold',
-    upperText: 'text-gray-700 text-sm',
+    title: 'mb-4 text-2xl text-gray-200 pb-2 pr-1-bold',
+    upperText: 'text-gray-400 text-sm',
   }
 
   return (
