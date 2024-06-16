@@ -5,50 +5,45 @@ import { pipe, append, assoc } from 'ramda'
 import { useNavigate } from 'react-router-dom'
 
 import { useState } from 'react'
-import { useGetMemorias, useDeleteMemoria } from '../rest/memoriaRestHooks'
 
 import { Table, TableName, ManageControls } from '../components/tables'
-import ValueDisplay from '../components/ui/ValueDisplay'
 import Pagination from '../components/ui/Pagination'
+import { useDeleteDoacao, useGetDoacoes } from '../rest/doacaoRestHooks'
+import { useDeleteItem } from '../rest/itemAcervoRestHooks'
 
-const propTypes = {
-  filters: PT.object,
-}
+const propTypes = {}
 
-const DoacoesTable = ({ filters }) => {
+const DoacoesTable = () => {
   const [page, setPage] = useState(0)
 
-  const { data, isLoading, refetch } = useGetMemorias({
-    queryParams: { page, size: 15, sort: 'nome,ASC', ...filters },
+  const { data, isLoading, refetch } = useGetDoacoes({
+    queryParams: { page, size: 15, sort: 'id,ASC' },
   })
 
   useEffect(() => {
     refetch({})
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, filters])
+  }, [page])
 
   // dynamic columns
   const doacaoTableColumns = useMemo(
     () =>
       pipe(
-        append({ Header: '', accessor: 'item' }),
-        append({ Header: 'Dimensões', accessor: 'dimensions' }),
-        append({
-          Header: 'Quantidade',
-          accessor: 'quantidade',
-        }),
+        append({ Header: 'Doador', accessor: 'item' }),
+        append({ Header: 'Descrição', accessor: 'description' }),
+        append({ Header: 'Doações', accessor: 'donations' }),
         append({ Header: 'Ações', accessor: 'manage' })
       )([]),
     []
   )
 
   // dynamic table content
-  const doacaoTableData = data.content.map((mem) =>
+  const doacaoTableData = data.content.map((doacao) =>
     pipe(
-      assoc('item', <MemoriaTableName {...{ mem }} />),
-      assoc('dimensions', <Dimensions {...{ mem }} />),
-      assoc('quantidade', mem?.quantidade),
-      assoc('manage', <MemoriaManage {...{ mem }} />)
+      assoc('item', <DoacaoTableName {...{ doacao }} />),
+      assoc('description', doacao?.descricao),
+      assoc('donations', <DoacaoList {...{ doacao }} />),
+      assoc('manage', <DoacaoManage {...{ doacao }} />)
     )({})
   )
 
@@ -58,7 +53,7 @@ const DoacoesTable = ({ filters }) => {
 
   if (isLoading) return <div>Carregando...</div>
   if (!isLoading && doacaoTableData.length === 0)
-    return <div className={cn.noData}>Não foram encontradas memórias.</div>
+    return <div className={cn.noData}>Não foram encontradas doações.</div>
 
   return (
     <>
@@ -78,58 +73,62 @@ export default DoacoesTable
 // Helpers
 //*****************************************************************************
 
-const MemoriaTableName = ({ mem }) => {
-  return <TableName name={mem?.nome} subtext={`Ano: ${mem.ano}`} />
+const DoacaoTableName = ({ doacao }) => {
+  return (
+    <TableName name={doacao?.doador?.nome} subtext={doacao?.doador?.email} />
+  )
 }
 
-MemoriaTableName.propTypes = {
-  mem: PT.object.isRequired,
+DoacaoTableName.propTypes = {
+  doacao: PT.object.isRequired,
 }
 
-const Dimensions = ({ mem }) => {
+const DoacaoList = ({ doacao }) => {
   const cn = {
-    root: 'leading-3 whitespace-pre',
+    root: 'leading-4 whitespace-pre-wrap truncate max-w-60  line-clamp-3',
   }
 
+  let text = ''
+  if (doacao.valor)
+    text += `${doacao.valor.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    })}, `
+
+  text += doacao.itensIds.map((don) => don).join(', ')
+
   return (
-    <div>
-      <ValueDisplay
-        label="Altura"
-        value={mem?.altura || ''}
-        className={cn.root}
-      />
-      <ValueDisplay
-        label="Largura"
-        value={mem?.largura || ''}
-        className={cn.root}
-      />
-      <ValueDisplay
-        label="Espessura"
-        value={mem?.espessura || ''}
-        className={cn.root}
-      />
+    <div className={cn.root} title={text}>
+      {text}
     </div>
   )
 }
 
-Dimensions.propTypes = {
-  mem: PT.object.isRequired,
+DoacaoList.propTypes = {
+  doacao: PT.object.isRequired,
 }
 
-const MemoriaManage = ({ mem }) => {
+const DoacaoManage = ({ doacao }) => {
   const navigate = useNavigate()
-  const { nome } = mem
-  const { deleteMemoria } = useDeleteMemoria()
+  const { deleteDoacao } = useDeleteDoacao()
+  const { deleteItemAsync } = useDeleteItem()
 
-  const onDelete = () => deleteMemoria(mem?.id)
+  const onDelete = async () => {
+    for (let i = 0; i < doacao.itensIds.length; i++) {
+      await deleteItemAsync(doacao.itensIds[i])
+    }
+    deleteDoacao(doacao?.id)
+  }
 
-  const onView = () => navigate(`/acervo/memoria/${mem?.id}`)
+  const onView = () => navigate(`/doacoes/${doacao?.id}`)
 
-  const onEdit = () => navigate(`/acervo/memoria/${mem?.id}/alterar`)
+  const onEdit = () => navigate(`/doacoes/${doacao?.id}/alterar`)
 
-  return <ManageControls {...{ name: nome, onDelete, onEdit, onView }} />
+  const name = `doação de ${doacao.doador.nome}`
+
+  return <ManageControls {...{ name, onDelete, onEdit, onView }} />
 }
 
-MemoriaManage.propTypes = {
-  mem: PT.object.isRequired,
+DoacaoManage.propTypes = {
+  doacao: PT.object.isRequired,
 }

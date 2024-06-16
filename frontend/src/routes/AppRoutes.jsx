@@ -25,6 +25,9 @@ import Pessoas from '../pages/Pessoas'
 import CreatePessoa from '../pages/CreatePessoa'
 import UpdatePessoa from '../pages/UpdatePessoa'
 import ViewPessoa from '../pages/ViewPessoa'
+import CreateDoacao from '../pages/CreateDoacao'
+import ViewDoacao from '../pages/ViewDoacao'
+import UpdateDoacao from '../pages/UpdateDoacao'
 
 const AppRoutes = () => {
   return (
@@ -86,6 +89,9 @@ const AppRoutes = () => {
       </Route>
       <Route path="doacoes">
         <Route index element={<Doacoes />} />
+        <Route path="nova" element={<CreateDoacao />} />
+        <Route path=":id" element={<ViewDoacao />} />
+        <Route path=":id/alterar" element={<UpdateDoacao />} />
       </Route>
     </Routes>
   )

@@ -17,6 +17,7 @@ const propTypes = {
   initialPlacaData: PT.object,
   navToOnCancel: PT.string, // route to navigate if form processing is cancelled
   className: PT.string, // applied to root container
+  buttonContainer: PT.node,
 }
 
 const PlacaForm = (props) => {
@@ -27,6 +28,7 @@ const PlacaForm = (props) => {
     initialPlacaData = {},
     onSubmit,
     className = '',
+    buttonContainer,
   } = props
 
   const cn = {
@@ -51,6 +53,7 @@ const PlacaForm = (props) => {
           onSubmit: handleOnSubmit,
           navToOnCancel,
           defaultValues,
+          disableFormButtons: !!buttonContainer,
         }}
       >
         <TextInput
@@ -86,6 +89,7 @@ const PlacaForm = (props) => {
           required
         />
         <LinksForm />
+        {buttonContainer}
       </Form>
     </div>
   )

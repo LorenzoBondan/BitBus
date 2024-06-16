@@ -100,3 +100,13 @@ export const copyTextToClipboard = async (text) => {
     return document.execCommand('copy', true, text)
   }
 }
+
+export function debounce(func, timeout = 500) {
+  let timer
+  return () => {
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      func()
+    }, timeout)
+  }
+}

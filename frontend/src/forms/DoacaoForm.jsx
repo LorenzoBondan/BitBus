@@ -1,41 +1,36 @@
 import PT from 'prop-types'
-import Form, {
-  TextInput,
-  NumberInput,
-  TextAreaInput,
-} from '../components/forms/Form'
-import LinksForm from './LinksForm'
+import Form, { TextInput, NumberInput } from '../components/forms/Form'
 import { omit } from 'ramda'
 import { validateMaxLength, validateMinLength } from '../utils/validationUtils'
+import PessoaSelectInput from '../views/pessoa/PessoaSelectInput'
+import ItemAcervoSelectInput from '../views/acervo/ItemAcervoSelectInput'
+import CreateItemAcervo from '../views/acervo/CreateItemAcervo'
 
 const propTypes = {
   onSubmit: PT.func, // called on form submission (passed form data)
   onDirtyChange: PT.func, // called when ever form dirty state changes
   title: PT.string, // form title if desired
-  initialMemoriaData: PT.object,
+  initialDoacaoData: PT.object,
   navToOnCancel: PT.string, // route to navigate if form processing is cancelled
   className: PT.string, // applied to root container
-  buttonContainer: PT.node,
 }
 
-const MemoriaoForm = (props) => {
+const DoacaoForm = (props) => {
   const {
     title = '',
     navToOnCancel = '',
     onDirtyChange,
-    initialMemoriaData = {},
+    initialDoacaoData = {},
     onSubmit,
     className = '',
-    buttonContainer,
   } = props
 
   const cn = {
     root: `max-w-lg ${className}`,
     medidas: 'flex gap-2',
-    buttonContainer: 'justify-end flex gap-2',
   }
 
-  const defaultValues = initialMemoriaData
+  const defaultValues = initialDoacaoData
 
   const handleOnSubmit = (data) => {
     const filteredData = omit(['temp_link'], data)
@@ -52,42 +47,26 @@ const MemoriaoForm = (props) => {
           onSubmit: handleOnSubmit,
           navToOnCancel,
           defaultValues,
-          disableFormButtons: !!buttonContainer,
         }}
       >
         <TextInput
           required
-          name="nome"
-          label="Nome"
+          name="descricao"
+          label="Descrição"
           validate={{
             min: (text) => validateMinLength(text, 3),
             max: (text) => validateMaxLength(text, 50),
           }}
         />
-        <NumberInput required name="ano" label="Ano" />
-        <NumberInput required name="quantidade" label="Quantidade" />
-        <div className={cn.medidas}>
-          <NumberInput step={0.001} name="altura" label="Altura" />
-          <NumberInput step={0.001} name="largura" label="Largura" />
-          <NumberInput step={0.001} name="espessura" label="Espessura" />
-        </div>
-        <TextAreaInput
-          name="informacoes"
-          label="Informações adicionais"
-          validate={{
-            min: (text) => validateMinLength(text, 3),
-            max: (text) => validateMaxLength(text, 255),
-          }}
-          rows={3}
-          required
-        />
-        <LinksForm />
-        {buttonContainer}
+        <PessoaSelectInput required name="doador" label="Doador" />
+        <ItemAcervoSelectInput name="itensIds" label="Itens" isMulti required />
+        <NumberInput step={0.01} name="valor" label="Valor (R$)" />
       </Form>
+      <CreateItemAcervo />
     </div>
   )
 }
 
-MemoriaoForm.propTypes = propTypes
+DoacaoForm.propTypes = propTypes
 
-export default MemoriaoForm
+export default DoacaoForm

@@ -30,7 +30,7 @@ export const useGetDoacaoById = (doacaoId, options = {}) => {
 }
 
 export const useDeleteDoacao = (options = {}) => {
-  const restPath = '/doacoes/:idPessoa'
+  const restPath = '/doacoes/:idDoacao'
   const mutationFnName = 'deleteDoacao'
 
   const onSuccess = {

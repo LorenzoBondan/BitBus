@@ -15,6 +15,7 @@ const propTypes = {
   initialProcessadorData: PT.object,
   navToOnCancel: PT.string, // route to navigate if form processing is cancelled
   className: PT.string, // applied to root container
+  buttonContainer: PT.node,
 }
 
 const ProcessadorForm = (props) => {
@@ -25,6 +26,7 @@ const ProcessadorForm = (props) => {
     initialProcessadorData = {},
     onSubmit,
     className = '',
+    buttonContainer,
   } = props
 
   const cn = {
@@ -49,6 +51,7 @@ const ProcessadorForm = (props) => {
           onSubmit: handleOnSubmit,
           navToOnCancel,
           defaultValues,
+          disableFormButtons: !!buttonContainer,
         }}
       >
         <TextInput
@@ -78,6 +81,7 @@ const ProcessadorForm = (props) => {
           required
         />
         <LinksForm />
+        {buttonContainer}
       </Form>
     </div>
   )

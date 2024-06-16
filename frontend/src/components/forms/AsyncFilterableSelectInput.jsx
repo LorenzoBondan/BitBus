@@ -1,8 +1,9 @@
 import PT from 'prop-types'
 import { useFormContext } from 'react-hook-form'
-import Select from 'react-select'
+import AsyncSelect from 'react-select/async'
 import FormInputLabel from './FormInputLabel'
 import { nullFormContext } from './Form'
+import { path } from 'ramda'
 
 //*****************************************************************************
 // Interface
@@ -16,10 +17,12 @@ const optionShape = {
 const propTypes = {
   name: PT.string.isRequired, // Form input name used to gather Form Data
   label: PT.string,
-  options: PT.arrayOf(PT.shape(optionShape)).isRequired,
+  defaultOptions: PT.arrayOf(PT.shape(optionShape)).isRequired,
   className: PT.string, // applied to root container
   isMulti: PT.bool, // whether input accepts more than one value
   defaultValue: PT.object,
+  loadOptions: PT.func,
+  required: PT.bool,
 }
 
 const defaultProps = {
@@ -30,32 +33,49 @@ const defaultProps = {
 // Components
 //*****************************************************************************
 
-const FilterableSelectInput = ({
+const AsyncFilterableSelectInput = ({
   name,
   label,
-  options,
+  defaultOptions,
   className,
   isMulti,
   defaultValue,
+  loadOptions,
+  required,
 }) => {
-  const { register, setValue } = useFormContext() || nullFormContext
+  const {
+    register,
+    setValue,
+    formState: { errors },
+  } = useFormContext() || nullFormContext
+
+  const errorTextPath = [...name.split('.'), 'message']
+  const errorText = path(errorTextPath, errors)
 
   const cn = {
     root: `mb-3 ${className}`,
+    error: 'text-red-300 font-semibold text-xs whitespace-pre-wrap',
   }
 
-  const { onBlur, ref } = register(name, { required: false })
+  const registerRequired = {
+    value: required,
+    message: `${label} é obrigatório`,
+  }
+
+  const { onBlur, ref } = register(name, { required: registerRequired })
 
   return (
     <div className={cn.root}>
-      <FormInputLabel labelText={label} />
-      <Select
+      <FormInputLabel labelText={label} required={required} />
+      <AsyncSelect
         ref={ref}
         onBlur={onBlur}
-        options={options}
+        defaultOptions={defaultOptions}
         name={name}
         defaultValue={defaultValue}
         placeholder="Selecione..."
+        cacheOptions
+        loadOptions={loadOptions}
         noOptionsMessage={() => 'Sem opções encontradas'}
         onChange={(option) => {
           if (isMulti) {
@@ -85,11 +105,12 @@ const FilterableSelectInput = ({
         }}
         unstyled
       />
+      {errorText && <div className={cn.error}>{errorText}</div>}
     </div>
   )
 }
 
-FilterableSelectInput.propTypes = propTypes
-FilterableSelectInput.defaultProps = defaultProps
+AsyncFilterableSelectInput.propTypes = propTypes
+AsyncFilterableSelectInput.defaultProps = defaultProps
 
-export default FilterableSelectInput
+export default AsyncFilterableSelectInput

@@ -15,6 +15,7 @@ const propTypes = {
   initialSoftwareData: PT.object,
   navToOnCancel: PT.string, // route to navigate if form processing is cancelled
   className: PT.string, // applied to root container
+  buttonContainer: PT.node,
 }
 
 const SoftwareForm = (props) => {
@@ -25,6 +26,7 @@ const SoftwareForm = (props) => {
     initialSoftwareData = {},
     onSubmit,
     className = '',
+    buttonContainer,
   } = props
 
   const cn = {
@@ -49,6 +51,7 @@ const SoftwareForm = (props) => {
           onSubmit: handleOnSubmit,
           navToOnCancel,
           defaultValues,
+          disableFormButtons: !!buttonContainer,
         }}
       >
         <TextInput
@@ -78,6 +81,7 @@ const SoftwareForm = (props) => {
           required
         />
         <LinksForm />
+        {buttonContainer}
       </Form>
     </div>
   )

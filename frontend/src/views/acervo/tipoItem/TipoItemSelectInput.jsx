@@ -16,7 +16,7 @@ const TipoItemSelectInput = () => {
 
   const { data = [] } = useGetTiposItem()
 
-  const options = data.map((item) => {
+  const options = data.content.map((item) => {
     return {
       label: item.descricao,
       value: item.id,

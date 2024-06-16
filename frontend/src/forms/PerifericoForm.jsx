@@ -17,6 +17,7 @@ const propTypes = {
   initialPerifericoData: PT.object,
   navToOnCancel: PT.string, // route to navigate if form processing is cancelled
   className: PT.string, // applied to root container
+  buttonContainer: PT.node,
 }
 
 const PerifericoForm = (props) => {
@@ -27,6 +28,7 @@ const PerifericoForm = (props) => {
     initialPerifericoData = {},
     onSubmit,
     className = '',
+    buttonContainer,
   } = props
 
   const cn = {
@@ -51,6 +53,7 @@ const PerifericoForm = (props) => {
           onSubmit: handleOnSubmit,
           navToOnCancel,
           defaultValues,
+          disableFormButtons: !!buttonContainer,
         }}
       >
         <TextInput
@@ -89,6 +92,7 @@ const PerifericoForm = (props) => {
           required
         />
         <LinksForm />
+        {buttonContainer}
       </Form>
       <CreateTipoItem />
     </div>
