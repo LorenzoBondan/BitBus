@@ -31,7 +31,6 @@ const DoacoesTable = () => {
       pipe(
         append({ Header: 'Doador', accessor: 'item' }),
         append({ Header: 'Descrição', accessor: 'description' }),
-        append({ Header: 'Doações', accessor: 'donations' }),
         append({ Header: 'Ações', accessor: 'manage' })
       )([]),
     []
@@ -42,7 +41,6 @@ const DoacoesTable = () => {
     pipe(
       assoc('item', <DoacaoTableName {...{ doacao }} />),
       assoc('description', doacao?.descricao),
-      assoc('donations', <DoacaoList {...{ doacao }} />),
       assoc('manage', <DoacaoManage {...{ doacao }} />)
     )({})
   )

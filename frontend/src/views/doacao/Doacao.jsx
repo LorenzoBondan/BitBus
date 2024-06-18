@@ -2,6 +2,7 @@ import PT from 'prop-types'
 import PanelTitle from '../../components/ui/PanelTitle'
 import Panel from '../../components/ui/Panel'
 import ValueDisplay from '../../components/ui/ValueDisplay'
+import { useGetItemById } from '../../rest/itemAcervoRestHooks'
 
 const propTypes = {
   doacao: PT.object,
@@ -52,8 +53,8 @@ const DoacaoList = ({ doacao }) => {
       )}
       {doacao.itensIds.map((id) => {
         return (
-          <div className={cn.item} key={id}>
-            {id}
+          <div key={id} className={cn.item}>
+            <Item id={id} />
           </div>
         )
       })}
@@ -63,4 +64,23 @@ const DoacaoList = ({ doacao }) => {
 
 DoacaoList.propTypes = {
   doacao: PT.object,
+}
+
+const Item = ({ id }) => {
+  const { item, isLoading } = useGetItemById(id)
+
+  const cn = {
+    small: 'text-xs text-slate-400',
+  }
+
+  if (isLoading) return ''
+  return (
+    <span>
+      {item.nome} <span className={cn.small}>({item.quantidade} Un)</span>
+    </span>
+  )
+}
+
+Item.propTypes = {
+  id: PT.string,
 }

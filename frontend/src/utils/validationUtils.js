@@ -1,3 +1,5 @@
+import { dateTimeFormatter } from './generalUtils'
+
 export const isEmailValid = (email) => {
   return email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g)
 }
@@ -41,4 +43,14 @@ export const validateMaxLength = (text, max) => {
   }
 
   return `Campo deve ter no máximo ${max} caracteres`
+}
+
+export const validateDateAfter = (date1, date2, text) => {
+  const d1 = new Date(date1).getTime()
+  const d2 = new Date(date2).getTime()
+  if (d1 > d2) {
+    return true
+  }
+
+  return text
 }

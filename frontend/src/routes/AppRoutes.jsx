@@ -28,6 +28,9 @@ import ViewPessoa from '../pages/ViewPessoa'
 import CreateDoacao from '../pages/CreateDoacao'
 import ViewDoacao from '../pages/ViewDoacao'
 import UpdateDoacao from '../pages/UpdateDoacao'
+import CreateVisita from '../pages/CreateVisita'
+import ViewVisita from '../pages/ViewVisita'
+import UpdateVisita from '../pages/UpdateVisita'
 
 const AppRoutes = () => {
   return (
@@ -68,9 +71,9 @@ const AppRoutes = () => {
       </Route>
       <Route path="visitas">
         <Route index element={<Visitas />} />
-        <Route path="nova" element={<></>} />
-        <Route path=":idVisita" element={<></>} />
-        <Route path=":idVisita/alterar" element={<></>} />
+        <Route path="nova" element={<CreateVisita />} />
+        <Route path=":idVisita" element={<ViewVisita />} />
+        <Route path=":idVisita/alterar" element={<UpdateVisita />} />
         <Route path="feedbacks">
           <Route index element={<></>} />
           <Route path="nova" element={<></>} />
