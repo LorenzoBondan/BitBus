@@ -110,6 +110,12 @@ export const dateTimeFormatter = (d) => {
   return `${day}/${month}/${date.getFullYear()} - ${hour}:${minute}`
 }
 
+export const timeFormatter = (d) => {
+  const min = d % 60
+  const h = Math.floor(d / 60)
+  return `${h}:${min.toString().padStart(2, '0')}`
+}
+
 export function debounce(func, timeout = 500) {
   let timer
   return () => {

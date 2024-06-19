@@ -31,6 +31,9 @@ import UpdateDoacao from '../pages/UpdateDoacao'
 import CreateVisita from '../pages/CreateVisita'
 import ViewVisita from '../pages/ViewVisita'
 import UpdateVisita from '../pages/UpdateVisita'
+import CreateOficina from '../pages/CreateOficina'
+import ViewOficina from '../pages/ViewOficina'
+import UpdateOficina from '../pages/UpdateOficina'
 
 const AppRoutes = () => {
   return (
@@ -89,6 +92,9 @@ const AppRoutes = () => {
       </Route>
       <Route path="oficinas">
         <Route index element={<Oficinas />} />
+        <Route path="nova" element={<CreateOficina />} />
+        <Route path=":id" element={<ViewOficina />} />
+        <Route path=":id/alterar" element={<UpdateOficina />} />
       </Route>
       <Route path="doacoes">
         <Route index element={<Doacoes />} />
