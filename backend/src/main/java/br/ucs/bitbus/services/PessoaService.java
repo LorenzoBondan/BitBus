@@ -1,6 +1,8 @@
 package br.ucs.bitbus.services;
 
-import br.ucs.bitbus.dtos.*;
+import br.ucs.bitbus.dtos.FeedbackDTO;
+import br.ucs.bitbus.dtos.PapelDTO;
+import br.ucs.bitbus.dtos.PessoaDTO;
 import br.ucs.bitbus.entities.*;
 import br.ucs.bitbus.repositories.*;
 import br.ucs.bitbus.services.exceptions.DatabaseException;
@@ -96,8 +98,8 @@ public class PessoaService {
         }
 
         entity.getVisitas().clear();
-        for(VisitaDTO visitaDto : dto.getVisitas()){
-            Visita visita = visitaRepository.findById(visitaDto.getId()).orElse(null);
+        for(Long visitaId : dto.getVisitasIds()){
+            Visita visita = visitaRepository.findById(visitaId).orElse(null);
             entity.getVisitas().add(visita);
         }
 

@@ -38,7 +38,7 @@ public class ItemDTO {
 
     @Size(min = 3, max = 255, message = "As informações devem conter entre 3 a 255 caracteres")
     private String informacoes;
-    private DoacaoDTO doacao;
+    private Long doacaoId;
 
     private List<LinkDTO> links = new ArrayList<>();
 
@@ -52,7 +52,7 @@ public class ItemDTO {
         this.espessura = entity.getEspessura();
         this.informacoes = entity.getInformacoes();
         if(entity.getDoacao() != null) {
-            this.doacao = new DoacaoDTO(entity.getDoacao());
+            this.doacaoId = entity.getDoacao().getId();
         }
         entity.getLinks().forEach(link -> this.links.add(new LinkDTO(link)));
     }

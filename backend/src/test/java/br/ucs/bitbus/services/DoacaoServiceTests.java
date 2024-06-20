@@ -109,7 +109,7 @@ public class DoacaoServiceTests {
 
         Assertions.assertThrows(ResourceNotFoundException.class, () -> {
             DoacaoDTO doacaoDTO = Factory.createDoacaoDTO();
-            doacaoDTO.setItensIds(List.of(nonExistingId));
+            doacaoDTO.setItens(List.of(Factory.createItemDTO()));
             service.insert(doacaoDTO);
         });
 

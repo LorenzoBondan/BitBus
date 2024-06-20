@@ -31,7 +31,7 @@ public class VisitaDTO {
     private LocalDateTime dataFim;
     @NotNull(message = "O responsável não pode ser nulo")
     private PessoaDTO responsavel;
-    private List<Long> visitantesIds = new ArrayList<>();
+    private List<PessoaDTO> visitantes = new ArrayList<>();
     private List<FeedbackDTO> feedbacks = new ArrayList<>();
 
     public VisitaDTO(Visita entity) {
@@ -41,7 +41,7 @@ public class VisitaDTO {
         this.dataFim = entity.getDataFim();
         this.responsavel = new PessoaDTO(entity.getResponsavel());
 
-        entity.getVisitantes().forEach(visitante -> this.visitantesIds.add(visitante.getId()));
+        entity.getVisitantes().forEach(visitante -> this.visitantes.add(new PessoaDTO(visitante)));
         entity.getFeedbacks().forEach(feedback -> this.feedbacks.add(new FeedbackDTO(feedback)));
     }
 }

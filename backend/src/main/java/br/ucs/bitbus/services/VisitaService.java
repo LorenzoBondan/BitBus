@@ -1,6 +1,7 @@
 package br.ucs.bitbus.services;
 
 import br.ucs.bitbus.dtos.FeedbackDTO;
+import br.ucs.bitbus.dtos.PessoaDTO;
 import br.ucs.bitbus.dtos.VisitaDTO;
 import br.ucs.bitbus.entities.Feedback;
 import br.ucs.bitbus.entities.Pessoa;
@@ -78,8 +79,8 @@ public class VisitaService {
         entity.setResponsavel(pessoaRepository.findById(dto.getResponsavel().getId()).orElseThrow(() -> new ResourceNotFoundException("Responsável não encontrado")));
 
         entity.getVisitantes().clear();
-        for(Long visitanteId : dto.getVisitantesIds()){
-            Pessoa visitante = pessoaRepository.findById(visitanteId).orElse(null);
+        for(PessoaDTO visitanteDTO : dto.getVisitantes()){
+            Pessoa visitante = pessoaRepository.findById(visitanteDTO.getId()).orElse(null);
             entity.getVisitantes().add(visitante);
         }
 

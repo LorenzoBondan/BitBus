@@ -20,7 +20,7 @@ public class ProcessadorDTO extends ItemDTO {
         this.setEspessura(entity.getEspessura());
         this.setInformacoes(entity.getInformacoes());
         if(entity.getDoacao() != null) {
-            this.setDoacao(new DoacaoDTO(entity.getDoacao()));
+            this.setDoacaoId(entity.getDoacao().getId());
         }
 
         entity.getLinks().forEach(link -> this.getLinks().add(new LinkDTO(link)));

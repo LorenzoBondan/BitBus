@@ -74,8 +74,8 @@ public class SoftwareService {
         entity.setEspessura(dto.getEspessura());
         entity.setInformacoes(dto.getInformacoes());
 
-        if(dto.getDoacao() != null){
-            entity.setDoacao(doacaoRepository.findById(dto.getDoacao().getId()).orElseThrow(() -> new ResourceNotFoundException("Doação não encontrada")));
+        if(dto.getDoacaoId() != null){
+            entity.setDoacao(doacaoRepository.findById(dto.getDoacaoId()).orElseThrow(() -> new ResourceNotFoundException("Doação não encontrada")));
         }
 
         entity.getLinks().clear();

@@ -1,13 +1,11 @@
 package br.ucs.bitbus.services;
 
 import br.ucs.bitbus.dtos.DoacaoDTO;
-import br.ucs.bitbus.dtos.LinkDTO;
+import br.ucs.bitbus.dtos.ItemDTO;
 import br.ucs.bitbus.entities.Doacao;
 import br.ucs.bitbus.entities.Item;
-import br.ucs.bitbus.entities.Link;
 import br.ucs.bitbus.repositories.DoacaoRepository;
 import br.ucs.bitbus.repositories.ItemRepository;
-import br.ucs.bitbus.repositories.LinkRepository;
 import br.ucs.bitbus.repositories.PessoaRepository;
 import br.ucs.bitbus.services.exceptions.DatabaseException;
 import br.ucs.bitbus.services.exceptions.ResourceNotFoundException;
@@ -73,8 +71,8 @@ public class DoacaoService {
         entity.setDoador(pessoaRepository.findById(dto.getDoador().getId()).orElseThrow(() -> new ResourceNotFoundException("Doador não encontrado")));
 
         entity.getItens().clear();
-        for(Long itemId : dto.getItensIds()){
-            Item item = itemRepository.findById(itemId).orElseThrow(() -> new ResourceNotFoundException("Item não encontrado: " + itemId));
+        for(ItemDTO itemDTO : dto.getItens()){
+            Item item = itemRepository.findById(itemDTO.getId()).orElseThrow(() -> new ResourceNotFoundException("Item não encontrado: " + itemDTO.getId()));
             entity.getItens().add(item);
             item.setDoacao(entity);
         }

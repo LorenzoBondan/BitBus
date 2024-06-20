@@ -30,7 +30,7 @@ public class PessoaDTO {
     private List<PapelDTO> papeis = new ArrayList<>();
     private List<Long> doacoesIds = new ArrayList<>();
     private List<Long> oficinasIds = new ArrayList<>();
-    private List<VisitaDTO> visitas = new ArrayList<>();
+    private List<Long> visitasIds = new ArrayList<>();
     private List<Long> visitasResponsavelIds = new ArrayList<>();
     private List<FeedbackDTO> feedbacks = new ArrayList<>();
 
@@ -43,7 +43,7 @@ public class PessoaDTO {
         entity.getPapeis().forEach(papel -> papeis.add(new PapelDTO(papel)));
         entity.getDoacoes().forEach(doacao -> doacoesIds.add(doacao.getId()));
         entity.getOficinas().forEach(oficina -> oficinasIds.add(oficina.getId()));
-        entity.getVisitas().forEach(visita -> visitas.add(new VisitaDTO(visita)));
+        entity.getVisitas().forEach(visita -> visitasIds.add(visita.getId()));
         entity.getVisitasResponsavel().forEach(visita -> visitasResponsavelIds.add(visita.getId()));
         entity.getFeedbacks().forEach(feedback -> feedbacks.add(new FeedbackDTO(feedback)));
     }

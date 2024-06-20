@@ -27,7 +27,7 @@ public class DoacaoDTO {
     @NotNull(message = "O doador não pode ser nulo")
     private PessoaDTO doador;
 
-    private List<Long> itensIds = new ArrayList<>();
+    private List<ItemDTO> itens = new ArrayList<>();
 
     public DoacaoDTO(Doacao entity) {
         this.id = entity.getId();
@@ -35,6 +35,6 @@ public class DoacaoDTO {
         this.descricao = entity.getDescricao();
         this.doador = new PessoaDTO(entity.getDoador());
 
-        entity.getItens().forEach(item -> this.itensIds.add(item.getId()));
+        entity.getItens().forEach(item -> this.itens.add(new ItemDTO(item)));
     }
 }
