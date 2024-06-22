@@ -18,7 +18,7 @@ export const useGetFeedbacks = (options = {}) => {
   })
 }
 
-export const useGetFeedbacksById = (feedbackId, options = {}) => {
+export const useGetFeedbackById = (feedbackId, options = {}) => {
   const { defaultResponse = [], resultsPropName = 'feedback' } = options
   const restPath = `/feedbacks/${feedbackId}`
   const queryCacheKey = ['feedbacks', feedbackId]

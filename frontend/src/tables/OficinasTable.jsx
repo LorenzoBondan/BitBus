@@ -17,7 +17,7 @@ const OficinasTable = () => {
   const [page, setPage] = useState(0)
 
   const { data, isLoading, refetch } = useGetOficinas({
-    queryParams: { page, size: 15, sort: 'titulo,ASC' },
+    queryParams: { page, size: 15, sort: 'dataInicio,DESC' },
   })
 
   useEffect(() => {

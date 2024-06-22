@@ -34,6 +34,9 @@ import UpdateVisita from '../pages/UpdateVisita'
 import CreateOficina from '../pages/CreateOficina'
 import ViewOficina from '../pages/ViewOficina'
 import UpdateOficina from '../pages/UpdateOficina'
+import Feedbacks from '../views/visita/feedback/Feedbacks'
+import UpdateFeedback from '../pages/UpdateFeedback'
+import CreateFeedback from '../pages/CreateFeedback'
 
 const AppRoutes = () => {
   return (
@@ -78,10 +81,9 @@ const AppRoutes = () => {
         <Route path=":idVisita" element={<ViewVisita />} />
         <Route path=":idVisita/alterar" element={<UpdateVisita />} />
         <Route path="feedbacks">
-          <Route index element={<></>} />
-          <Route path="nova" element={<></>} />
-          <Route path=":idFeedback" element={<></>} />
-          <Route path=":idFeedback/alterar" element={<></>} />
+          <Route index element={<Feedbacks />} />
+          <Route path="nova" element={<CreateFeedback />} />
+          <Route path=":idFeedback/alterar" element={<UpdateFeedback />} />
         </Route>
       </Route>
       <Route path="pessoas">

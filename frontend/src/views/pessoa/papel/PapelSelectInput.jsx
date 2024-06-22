@@ -14,10 +14,9 @@ const PapelSelectInput = () => {
     formState: { defaultValues },
   } = useFormContext() || nullFormContext
 
-  const { data = {} } = useGetPapeis()
-  const { content = [] } = data
+  const { data = [] } = useGetPapeis()
 
-  const options = content.map((item) => {
+  const options = (data.content || data).map((item) => {
     return {
       label: item.descricao,
       value: item,
@@ -34,7 +33,7 @@ const PapelSelectInput = () => {
   const cn = {
     footer: 'w-full flex justify-end relative top-[-12px] mb-3',
     subText:
-      'text-xs text-gray-400 cursor-pointer hover:text-gray-200 text-right whitespace-pre',
+      'text-xs text-gray-800 cursor-pointer hover:text-gray-500 text-right whitespace-pre',
   }
 
   return (

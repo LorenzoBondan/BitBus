@@ -59,7 +59,7 @@ const DoacaoForm = (props) => {
           }}
         />
         <PessoaSelectInput required name="doador" label="Doador" />
-        <ItemAcervoSelectInput name="itensIds" label="Itens" isMulti required />
+        <ItemAcervoSelectInput name="itens" label="Itens" isMulti required />
         <NumberInput step={0.01} name="valor" label="Valor (R$)" />
       </Form>
       <CreateItemAcervo />

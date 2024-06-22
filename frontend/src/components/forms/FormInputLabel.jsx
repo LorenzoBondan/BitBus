@@ -10,8 +10,8 @@ const propTypes = {
 
 const FormLabel = ({ labelText, className = '', required }) => {
   const cn = {
-    root: `mb-0.5 text-sm text-zinc-300 flex-row gap-3 ${className}`,
-    required: 'ml-1 text-rose-300',
+    root: `mb-0.5 text-sm text-zinc-800 font-semibold flex-row gap-3 ${className}`,
+    required: 'ml-1 text-rose-700',
   }
 
   return (

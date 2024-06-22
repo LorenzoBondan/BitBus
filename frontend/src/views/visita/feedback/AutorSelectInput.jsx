@@ -1,10 +1,10 @@
 import { useFormContext } from 'react-hook-form'
-import { nullFormContext } from '../../components/forms/Form'
+import { nullFormContext } from '../../../components/forms/Form'
 import PT from 'prop-types'
-import { debounce } from '../../utils/generalUtils'
+import { debounce } from '../../../utils/generalUtils'
 import { useState } from 'react'
-import { useGetPessoas } from '../../rest/pessoaRestHooks'
-import AsyncFilterableSelectInput from '../../components/forms/AsyncFilterableSelectInput'
+import { useGetPessoas } from '../../../rest/pessoaRestHooks'
+import AsyncFilterableSelectInput from '../../../components/forms/AsyncFilterableSelectInput'
 
 const propTypes = {
   name: PT.string,
@@ -12,7 +12,7 @@ const propTypes = {
   required: PT.bool,
 }
 
-const VisitantesSelectInput = ({ name, label, required }) => {
+const AutorSelectInput = ({ name, label, required }) => {
   const [value, setValue] = useState('')
 
   const {
@@ -31,12 +31,12 @@ const VisitantesSelectInput = ({ name, label, required }) => {
       }
     })
 
-  const defaultValue = (defaultValues?.[name] || []).map((p) => {
-    return {
-      value: p,
-      label: p.nome + ' (' + p.email + ')',
-    }
-  })
+  const defaultValue = {
+    ...defaultValues?.[name],
+    label: defaultValues?.[name]
+      ? defaultValues?.[name]?.nome + ' (' + defaultValues?.[name]?.email + ')'
+      : '',
+  }
 
   return (
     <div>
@@ -44,7 +44,6 @@ const VisitantesSelectInput = ({ name, label, required }) => {
         required={required}
         name={name}
         label={label}
-        isMulti
         loadOptions={(v, cb) => {
           setValue(v)
           return debounce(async () => {
@@ -58,5 +57,5 @@ const VisitantesSelectInput = ({ name, label, required }) => {
     </div>
   )
 }
-VisitantesSelectInput.propTypes = propTypes
-export default VisitantesSelectInput
+AutorSelectInput.propTypes = propTypes
+export default AutorSelectInput

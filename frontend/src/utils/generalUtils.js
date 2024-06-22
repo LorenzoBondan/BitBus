@@ -104,7 +104,7 @@ export const copyTextToClipboard = async (text) => {
 export const dateTimeFormatter = (d) => {
   const date = new Date(d)
   const month = (date.getMonth() + 1).toString().padStart(2, '0')
-  const day = date.getDay().toString().padStart(2, '0')
+  const day = date.getDate().toString().padStart(2, '0')
   const hour = date.getHours().toString().padStart(2, '0')
   const minute = date.getMinutes().toString().padStart(2, '0')
   return `${day}/${month}/${date.getFullYear()} - ${hour}:${minute}`

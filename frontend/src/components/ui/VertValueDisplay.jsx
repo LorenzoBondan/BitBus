@@ -9,8 +9,8 @@ const propTypes = {
 const VertValueDisplay = ({ label, value, className }) => {
   const cn = {
     root: `mb-4 text-sm  ${className}`,
-    label: 'text-zinc-400 ',
-    value: 'text-zinc-100',
+    label: 'text-zinc-600 ',
+    value: 'text-zinc-900',
   }
 
   return (

@@ -39,7 +39,7 @@ const Sidebar = () => {
   ]
 
   const cn = {
-    container: 'bg-slate-900 w-56 h-full py-2',
+    container: 'bg-slate-900 w-56 h-full py-2 text-[#eaeaea]',
     option: 'flex items-center gap-2 py-2 px-4 hover:bg-gray-400/10',
     optionActive: 'bg-white/10',
     icon: 'h-7 w-7 text-green-500',

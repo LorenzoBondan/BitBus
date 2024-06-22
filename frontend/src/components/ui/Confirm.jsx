@@ -22,10 +22,10 @@ const Confirm = (props) => {
   } = props
 
   const cn = {
-    root: `p-4 rounded-lg bg-gray-800 w-fit h-fit ${className}`,
-    title: 'text-white mb-3 text-xl font-semibold text-start',
+    root: `p-4 rounded-lg bg-gray-200 w-fit h-fit ${className}`,
+    title: 'text-black mb-3 text-xl font-semibold text-start',
     buttonContainer: 'flex flex-row gap-2 justify-end',
-    subtitle: 'text-gray-50 font-semibold mt-2 mb-6',
+    subtitle: 'text-gray-800 font-semibold mt-2 mb-6',
   }
 
   return (

@@ -7,9 +7,9 @@ const propTypes = {
 const PapeisList = ({ papeis = [] }) => {
   const cn = {
     container: '',
-    title: 'text-slate-300 font-semibold',
-    link: 'text-zinc-400 text-sm pl-2',
-    linkTag: 'hover:text-zinc-200',
+    title: 'text-slate-600 font-semibold',
+    link: 'text-zinc-600 text-sm pl-2',
+    linkTag: 'hover:text-zinc-800',
   }
 
   return (

@@ -18,7 +18,7 @@ const VisitasTable = () => {
   const [page, setPage] = useState(0)
 
   const { data, isLoading, refetch } = useGetVisitas({
-    queryParams: { page, size: 15, sort: 'dataInicio,ASC' },
+    queryParams: { page, size: 15, sort: 'dataInicio,DESC' },
   })
 
   useEffect(() => {
@@ -111,7 +111,12 @@ const VisitaManage = ({ vis }) => {
 
   return (
     <ManageControls
-      {...{ name: `visita de ${dataInicio}`, onDelete, onEdit, onView }}
+      {...{
+        name: `visita de ${dateTimeFormatter(dataInicio)}`,
+        onDelete,
+        onEdit,
+        onView,
+      }}
     />
   )
 }

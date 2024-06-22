@@ -3,7 +3,6 @@ import Panel from '../../components/ui/Panel'
 import PanelTitle from '../../components/ui/PanelTitle'
 import ValueDisplay from '../../components/ui/ValueDisplay'
 import { dateTimeFormatter } from '../../utils/generalUtils'
-import VertValueDisplay from '../../components/ui/VertValueDisplay'
 
 const propTypes = {
   visita: PT.object,
@@ -35,10 +34,7 @@ const Visita = ({ visita, className }) => {
           label="Responsável"
           value={visita?.responsavel.nome || ''}
         />
-        <VertValueDisplay
-          label="visitantes"
-          value={visita.visitantesIds.join(', ')}
-        />
+        <VisitantesList visitantes={visita.visitantes} />
       </Panel>
     </div>
   )
@@ -47,3 +43,27 @@ const Visita = ({ visita, className }) => {
 Visita.propTypes = propTypes
 
 export default Visita
+
+const VisitantesList = ({ visitantes }) => {
+  const cn = {
+    container: 'text-sm',
+    label: 'text-gray-600',
+    itens: 'pl-2 text-gray-900',
+  }
+  return (
+    <div className={cn.container}>
+      <div className={cn.label}>Visitantes</div>
+      <div className={cn.itens}>
+        {visitantes.map((v) => (
+          <div key={v.id}>
+            {v.nome} ({v.email})
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+VisitantesList.propTypes = {
+  visitantes: PT.array,
+}

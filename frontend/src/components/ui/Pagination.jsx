@@ -27,7 +27,8 @@ const Pagination = ({ page: indexPage, setPage, lastPage }) => {
   const cn = {
     icon: 'h-7 w-7',
     iconDisabled: 'fill-slate-700',
-    container: 'flex flex-row items-center gap-2 justify-center p-2',
+    container:
+      'flex flex-row items-center gap-2 justify-center p-2 text-[#eaeaea]',
     option: 'rounded-full w-7 h-7 flex items-center justify-center',
     optionEnabled: 'hover:bg-slate-700 cursor-pointer',
     optionSelected: 'bg-green-600',

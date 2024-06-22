@@ -5,7 +5,7 @@ import Sidebar from './Sidebar'
 
 const AppContainer = () => {
   const cn = {
-    container: 'min-h-screen w-screen bg-slate-950 ',
+    container: 'min-h-screen w-screen bg-white ',
     content: 'flex flex-row w-full h-[calc(100vh-3.5rem)] ',
     resource: 'w-[calc(100%-160px)] p-8 overflow-y-auto',
   }

@@ -31,9 +31,9 @@ const Table = (props) => {
   } = props
 
   const cn = {
-    root: `relative overflow-x-auto text-white ${className}`,
-    table: `w-full text-sm text-center text-white ${classNames.table}`,
-    thead: `text-s border-b border-zinc-500 pb-8 ${classNames.thead}`,
+    root: `relative overflow-x-auto text-black ${className}`,
+    table: `w-full text-sm text-center text-black ${classNames.table}`,
+    thead: `text-sm border-b border-zinc-500 pb-8 ${classNames.thead}`,
     theadTr: `px-6 py-3  ${classNames.theadTr}`,
     theadTh: `w-24 ${classNames.theadTh}`,
     tbody: `${classNames.tbody}`,

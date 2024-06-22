@@ -7,7 +7,7 @@ const propTypes = {
 
 const FormTitle = ({ title, className = '' }) => {
   const cn = {
-    root: `text-lg text-white font-semibold pb-1 pr-1 ${className}`,
+    root: `text-lg text-black font-semibold pb-1 pr-1 ${className}`,
   }
   return <div className={cn.root}>{title}</div>
 }

@@ -21,13 +21,17 @@ const ViewVisita = ({ className }) => {
   const cn = {
     root: ` ${className}`,
     editButton: 'mt-8 mr-4 float-right',
+    header: 'flex justify-between',
   }
 
   const title = dateTimeFormatter(visita.dataInicio)
 
   return (
     <div className={cn.root}>
-      <PageTitle upperText="Visita" title={title} />
+      <div className={cn.header}>
+        <PageTitle upperText="Visita" title={title} />
+        <NavButton linkto={'feedbacks'} text="Feedbacks" />
+      </div>
       <Visita {...{ visita }} />
 
       <NavButton

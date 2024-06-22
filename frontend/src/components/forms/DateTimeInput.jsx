@@ -9,7 +9,7 @@ const DateTimeInput = (props) => {
         type: 'datetime-local',
         defaultValue: props.defaultValue,
         ...pickFormProps(props),
-        className: 'text-red [color-scheme:dark]',
+        className: 'text-red',
       }}
     />
   )

@@ -27,26 +27,25 @@ const ItemAcervoSelectInput = ({ name, label, required }) => {
 
   const getOptions = (data) =>
     data.content
-      .filter((item) => !item.doacao)
+      .filter((item) => !item.doacaoId)
       .map((item) => {
         return {
           label: item.nome,
-          value: item.id,
+          value: item,
         }
       })
 
-  const defaultValue = (defaultValues?.itensIds || []).map((id) => {
+  const defaultValue = (defaultValues?.itens || []).map((p) => {
     return {
-      value: id,
-      // label: p?.[name] ? p?.[name]?.nome : '',
-      label: id,
+      value: p,
+      label: p.nome,
     }
   })
 
   const cn = {
     footer: 'w-full flex justify-end relative top-[-12px] mb-3',
     subText:
-      'text-xs text-gray-400 cursor-pointer hover:text-gray-200 text-right whitespace-pre',
+      'text-xs text-gray-600 cursor-pointer hover:text-gray-800 text-right whitespace-pre',
   }
 
   return (

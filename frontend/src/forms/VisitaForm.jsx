@@ -56,7 +56,7 @@ const VisitaForm = (props) => {
           label="Local"
           validate={{
             min: (text) => validateMinLength(text, 3),
-            max: (text) => validateMaxLength(text, 50),
+            max: (text) => validateMaxLength(text, 40),
           }}
         />
         <DateTimeInput
@@ -102,11 +102,7 @@ const VisitaForm = (props) => {
           name="responsavel"
           label="Responsável"
         />
-        <VisitantesSelectInput
-          required
-          name="visitantesIds"
-          label="Visitantes"
-        />
+        <VisitantesSelectInput required name="visitantes" label="Visitantes" />
         {buttonContainer}
       </Form>
     </div>

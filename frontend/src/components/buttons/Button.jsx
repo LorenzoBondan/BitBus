@@ -37,11 +37,11 @@ const Button = (props) => {
 
   const fillCn = (solid) => {
     if (solid) {
-      if (disabled) return 'bg-zinc-700'
+      if (disabled) return 'bg-zinc-300'
       return 'bg-green-500 hover:bg-green-400 hover:border-green-400'
     }
-    if (disabled) return 'bg-zinc-700'
-    return 'hover:bg-white/10'
+    if (disabled) return 'bg-zinc-300'
+    return 'hover:bg-white/10 text-zinc-800'
   }
 
   const cn = {

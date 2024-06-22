@@ -7,9 +7,9 @@ const propTypes = {
 const LinkList = ({ links = [] }) => {
   const cn = {
     container: '',
-    title: 'text-slate-300 font-semibold',
-    link: 'text-zinc-300 text-sm pl-2',
-    linkTag: 'hover:text-zinc-100',
+    title: 'text-slate-700 font-semibold',
+    link: 'text-zinc-700 text-sm pl-2',
+    linkTag: 'hover:text-zinc-900',
   }
 
   return (

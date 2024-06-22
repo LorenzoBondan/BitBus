@@ -19,14 +19,14 @@ const LinksForm = ({ className }) => {
 
   const cn = {
     root: `max-w-lg mt-8 ${className}`,
-    title: 'my-3 text-slate-400 text-lg',
+    title: 'my-3 text-slate-600 text-lg',
     listTitle: 'text-slate-500 text-right',
     list: 'mt-3 mb-8',
     listItem:
-      'flex justify-between border-slate-600 border-t last:border-b py-2',
+      'flex justify-between border-slate-700 border-t last:border-b py-2',
     infoContainer:
-      'flex flex-col items-start justify-center text-sm text-zinc-400 break-all w-3/4 max-w-72 ',
-    linkTag: 'hover:text-zinc-200',
+      'flex flex-col items-start justify-center text-sm text-zinc-800 break-all w-3/4 max-w-72 ',
+    linkTag: 'hover:text-zinc-600',
     actionContainer: 'flex items-center',
     form: 'flex items-center gap-2',
     input: 'grow',

@@ -54,7 +54,7 @@ const AsyncFilterableSelectInput = ({
 
   const cn = {
     root: `mb-3 ${className}`,
-    error: 'text-red-300 font-semibold text-xs whitespace-pre-wrap',
+    error: 'text-red-700 font-semibold text-xs whitespace-pre-wrap',
   }
 
   const registerRequired = {
@@ -90,18 +90,18 @@ const AsyncFilterableSelectInput = ({
         isMulti={isMulti}
         classNames={{
           container: () =>
-            ' bg-gray-900 border border-gray-600 rounded text-gray-300 px-2',
-          valueContainer: () => 'text-base  bg-gray-900 rounded',
+            'bg-[#d9d9d9] border-gray-600 rounded text-gray-700 px-2',
+          valueContainer: () => 'text-base bg-[#d9d9d9] rounded',
           indicatorsContainer: () => 'text-base my-2 ',
-          menu: () => 'bg-gray-900 rounded mt-1.5 text-base',
-          indicatorSeparator: () => 'bg-gray-300 h-6 mr-2 h-full',
-          multiValue: () => 'bg-gray-800 px-2 py-1 rounded m-1',
-          multiValueRemove: () => 'hover:text-red-300 ml-2',
-          clearIndicator: () => 'hover:text-red-300 px-2',
+          menu: () => 'bg-gray-300 rounded mt-1.5 text-base',
+          indicatorSeparator: () => 'bg-gray-700 h-6 mr-2 h-full',
+          multiValue: () => 'bg-gray-200 px-2 py-1 rounded m-1',
+          multiValueRemove: () => 'hover:text-red-700 ml-2',
+          clearIndicator: () => 'hover:text-red-700 px-2',
           option: ({ isSelected }) =>
             isSelected
-              ? 'block transition duration-200 px-2 py-1.5 cursor-pointer select-none truncate rounded text-gray-300 bg-gray-700/50'
-              : 'block transition duration-200 px-2 py-1.5 cursor-pointer select-none truncate rounded text-gray-300 hover:bg-gray-700/30',
+              ? 'block transition duration-200 px-2 py-1.5 cursor-pointer select-none truncate rounded text-gray-700 bg-gray-400/50'
+              : 'block transition duration-200 px-2 py-1.5 cursor-pointer select-none truncate rounded text-gray-700 hover:bg-gray-400/30',
         }}
         unstyled
       />

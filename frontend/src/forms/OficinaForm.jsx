@@ -59,7 +59,7 @@ const OficinaForm = (props) => {
           label="Local"
           validate={{
             min: (text) => validateMinLength(text, 3),
-            max: (text) => validateMaxLength(text, 50),
+            max: (text) => validateMaxLength(text, 40),
           }}
         />
         <DateTimeInput
