@@ -37,11 +37,12 @@ const SelectMenuInput = ({ name, label, options, className = '' }) => {
             classNames={{
               menuButton: () =>
                 'flex items-center h-8 pl-2 w-full rounded text-base bg-[#d9d9d9]',
+              ChevronIcon: () => 'fill-gray-500',
               menu: 'absolute z-10 w-full bg-[#d9d9d9] rounded py-1 mt-1.5 text-base',
               listItem: ({ isSelected }) =>
                 isSelected
                   ? 'block transition duration-200 px-2 py-1.5 cursor-pointer select-none truncate rounded text-gray-200 bg-green-600'
-                  : 'block transition duration-200 px-2 py-1.5 cursor-pointer select-none truncate rounded text-gray-600 hover:bg-gray-200',
+                  : 'block transition duration-200 px-2 py-1.5 cursor-pointer select-none truncate rounded text-gray-600 hover:bg-gray-400/30',
             }}
           />
         )}
