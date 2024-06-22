@@ -27,7 +27,7 @@ const AutorSelectInput = ({ name, label, required }) => {
     data.content.map((pes) => {
       return {
         label: pes.nome + ' (' + pes.email + ')',
-        value: pes,
+        value: pes.id,
       }
     })
 

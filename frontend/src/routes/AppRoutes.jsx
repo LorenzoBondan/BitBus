@@ -80,7 +80,7 @@ const AppRoutes = () => {
         <Route path="nova" element={<CreateVisita />} />
         <Route path=":idVisita" element={<ViewVisita />} />
         <Route path=":idVisita/alterar" element={<UpdateVisita />} />
-        <Route path="feedbacks">
+        <Route path=":idVisita/feedbacks">
           <Route index element={<Feedbacks />} />
           <Route path="nova" element={<CreateFeedback />} />
           <Route path=":idFeedback/alterar" element={<UpdateFeedback />} />

@@ -29,13 +29,13 @@ export const useGetFeedbackById = (feedbackId, options = {}) => {
   })
 }
 
-export const useDeleteFeedback = (options = {}) => {
+export const useDeleteFeedback = (visitaId, options = {}) => {
   const restPath = '/feedbacks/:idFeedback'
   const mutationFnName = 'deleteFeedback'
 
   const onSuccess = {
     toastMessage: 'Feedback deletado!',
-    cachesToInvalidate: [['feedbacks']],
+    cachesToInvalidate: [['feedbacks'], ['visitas', visitaId]],
     cachesToRemove: [(feedback) => ['feedbacks', feedback?.id]],
     ...propOr({}, 'onSuccess', options), // caller options
   }

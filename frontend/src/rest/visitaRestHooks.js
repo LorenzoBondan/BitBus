@@ -19,7 +19,7 @@ export const useGetVisitas = (options = {}) => {
 }
 
 export const useGetVisitaById = (visitaId, options = {}) => {
-  const { defaultResponse = [], resultsPropName = 'visita' } = options
+  const { defaultResponse = {}, resultsPropName = 'visita' } = options
   const restPath = `/visitas/${visitaId}`
   const queryCacheKey = ['visitas', visitaId]
   return useRestQuery(queryCacheKey, restPath, {

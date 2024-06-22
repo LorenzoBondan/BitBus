@@ -9,7 +9,8 @@ const CreateFeedback = () => {
   })
 
   const onSubmit = async (data) => {
-    await createFeedback(data)
+    const feedback = { ...data, visitaId: idVisita }
+    await createFeedback(feedback)
   }
 
   return (
