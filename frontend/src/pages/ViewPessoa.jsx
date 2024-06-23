@@ -21,7 +21,7 @@ const ViewPessoa = ({ className }) => {
     root: ` ${className}`,
     editButton: 'mt-8 mr-4 float-right',
   }
-  console.log(pessoa)
+
   return (
     <div className={cn.root}>
       <PageTitle upperText="Pessoa" title={pessoa?.nome || ''} />

@@ -55,7 +55,6 @@ const ItemAcervoSelectInput = ({ name, label, required }) => {
         required={required}
         label={label}
         loadOptions={(v, cb) => {
-          console.log(v)
           setValue(v)
           return debounce(async () => {
             const values = await refetch()

@@ -2,6 +2,7 @@ import {
   BanknotesIcon,
   CpuChipIcon,
   MapPinIcon,
+  RectangleGroupIcon,
   UserGroupIcon,
   UsersIcon,
 } from '@heroicons/react/24/outline'
@@ -35,6 +36,11 @@ const Sidebar = () => {
       name: 'Pessoas',
       path: 'pessoas',
       Icon: UsersIcon,
+    },
+    {
+      name: 'Categorias',
+      path: 'categorias',
+      Icon: RectangleGroupIcon,
     },
   ]
 

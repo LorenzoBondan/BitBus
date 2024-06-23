@@ -1,14 +1,19 @@
 import Modal from '../../../components/ui/Modal'
 import PapelForm from '../../../forms/PapelForm'
-import { useCreatePapel } from '../../../rest/papelRestHooks'
+import { useUpdatePapel } from '../../../rest/papelRestHooks'
 import { useHandleOpenForm } from '../../../state/appState'
+import PT from 'prop-types'
 
-const CreatePapel = () => {
+const propTypes = {
+  papel: PT.object,
+}
+
+const UpdatePapel = ({ papel }) => {
   const { openPapelForm, setOpenPapelForm } = useHandleOpenForm()
-  const { createPapel } = useCreatePapel()
+  const { updatePapel } = useUpdatePapel(papel.id)
 
   const onSubmit = async (data) => {
-    await createPapel(data)
+    await updatePapel(data)
     setOpenPapelForm(false)
   }
 
@@ -16,12 +21,14 @@ const CreatePapel = () => {
     <Modal modalIsOpen={openPapelForm}>
       <PapelForm
         onSubmit={onSubmit}
+        initialPapelData={papel}
         onCancel={() => setOpenPapelForm(false)}
         disableFormButtons
-        title={'Nova Função'}
+        title={'Alterar Função'}
       />
     </Modal>
   )
 }
 
-export default CreatePapel
+UpdatePapel.propTypes = propTypes
+export default UpdatePapel

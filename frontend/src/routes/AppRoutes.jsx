@@ -37,6 +37,7 @@ import UpdateOficina from '../pages/UpdateOficina'
 import Feedbacks from '../views/visita/feedback/Feedbacks'
 import UpdateFeedback from '../pages/UpdateFeedback'
 import CreateFeedback from '../pages/CreateFeedback'
+import Categorias from '../pages/Categorias'
 
 const AppRoutes = () => {
   return (
@@ -103,6 +104,9 @@ const AppRoutes = () => {
         <Route path="nova" element={<CreateDoacao />} />
         <Route path=":id" element={<ViewDoacao />} />
         <Route path=":id/alterar" element={<UpdateDoacao />} />
+      </Route>
+      <Route path="categorias">
+        <Route index element={<Categorias />} />
       </Route>
     </Routes>
   )

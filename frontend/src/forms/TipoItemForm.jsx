@@ -8,7 +8,7 @@ const propTypes = {
   onSubmit: PT.func, // called on form submission (passed form data)
   onDirtyChange: PT.func, // called when ever form dirty state changes
   title: PT.string, // form title if desired
-  initialSoftwareData: PT.object,
+  initialTipoItemData: PT.object,
   onCancel: PT.func,
   className: PT.string, // applied to root container
 }
@@ -17,7 +17,7 @@ const TipoItemForm = (props) => {
   const {
     title = '',
     onDirtyChange,
-    initialSoftwareData = {},
+    initialTipoItemData = {},
     onSubmit,
     className = '',
   } = props
@@ -27,7 +27,7 @@ const TipoItemForm = (props) => {
     medidas: 'flex gap-2',
   }
 
-  const defaultValues = initialSoftwareData
+  const defaultValues = initialTipoItemData
 
   return (
     <div className={cn.root}>
