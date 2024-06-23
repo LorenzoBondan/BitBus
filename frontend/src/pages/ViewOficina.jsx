@@ -24,7 +24,7 @@ const ViewOficina = ({ className }) => {
 
   return (
     <div className={cn.root}>
-      <PageTitle upperText="Oficina" title={Oficina.titulo} />
+      <PageTitle upperText="Oficina" title={oficina.titulo} />
       <Oficina {...{ oficina }} />
 
       <NavButton
